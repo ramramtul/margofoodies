@@ -1,7 +1,7 @@
 @extends('layout')
 
 @yield('title')
-<title> Menu | {{$restoran->nama}}</title>
+<title> MargoFoodies - Menu {{$restoran->nama}}</title>
 
 @section('content')
 
