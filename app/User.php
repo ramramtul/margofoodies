@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'users';
+    public $timestamps = false;
 
     protected $fillable = [
         'nama_lengkap',
-        'username',
         'email',
         'password',
         'update_at',

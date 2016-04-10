@@ -1,0 +1,67 @@
+.navbar { 
+	background-color: #FFFFFF;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+	border-bottom-style: solid;
+	border-bottom-color: #EA5B4D;
+	border-bottom-width: 20px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color: #7F756B;	
+}
+
+.nav.navbar-nav.navbar-right li a:hover {
+    color: #000000;	
+}
+
+.inputan {
+	background-color: #E8E399;
+	margin-left: 120px;
+	margin-right: 120px;
+	border-style: solid;
+	border-radius: 10px;
+	border-width: 5px;
+	border-color: #EA5B4D;
+	padding-top: 15px;
+}
+
+.judul {
+	text-align: center;
+}
+
+.btn {
+	background-color: #EA5B4D;
+}
+
+#search {
+	padding-top: 20px;
+	padding-bottom: 30px;
+	padding-right: 30px;
+	margin-right: 80px;
+}
+
+#myCarousel {
+       width: 400px;
+}
+
+.stylish-input-group .input-group-addon{
+    border-color: #EA5B4D;
+    background: transparent;
+}
+
+.stylish-input-group .form-control{
+	border-right: 5; 
+	border-color: #EA5B4D;
+}
+
+.icon-bar {
+	color:red;
+}
+
+.navbar-toggle {
+	background-color:black;
+}
