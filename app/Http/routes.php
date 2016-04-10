@@ -28,4 +28,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+
+    Route::get('/register', 'UserController@index');
+	Route::post('/register', 'UserController@create');
+	Route::get('/home', 'HomeController@index');
 });
