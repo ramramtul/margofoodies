@@ -9,8 +9,10 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use DB;
+use Session;
 
 class UserController extends Controller
 {
@@ -28,16 +30,36 @@ class UserController extends Controller
         $user = new User;
         $user->nama_lengkap = Input::get('nama_lengkap');
         $user->email = Input::get('email');
-        $user->password = bcrypt(Input::get('password'));
+        $user->password = (Input::get('password'));
         $user->save();
         return redirect('home');
     }
 
-    // melakukan validasi data terhadap input form
-    // public function create(Request $request){
-    //     $this->store($request);
-        
-    // }
+    public function dologin()
+    {   
+        $email = Input::get('email');
+        $pass = (Input::get('password'));
+        $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
+        if($user===null){
+            echo $email.'<br>';
+            echo $pass.'<br>';
+            return Redirect::to('/home');
+        } else { 
+            $userdata = array(
+                'nama'      => $user->nama_lengkap,
+                'email'     => $user->email,
+                'password'  => $user->password
+            );
+            Session::put($userdata);
+            return Redirect::to('/home');
+        }
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        return Redirect::to('/home');
+    }
 
 }
      

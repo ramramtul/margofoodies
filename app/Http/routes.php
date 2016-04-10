@@ -24,8 +24,15 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-	Route::post('/home', 'UserController@create');
-	Route::get('/home','HomeController@home');
+	Route::get('/','HomeController@home');
+	Route::post('home', 'UserController@create');
+	Route::get('home','HomeController@home');
+
+	Route::post('dologin','UserController@dologin');
+	Route::get('logout','UserController@logout');
+
+	Route::post('findFood','MenuController@findFood');
+
 	Route::get('restoran/{id}','RestoranController@show');
 	Route::get('menus/{id}','MenuController@showList');
 
