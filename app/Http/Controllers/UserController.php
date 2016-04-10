@@ -14,10 +14,6 @@ use DB;
 
 class UserController extends Controller
 {
-    // menampilkan halaman register
-    public function index(){
-    	return view('register');
-    }
 
     // menyimpan (store) data yg sudah tervalidasi kedatabase
     public function create(Request $request){
@@ -25,14 +21,12 @@ class UserController extends Controller
         $this->validate($request, [
             'nama_lengkap' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            'username' => 'required|min:3'
+            'password' => 'required|min:6'
         ]);
 
 
         $user = new User;
         $user->nama_lengkap = Input::get('nama_lengkap');
-        $user->username = Input::get('username');
         $user->email = Input::get('email');
         $user->password = bcrypt(Input::get('password'));
         $user->save();
