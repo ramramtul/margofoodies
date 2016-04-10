@@ -26,4 +26,7 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::post('/home', 'UserController@create');
 	Route::get('/home','HomeController@home');
+	Route::get('restoran/{id}','RestoranController@show');
+	Route::get('menus/{id}','MenuController@showList');
+
 });

@@ -5,7 +5,8 @@
 	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 	@yield('title')
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	  	<link rel="stylesheet" href="css/mystyle.css">
+	  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" >
+      	<link rel="stylesheet" href="/margofoodies/public/css/mystyle.css">
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
@@ -19,7 +20,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>                        
       		</button>
-      			<a class="navbar-brand" href=""><img src="images/logo.png" class="img-responsive" alt="MargoFoodies" ></a>
+      			<a class="navbar-brand" href=""><img src="/margofoodies/public/images/logo.png" class="img-responsive" alt="MargoFoodies" ></a>
     		</div>
     		<br>
     		<div class="collapse navbar-collapse" id="myNavbar">
