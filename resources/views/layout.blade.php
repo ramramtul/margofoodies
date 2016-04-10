@@ -23,14 +23,21 @@
     		</div>
     		<br>
     		<div class="collapse navbar-collapse" id="myNavbar">
+    			@if (!Session::has('nama'))
       			<ul class="nav navbar-nav navbar-right">
         			<li><a href="#myModal1" data-toggle="modal"  data-target="#myModal1"><span class="glyphicon glyphicon-user" ></span> Daftar</a></li>
         			<li><a href="#myModal2" data-toggle="modal"  data-target="#myModal2"><span class="glyphicon glyphicon-log-in"></span> Masuk</a></li>
       			</ul>
-	  			
-   				@yield('daftar')
+	  			@else
+	  			<ul class="nav navbar-nav navbar-right">
+        			<li><a href="#">Hi {!! Session::get('nama') !!}</a></li>
+        			<li><a href="{{ URL::to('/logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      			</ul>
+				@endif
+
+   				@include('register')
   
-				@yield('masuk')
+				@include('login')
 	  
 			   	<div class="container" id="search">
 					<div class="row">
