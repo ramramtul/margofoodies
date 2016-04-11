@@ -24,13 +24,13 @@
 					        	<img src="images/promo1.jpg" alt="Chania" width="400" height="300">
 					      	</div>
 					      	<div class="item">
-					        	<img src="images/promo1.jpg" alt="Chania" width="400" height="300">
+					        	<img src="images/promo2.jpg" alt="Chania" width="400" height="300">
 					      	</div>
 					      	<div class="item">
 					        	<img src="images/promo1.jpg" alt="Flower" width="400" height="300">
 					      	</div>
 					      	<div class="item">
-					        	<img src="images/promo1.jpg" alt="Flower" width="400" height="300">
+					        	<img src="images/promo2.jpg" alt="Flower" width="400" height="300">
 					      	</div>
 					    </div>
 
