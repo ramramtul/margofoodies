@@ -85,11 +85,16 @@
 	margin-right: 80px;
 }
 
-/*#myCarousel {
+#restoCarousel {
        width: 550px;
        height:380px;
 }
-*/
+
+#myCarousel {
+       width: 400px;
+       height:220px;
+}
+
 .stylish-input-group .input-group-addon{
     border-color: #EA5B4D;
     background: transparent;
