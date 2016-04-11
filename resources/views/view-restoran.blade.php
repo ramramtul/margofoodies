@@ -1,7 +1,8 @@
 @extends('layout')
 
-@yield('title')
+@section('title')
 <title> MargoFoodies - Restoran - {{$restoran->nama}} </title>
+@stop
 
 @section('content')
 
