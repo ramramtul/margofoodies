@@ -1,7 +1,8 @@
 @extends('layout')
 
-@yield('title')
-<title> Restoran | {{$restoran->nama}} </title>
+@section('title')
+<title> MargoFoodies - Restoran - {{$restoran->nama}} </title>
+@stop
 
 @section('content')
 
@@ -19,13 +20,13 @@
  		<br>
   		<div class="row">
         	<div class="col-xs-12 col-sm-6 col-md-6">
-        		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+        		<div id="restoCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
 				  <ol class="carousel-indicators">
-				    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				    <li data-target="#myCarousel" data-slide-to="1"></li>
-				    <li data-target="#myCarousel" data-slide-to="2"></li>
-				    <li data-target="#myCarousel" data-slide-to="3"></li>
+				    <li data-target="#restoCarousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#restoCarousel" data-slide-to="1"></li>
+				    <li data-target="#restoCarousel" data-slide-to="2"></li>
+				    <li data-target="#restoCarousel" data-slide-to="3"></li>
 				  </ol>
 
 				  <!-- Wrapper for slides -->
@@ -48,11 +49,11 @@
 				  </div>
 
 				  <!-- Left and right controls -->
-				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				  <a class="left carousel-control" href="#restoCarousel" role="button" data-slide="prev">
 				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 				    <span class="sr-only">Previous</span>
 				  </a>
-				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				  <a class="right carousel-control" href="#restoCarousel" role="button" data-slide="next">
 				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				    <span class="sr-only">Next</span>
 				  </a>
@@ -93,9 +94,15 @@
 						</ul>
 
 						<h5><b> Jam Buka : </b></h5>
-						<h5>Hari ini {{$hari_ini->waktu_buka}} - {{$hari_ini->waktu_tutup}} <button class="btn-singgah" onclick="$('#target').toggle();">
+						@if ($hari_ini->waktu_buka != null)
+							<h5>Hari Ini :  <b>{{$hari_ini->waktu_buka}} - {{$hari_ini->waktu_tutup}}</b>
+							@else
+							<h5>Hari Ini : <b>Tutup </b>
+							@endif
+							<button class="btn-singgah" onclick="$('#target').toggle();">
 						Lengkap/Sedikit
 						</button></h5>
+				
 						
 						<div id="target" style="display: none">
 
