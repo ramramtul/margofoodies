@@ -85,9 +85,14 @@
 	margin-right: 80px;
 }
 
-#myCarousel {
+#restoCarousel {
        width: 550px;
-       height:380px;;
+       height:380px;
+}
+
+#myCarousel {
+       width: 400px;
+       height:290px;
 }
 
 .stylish-input-group .input-group-addon{
