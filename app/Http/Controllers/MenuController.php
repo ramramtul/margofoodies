@@ -70,6 +70,12 @@ class MenuController extends Controller {
 		return view('view-menus')->with('menus', $menus)->with('restoran', $restoran);
 	}
 
+	public function search($syarat)
+	{
+		$temp = '%'.$syarat.'%';
+		$menu = Menu::where('nama', 'like', $temp)->get();
+		return view('view-search', compact('menu'));
+	}
 
 	/**
 	 * Show the form for editing the specified resource.
