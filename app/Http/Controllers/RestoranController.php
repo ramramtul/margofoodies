@@ -17,6 +17,12 @@ class RestoranController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function showList()
+	{
+		//
+		$restoran = Restoran::all();
+		return view('view-restoran-all')->with('restoran', $restoran);
+	}
 	
 	/**
 	 * Show the form for creating a new resource.
