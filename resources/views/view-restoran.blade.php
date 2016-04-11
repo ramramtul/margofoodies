@@ -141,6 +141,8 @@
 			</div>
 		</div>
 	</div>
+@else
+<h1> Restoran yang Anda cari tidak tersedia </h1>
 @endif
 
 
