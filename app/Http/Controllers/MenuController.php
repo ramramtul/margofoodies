@@ -116,7 +116,7 @@ class MenuController extends Controller {
         if($menus===null){
             return Redirect::to('/');
         } else { 
-            return View::make("food-combination")->with(array('data'=>$menus));
+            return View::make("food-combination")->with('menus', $menus);
         }
     }
 
