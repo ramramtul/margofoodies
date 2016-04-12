@@ -16,7 +16,7 @@
   </div>
 	<div class="panel panel-default">
   					<div class="panel-body res1">
-
+<!-- test -->
 <?php
 $count = 0;
  ?>
@@ -34,7 +34,7 @@ $count = 0;
       <div class = "caption">
          <h3 style="text-align: center"><a href="restoran/{{$res->id}}">{{$res->nama}}</a></h3>
          <p>{{$res->deskripsi}}</p>
-         
+        
          
          
       </div>
