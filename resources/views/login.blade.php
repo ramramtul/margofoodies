@@ -9,7 +9,7 @@
 				<form role="form" action="{{url('/dologin')}}" method="POST">
 					{!! csrf_field() !!}
 					@if (Session::has('loginerr'))
-						<div class="alert alert-danger">{!! Session::get('loginerr') !!}</div>
+						<div class="alert alert-danger"><strong>{!! Session::get('loginerr') !!}</strong></div>
 					@endif
 					<div class="form-group">
 						<label for="email">Email:</label>
