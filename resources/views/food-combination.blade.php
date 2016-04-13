@@ -1,14 +1,13 @@
 @extends('layout')
 
 @section('title')
-<title> MargoFoodies - Menu {{$restoran->nama}}</title>
+	<title>MargoFoodies - Hasil Pencarian Makanan</title>
 @stop
 
 @section('content')
 
 @if(count($menus))
   <div class="container" >
-  <h1 id="name"><b>MENU <a href="../restoran/{{$restoran->id}}">"{{strtoupper($restoran->nama)}}"</a></b></h1>  
   <br>
   <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-3">
@@ -52,7 +51,6 @@
   <div class="col-xs-12 col-sm-6 col-md-9">
       <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-12 ">
-  {!! $menus->links() !!}
   </div>
   </div>
     @foreach($menus as $menu)
@@ -60,7 +58,7 @@
         <div class="panel-body res1">
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
-                <img src="../images/menu.jpg" class="img-responsive img-menu" alt={{$restoran->nama}}>
+                <img src="/margofoodies/public/images/menu.jpg" class="img-responsive img-menu">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <h4><b>{{$menu->nama}}</b></h4>
@@ -82,5 +80,5 @@
     </div>
   </div>
 @endif
-@stop
 
+@stop

@@ -1,11 +1,18 @@
-<?php namespace App\Http\Controllers;
+<?php 
 
+namespace App\Http\Controllers;
+
+use DB;
+
+use App\Menu;
+use App\Restoran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Menu;
-use App\Restoran;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 
 class MenuController extends Controller {
 
@@ -102,5 +109,15 @@ class MenuController extends Controller {
 	{
 		//
 	}
+
+	public function findFood()
+    {   
+        $menus= DB::table('menus')->where([['harga','<=',Input::get('budget')],['kapasitas','<=',Input::get('porsi')]])->get();
+        if($menus===null){
+            return Redirect::to('/');
+        } else { 
+            return View::make("food-combination")->with('menus', $menus);
+        }
+    }
 
 }

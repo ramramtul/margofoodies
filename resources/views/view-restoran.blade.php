@@ -1,7 +1,8 @@
 @extends('layout')
 
-@yield('title')
+@section('title')
 <title> MargoFoodies - Restoran - {{$restoran->nama}} </title>
+@stop
 
 @section('content')
 
@@ -19,13 +20,13 @@
  		<br>
   		<div class="row">
         	<div class="col-xs-12 col-sm-6 col-md-6">
-        		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+        		<div id="restoCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
 				  <ol class="carousel-indicators">
-				    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				    <li data-target="#myCarousel" data-slide-to="1"></li>
-				    <li data-target="#myCarousel" data-slide-to="2"></li>
-				    <li data-target="#myCarousel" data-slide-to="3"></li>
+				    <li data-target="#restoCarousel" data-slide-to="0" class="active"></li>
+				    <li data-target="#restoCarousel" data-slide-to="1"></li>
+				    <li data-target="#restoCarousel" data-slide-to="2"></li>
+				    <li data-target="#restoCarousel" data-slide-to="3"></li>
 				  </ol>
 
 				  <!-- Wrapper for slides -->

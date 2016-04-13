@@ -20,24 +20,32 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>                        
       		</button>
-      			<a class="navbar-brand" href=""><img src="/margofoodies/public/images/logo.png" class="img-responsive" alt="MargoFoodies" ></a>
+      			<a class="navbar-brand" href="{{ URL::to('home') }}"><img src="/margofoodies/public/images/logo.png" class="img-responsive" alt="MargoFoodies" ></a>
     		</div>
     		<br>
     		<div class="collapse navbar-collapse" id="myNavbar">
+    			@if (!Session::has('nama'))
       			<ul class="nav navbar-nav navbar-right">
         			<li><a href="#myModal1" data-toggle="modal"  data-target="#myModal1"><span class="glyphicon glyphicon-user" ></span> Daftar</a></li>
         			<li><a href="#myModal2" data-toggle="modal"  data-target="#myModal2"><span class="glyphicon glyphicon-log-in"></span> Masuk</a></li>
       			</ul>
-	  			
-   				@yield('daftar')
+	  			@else
+	  			<ul class="nav navbar-nav navbar-right">
+        			<li><a href="#">Hi {!! Session::get('nama') !!}</a></li>
+        			<li><a href="{{ URL::to('/logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      			</ul>
+				@endif
+
+   				@include('register')
   
-				@yield('masuk')
-	  
+				@include('login')
+	  			
+
+
 			   	<div class="container" id="search">
 					<div class="row">
 			        	<div class="col-sm-3 col-sm-offset-10">       
 			            	<div class="input-group stylish-input-group">
-			            		
 				                	<input type="text" class="form-control" name="cari" placeholder="Search" >
 				                	<span class="input-group-addon">
 					                    <button type="submit">
@@ -54,6 +62,6 @@
 	</nav>
 
 	@yield('content')
-    
+
     </body>
 </html>
