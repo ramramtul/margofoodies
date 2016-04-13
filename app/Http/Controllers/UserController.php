@@ -21,18 +21,18 @@ class UserController extends Controller
     public function create(Request $request){
         //Users::create($request->all());
         $this->validate($request, [
-            'nama_lengkap' => 'required|max:255',
+            'nama' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6'
         ]);
 
 
         $user = new User;
-        $user->nama_lengkap = Input::get('nama_lengkap');
+        $user->nama_lengkap = Input::get('nama');
         $user->email = Input::get('email');
         $user->password = (Input::get('password'));
         $user->save();
-        return redirect('home');
+        return Redirect::to('/home');
     }
 
     public function dologin()
@@ -43,6 +43,7 @@ class UserController extends Controller
         if($user===null){
             echo $email.'<br>';
             echo $pass.'<br>';
+            Session::put(array('loginerr' => 'Wrong email or password'));
             return Redirect::to('/home');
         } else { 
             $userdata = array(
