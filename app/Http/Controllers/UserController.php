@@ -23,14 +23,15 @@ class UserController extends Controller
         $this->validate($request, [
             'nama' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6|required',
+            're-pass' => 'required|same:password',
         ]);
 
 
         $user = new User;
         $user->nama_lengkap = Input::get('nama');
         $user->email = Input::get('email');
-        $user->password = (Input::get('password'));
+        $user->password = Input::get('password');
         $user->save();
         return Redirect::to('/home');
     }

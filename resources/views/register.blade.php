@@ -11,17 +11,20 @@
 			<div class="modal-body">
 				<form class="form-horizontal" role="form" action="{{url('/home')}}" method="POST">
 					{!! csrf_field() !!}
-					@if ($errors->has('nama') or $errors->has('email') or $errors->has('password'))
+					@if ($errors->has('nama') or $errors->has('email') or $errors->has('password') or $errors->has('re-pass')  )
 						<?php $error=true; ?>
 						<span class="help-block alert alert-danger ">
 							@if ($errors->has('nama'))
-								<strong>*{{ $errors->first('nama') }}</strong><br>
+								<strong>{{ $errors->first('nama') }}</strong><br>
 							@endif
-							@if ($errors->has('nama'))
-								<strong>*{{ $errors->first('email') }}</strong><br>
+							@if ($errors->has('email'))
+								<strong>{{ $errors->first('email') }}</strong><br>
 							@endif
-							@if ($errors->has('nama'))
-								<strong>*{{ $errors->first('password') }}</strong><br>
+							@if ($errors->has('password'))
+								<strong>{{ $errors->first('password') }}</strong><br>
+							@endif
+							@if ($errors->has('re-pass'))
+								<strong>{{ $errors->first('re-pass') }}</strong><br>
 							@endif
 						</span>
 					@endif
@@ -43,8 +46,15 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="pwd">Password:</label>
 						<div class="col-sm-10">          
-						<input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password">
+							<input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password">
 						</div>
+					</div>
+
+					<div class ="form-group">
+						<label class="control-label col-sm-2" for ="repwd">Re-Pass:</label>
+						<div class="col-sm-10">
+							<input type="password" name="re-pass" class="form-control" id="repwd" placeholder="Re-enter Password">
+						</div>	
 					</div>
 					<!-- <div class="form-group">        
 							<div class="col-sm-offset-2 col-sm-10">
