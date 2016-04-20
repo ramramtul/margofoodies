@@ -32,8 +32,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('logout','UserController@logout');
 
 	Route::post('findFood','MenuController@findFood');
-
+	
+	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
+	
 	Route::get('menus/{id}','MenuController@showList');
 	Route::get('search/{syarat}','MenuController@search');
 });

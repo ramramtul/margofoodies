@@ -49,11 +49,11 @@
 				  </div>
 
 				  <!-- Left and right controls -->
-				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				  <a class="left carousel-control" href="#restoCarousel" role="button" data-slide="prev">
 				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 				    <span class="sr-only">Previous</span>
 				  </a>
-				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				  <a class="right carousel-control" href="#restoCarousel" role="button" data-slide="next">
 				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				    <span class="sr-only">Next</span>
 				  </a>
@@ -94,9 +94,15 @@
 						</ul>
 
 						<h5><b> Jam Buka : </b></h5>
-						<h5>Hari ini {{$hari_ini->waktu_buka}} - {{$hari_ini->waktu_tutup}} <button class="btn-singgah" onclick="$('#target').toggle();">
+						@if ($hari_ini->waktu_buka != null)
+							<h5>Hari Ini :  <b>{{$hari_ini->waktu_buka}} - {{$hari_ini->waktu_tutup}}</b>
+							@else
+							<h5>Hari Ini : <b>Tutup </b>
+							@endif
+							<button class="btn-singgah" onclick="$('#target').toggle();">
 						Lengkap/Sedikit
 						</button></h5>
+				
 						
 						<div id="target" style="display: none">
 
@@ -135,6 +141,8 @@
 			</div>
 		</div>
 	</div>
+@else
+<h1> Restoran yang Anda cari tidak tersedia </h1>
 @endif
 
 
