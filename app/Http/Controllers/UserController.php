@@ -46,7 +46,15 @@ class UserController extends Controller
             echo $pass.'<br>';
             Session::put(array('loginerr' => 'Wrong email or password'));
             return Redirect::to('/home');
-        } else { 
+        } else {
+            $poin = 10;
+            $userpoin = DB::table('users')->where('email', '=', $email)->get();
+            $tambah = $userpoin + $poin;
+
+            $user->poin = $tambah;
+            $user->save();
+
+
             $userdata = array(
                 'nama'      => $user->nama_lengkap,
                 'email'     => $user->email,
