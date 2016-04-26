@@ -40,7 +40,7 @@ class UserController extends Controller
     {   
         $email = Input::get('email');
         $pass = (Input::get('password'));
-        $user= DB::table('users')->select('poin')->where([['email','=',$email],['password','=',$pass]])->first();
+        $user= DB::table('users')->select('total_poin')->where([['email','=',$email],['password','=',$pass]])->first();
         if($user===null){
             echo $email.'<br>';
             echo $pass.'<br>';
