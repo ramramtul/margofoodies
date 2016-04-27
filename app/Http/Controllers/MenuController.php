@@ -74,11 +74,17 @@ class MenuController extends Controller {
 		}
 	}
 
-	public function search($syarat)
+	public function search()
 	{
+		$syarat = Input::get('query');
 		$temp = '%'.$syarat.'%';
 		$menu = Menu::where('nama', 'like', $temp)->get();
-		return view('view-search', compact('menu'));
+		for ($i = 0; $i < count($menu); $i++) {
+			$id = $menu[$i]->id_restoran;
+			$resto = Restoran::find($id);
+			$menu[$i]->resto = $resto->nama;
+		}
+		return view('view-search')->with('menu', $menu);
 	}
 
 	/**

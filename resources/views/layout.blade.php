@@ -46,12 +46,15 @@
 					<div class="row">
 			        	<div class="col-sm-3 col-sm-offset-10">       
 			            	<div class="input-group stylish-input-group">
-				                	<input type="text" class="form-control" name="cari" placeholder="Search" >
+			                	<form role="form" action="{{url('/search')}}" method="POST">
+		  							{!! csrf_field() !!}
+				                	<input type="text" class="form-control" name="query" placeholder="Search" >
 				                	<span class="input-group-addon">
 					                    <button type="submit">
 					                    	<span class="glyphicon glyphicon-search"></span>
 					                    </button> 
-				                	</span>                
+				                	</span> 
+				                </form>               
 			            	</div>
 			        	</div>	
 					</div>
