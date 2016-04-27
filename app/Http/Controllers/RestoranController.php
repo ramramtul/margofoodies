@@ -17,6 +17,12 @@ class RestoranController extends Controller {
 	 *
 	 * @return Response
 	 */
+	public function showList()
+	{
+		//
+		$restoran = Restoran::paginate(6);
+		return view('view-restoran-all')->with('restoran', $restoran);
+	}
 	
 	/**
 	 * Show the form for creating a new resource.
@@ -61,8 +67,11 @@ class RestoranController extends Controller {
 		else if ($hari == "Friday") $hari = "Jumat";
 		else if ($hari == "Saturday") $hari = "Sabtu";
 		$hari_ini = WaktuOperasional::where('id_restoran', '=', $id)->where('hari', '=', $hari)->get();
-		
+		if ($restoran != null){
 		return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0]);
+		} else {
+			return view('error-page');
+		}
 
 	}
 

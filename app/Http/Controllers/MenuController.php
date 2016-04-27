@@ -67,7 +67,11 @@ class MenuController extends Controller {
 		$restoran = Restoran::find($id);
 		$menus = Menu::where('id_restoran', '=', $id)->paginate(5);
 		//dd($menus);
+		if ($restoran != null){
 		return view('view-menus')->with('menus', $menus)->with('restoran', $restoran);
+		} else {
+			return view('error-page');
+		}
 	}
 
 	public function search($syarat)
