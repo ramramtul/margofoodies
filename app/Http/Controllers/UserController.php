@@ -40,20 +40,19 @@ class UserController extends Controller
     {   
         $email = Input::get('email');
         $pass = (Input::get('password'));
-        $user= DB::table('users')->select('total_poin')->where([['email','=',$email],['password','=',$pass]])->first();
+        $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
         if($user===null){
             echo $email.'<br>';
             echo $pass.'<br>';
             Session::put(array('loginerr' => 'Wrong email or password'));
             return Redirect::to('/home');
         } else {
-            $poin = 10;
-            $userpoin = DB::table('users')->where('email', '=', $email)->get();
-            $tambah = $userpoin + $poin;
-
-            $user->poin = $tambah;
-            $user->save();
-
+            $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
+            var_dump($userpoin);
+            $poinuser = $userpoin->total_point;
+            $poin = $poinuser + 10;
+            
+            DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
 
             $userdata = array(
                 'nama'      => $user->nama_lengkap,
