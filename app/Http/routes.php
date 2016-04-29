@@ -37,5 +37,5 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('restoran/{id}','RestoranController@show');
 	
 	Route::get('menus/{id}','MenuController@showList');
-	Route::get('search/{syarat}','MenuController@search');
+	Route::post('search','MenuController@search');
 });
