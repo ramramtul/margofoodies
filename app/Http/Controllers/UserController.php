@@ -59,7 +59,7 @@ class UserController extends Controller
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
             $currTime = Carbon::now();
-            $userLog = DB::table('waktu_login_users')->select('login_time')->where('email',$email)->orderBy('login_time','desc')->first();
+            $userLog = DB::table('waktu_login_users')->select('login_time')->where('email',$email)->orderBy('login_time','desc')->get(1);
             $lastLogin = Carbon::parse($userLog->login_time);
 
             if($currTime->DiffInHours($lastLogin) < 24) {
@@ -70,8 +70,7 @@ class UserController extends Controller
                     
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
-            } else 
-            if ($currTime->DiffInHours($lastLogin) > 24) {
+            } else if ($currTime->DiffInHours($lastLogin) > 24) {
                 # code...
                 $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
                 $poinuser = $userpoin->total_point;
