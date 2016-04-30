@@ -18,15 +18,31 @@
 ?>
 <!-- Bootstrap Boilerplate... -->
 <div class="container">
-	<h2> Kalkulator Patungan </h2>
+<h2 class="judul"> Kalkulator Patungan </h2>
   
         <h3> Restoran : {{ $resto->nama }}</h3>
-		<h3> Untuk : {{ $jmlOrang }} ORANG</h3>
+        <h3> Untuk : {{ $jmlOrang }} ORANG</h3>
         @if ($orang == $jml)
             <h3> Oleh : {{$user}} - Pesanan Bersama</h3>
         @else
             <h3> Oleh : {{$user}} - Pesanan Orang ke {{$orang}}</h3>
         @endif
+<div style="text-align: right;">
+        <?php
+        $prev = $orang - 1;
+        $next = $orang + 1;
+        $link = url("calculateFood");
+        if($prev >= 1){
+            echo "<a href='$link/$prev'><button class='btn btn-danger'> Previous </button></a>";
+        } 
+        echo "&nbsp;&nbsp;&nbsp;";
+        if($next <= $jml){
+            echo "<a href='$link/$next'><button class='btn btn-danger'> Next </button></a>";
+        } 
+        $a = 1;
+        
+    ?>
+    </div>
     <div class="panel-body">
         <!-- Display Validation Errors -->
         <!-- New Task Form -->
@@ -111,29 +127,47 @@
         </div>
 
     @endif
-    <?php
-        $prev = $orang - 1;
-        $next = $orang + 1;
-        $link = url("calculateFood");
-        if($prev >= 1){
-            echo "<a href='$link/$prev'> Previous </a>";
-        } 
-        if($next <= $jml){
-            echo "<a href='$link/$next'> Next </a>";
-        } 
-            
-        
-    ?>
-    @if($orang == $jml)
-       
-            <form action="{{ url('calculate')}}" method="POST">
-                        {{ csrf_field() }}
     
-                        <button type="submit" name="hitung" value="hitung" class="btn btn-danger">
-                <i class="fa fa-btn fa-trash"></i>Hitung
-            </button>
-                    </form>
+
+    @if($orang == $jml)
+    
+
     @endif
+ <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+            Hitung
+        </button>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Hitung Patungan</h4>
+              </div>
+              <div class="modal-body">
+              <p> Setelah ini Anda tidak dapat lagi mengubah pesanan, Apakah anda yakin?</p>
+              </div>
+              <div class="modal-footer">
+                <div style="text-align: center">
+              <table>
+              <tr>
+          
+                <td><form action="{{ url('calculate/'.$a.'')}}" method="POST">
+
+    
+                        <td><button type="submit" name="hitung" value="hitung" class="btn btn-danger btn-responsive">
+                <i class="fa fa-btn fa-trash"></i>Ya
+            </button>
+                    </form></td>
+                <td><button type="button" class="btn btn-danger btn-responsive" data-dismiss="modal">Tidak</button></td>
+                
+
+               </tr>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 </div>
-    <!-- TODO: Current Tasks -->
 @stop

@@ -58,11 +58,20 @@ class PesananController extends Controller
 		//
 	}
 
-	public function calculate(Request $request)
+	public function reset(Request $request)
 	{
-		Session::put('or', 1);
-		return view ('desc-calculator');
+		$user = $request->session()->get('email');
+		$affectedRows = Pesanan::where('id_user', '=', $user)->delete();
+		return Redirect::to('/');
 	}
+
+	public function calculateId(Request $request, $or)
+	{
+		
+		return view ('desc-calculator')->with('or', $or);
+	}
+
+
 	public function pesan(Request $request, $orang)
 	{
 

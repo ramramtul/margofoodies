@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Restoran;
 use App\Menu;
+use App\Pesanan;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
@@ -42,6 +43,7 @@ class HomeController extends Controller
                 'orang' => 1
             );
 		Session::put($data);
+		$affectedRows = Pesanan::where('id_user', '=', $user)->delete();
 		return Redirect::to('/calculateFood/1');
 	}
 	}

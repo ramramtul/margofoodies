@@ -14,7 +14,6 @@
     $patungan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $jml)->get();
     $totalPatungan = 0;
     $biayaPatungan = 0;
-    $or = Session::get('or');
 ?>
 @foreach($patungan as $pat)
     <?php
@@ -68,23 +67,12 @@
         <td> Rp.{{$total}},00 </td>
         <td>
             
-            
-            <script>
-           
-            function onClick(id)
-            {
-                
-                window.alert(id);
-                <?php
-                    
-                ?>
-                //location.reload();
-            }
-            </script>
-            
-                        <button type="submit" onclick="onClick(this.id)" id="{{ $i }}" class="btn btn-danger">
+            <form action="{{ url('calculate/'.$i.'')}}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit"  id="{{ $i }}" class="btn btn-danger">
                 Rincian
             </button>
+            </form>
 
         </td>
         </tr>
@@ -92,15 +80,27 @@
     </tbody>
     </table>
     </div>
-        </div>
+    
     </div>
+    <form action="{{ url('calculate')}}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit"  class="btn btn-danger">
+                Selesai
+            </button>
+            </form>
+        </div>
     <div class="col-md-6"> 
         <div class="panel panel-default">
             <div class="panel-heading">
-                Rincian Pesanan
+                Rincian Pesanan Orang ke {{$or}}
             </div>
-
+                    <?php
+                        $pesanan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $or)->get();
+                        $totPes = 0;
+                    ?>
+                    
             <div class="panel-body" id="rincian">
+            @if(count($pesanan) > 0)
             <table class="table table-striped task-table">
 
                     <!-- Table Headings -->
@@ -112,10 +112,6 @@
 
                     <!-- Table Body -->
                     <tbody id="pesanan">
-                    <?php
-                        $pesanan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $or)->get();
-                        $totPes = 0;
-                    ?>
                        @foreach($pesanan as $pesan)
                         <?php
                             $menu = App\Menu::find($pesan->id_menu);
@@ -145,9 +141,11 @@
                     </tbody>
             </table>
             <div>
-            <hr>
+             <hr>
+            @endif
+           
                 <b>Patungan</b>
-                <hr>
+                
                 <table class="table table-striped task-table">
 
                     <!-- Table Headings -->
@@ -204,8 +202,6 @@
                 </table>
 
             </div>
-
-
 
             </div>
     </div>

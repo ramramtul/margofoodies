@@ -17,8 +17,10 @@
 .nav.navbar-nav.navbar-right li a:hover {
     color: #000000;	
 }
-
-
+.btn-responsive {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
 .inputan {
 	background-color: #E8E399;
 	margin-left: 120px;
@@ -49,6 +51,7 @@
 }
 .judul {
 	text-align: center;
+  color :red;
 }
 
 .btn-singgah {
