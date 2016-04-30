@@ -51,7 +51,9 @@
 	<br>
 	<div class="container">
 		<div class="row">
-		    <div class="col-md-5">   
+		    <div class="col-md-5">  
+		    <div class="panel panel-default">
+        <div class="panel-body res1"> 
 			    	<h3 style="text-align: center"> Hitung Budgetmu! </h3>
 				  	<form role="form" action="{{url('/findFood')}}" method="POST" class="carimakan">
 				  		{!! csrf_field() !!}
@@ -74,9 +76,13 @@
 								</div>
 						</div>
 				  	</form>
-				  	
+				  	<br>
+				  	</div>
+				  	</div>
 			</div>
 			<div class="col-md-5 col-md-offset-1">
+			 <div class="panel panel-default">
+        <div class="panel-body res2">
 				  	<form role="form" action="{{url('/calculateFood')}}" method="POST" class="hitungmakan"> 
 				  		{!! csrf_field() !!}
 				  		
@@ -106,7 +112,7 @@
 				    	<div class="form-group">
 				    		<div class="row">	
 				    			<div class="col-sm-4 col-sm-offset-1"> 
-				      				<input type="text" pattern="[0-9]{1,3}" class="form-control" placeholder="Jumlah orang" name="orang" id="orang" required="true">
+				      				<input type="text" pattern="^(?!0+$)\d+$" class="form-control" placeholder="Jumlah orang" name="orang" id="orang" required="true">
 					     		</div>
 				    			
 								<div class="col-sm-2 col-sm-offset-4 ">
@@ -115,6 +121,8 @@
 							</div>
 						</div>
 				  	</form>
+				  	</div>
+				  	</div>
 			</div>
 		</div>
 	</div>

@@ -31,10 +31,12 @@
 	border-color: #EA5B4D;
 	padding-top: 15px;
 }
+
 .res1{
 	border: 6px solid #92c19f;
-	border-radius : 4px;
+	border-radius : 10px;
 	background-color: #E8E399;
+  margin : 0 auto;
 
 }
 .res2{

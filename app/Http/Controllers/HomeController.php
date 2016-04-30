@@ -28,7 +28,11 @@ class HomeController extends Controller
 		if($user == null){
 			return view('home');
 		}
-		//echo $user;
+		$deletedRows = Pesanan::where('id_user', $user)->delete();
+		$request->session()->forget('resto');
+		$request->session()->forget('jmlOrang');
+		$request->session()->forget('menus');
+		$request->session()->forget('resto');
 		$restoran = Input::get('restoran');
 		$jmlOrang =Input::get('orang');
 		if($restoran===null){

@@ -60,9 +60,13 @@ class PesananController extends Controller
 
 	public function reset(Request $request)
 	{
-		$user = $request->session()->get('email');
-		$affectedRows = Pesanan::where('id_user', '=', $user)->delete();
-		return Redirect::to('/');
+		$user = session()->get('email');
+		$deletedRows = Pesanan::where('id_user', $user)->delete();
+		$request->session()->forget('resto');
+		$request->session()->forget('jmlOrang');
+		$request->session()->forget('menus');
+		$request->session()->forget('resto');
+   		return Redirect::to('/home');
 	}
 
 	public function calculateId(Request $request, $or)
@@ -78,7 +82,11 @@ class PesananController extends Controller
 		$user = $request->session()->get('email');
 		$or = session()->get('orang');
 		if($user == null){
-			return view('home');
+			return Redirect::to('/home');
+		}
+		if (!(Session::has('jmlOrang')))
+		{
+		    return Redirect::to('/home');
 		}
 		$jml = session()->get('jmlOrang') + 1;
 		if($jml >= $orang){

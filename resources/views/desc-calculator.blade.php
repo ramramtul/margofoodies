@@ -22,16 +22,17 @@
     ?>
 @endforeach
     <?php
-        $biayaPatungan = $totalPatungan/$jmlOrang;
+        $biayaPatungan = round($totalPatungan/$jmlOrang,2);
     ?>
 
 <!-- Bootstrap Boilerplate... -->
 <div class="container">
-    <h2> Ringkasan Patungan </h2>
+    <h2 class="judul"> Ringkasan Patungan </h2>
   
-        <h3> Restoran : {{ $resto->nama }}</h3>
-        <h3> Untuk : {{ $jmlOrang }} ORANG</h3>
-            <h3> Oleh : {{$user}}</h3>
+        <div style="text-align: center;">
+            <h4> Restoran : <b>{{ $resto->nama }} </b> -   untuk : <b>{{ $jmlOrang }} orang</b></h4>
+            <br>
+        </div>
     <div class="row">
         <div class="col-md-6"> 
         <div class="panel panel-default">
@@ -124,7 +125,7 @@
                                 </td>
                                 <td class="table-text">
                                     
-                                    <div>{{$menu->harga}}</div>
+                                    <div>Rp.{{$menu->harga}},00</div>
                                 </td>
                                 </tr>
                         @endforeach 
@@ -135,7 +136,7 @@
                         </td>
                         <td class="table-text">
                                     
-                                    <div>{{$totPes}}</div>
+                                    <div>Rp.{{$totPes}},00</div>
                                 </td>
                         </tr>
                     </tbody>
@@ -164,7 +165,7 @@
                         @foreach($patungan as $pat)
                             <?php
                                 $menu = App\Menu::find($pat->id_menu);
-                                $hOrang = $menu->harga/$jmlOrang;
+                                $hOrang = round($menu->harga/$jmlOrang, 2);
                                 $totPat = $totPat + $hOrang;
                                 $totP = $totP + $menu->harga;
                             ?>
@@ -175,11 +176,11 @@
                                 </td>
                                 <td class="table-text">
                                     
-                                    <div>{{$menu->harga}}</div>
+                                    <div>Rp.{{$menu->harga}},00</div>
                                 </td>
                                 <td class="table-text">
                                     
-                                    <div>{{$hOrang}}</div>
+                                    <div>Rp.{{$hOrang}},00</div>
                                 </td>
                             </tr>
 
@@ -191,11 +192,11 @@
                         </td>
                          <td class="table-text">
                                     
-                                    <div>{{$totP}}</div>
+                                    <div>Rp.{{$totP}},00</div>
                                 </td>
                         <td class="table-text">
                                     
-                                    <div>{{$totPat}}</div>
+                                    <div>Rp.{{$totPat}},00</div>
                                 </td>
                         </tr>
                     </tbody>

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-	<title>MargoFoodies - Kalkulator Patungan </title>
+    <title>MargoFoodies - Kalkulator Patungan </title>
 @stop
 
 @section('content')
@@ -17,32 +17,39 @@
 
 ?>
 <!-- Bootstrap Boilerplate... -->
-<div class="container">
-<h2 class="judul"> Kalkulator Patungan </h2>
-  
-        <h3> Restoran : {{ $resto->nama }}</h3>
-        <h3> Untuk : {{ $jmlOrang }} ORANG</h3>
+<div class="container kalkulator">
+    <h2 class="judul"> Kalkulator Patungan </h2>
+  <div class="panel panel-default">
+        <div class="panel-body res2">
+        <div style="text-align: center;">
+        <h4> Restoran : <b>{{ $resto->nama }} </b> -   untuk : <b>{{ $jmlOrang }} orang</b></h4>
         @if ($orang == $jml)
-            <h3> Oleh : {{$user}} - Pesanan Bersama</h3>
+            <h4><b>Pesanan Bersama</b></h4>
         @else
-            <h3> Oleh : {{$user}} - Pesanan Orang ke {{$orang}}</h3>
+            <h4><b>Pesanan Orang ke {{$orang}}</b></h4>
         @endif
-<div style="text-align: right;">
-        <?php
-        $prev = $orang - 1;
-        $next = $orang + 1;
-        $link = url("calculateFood");
-        if($prev >= 1){
-            echo "<a href='$link/$prev'><button class='btn btn-danger'> Previous </button></a>";
-        } 
-        echo "&nbsp;&nbsp;&nbsp;";
-        if($next <= $jml){
-            echo "<a href='$link/$next'><button class='btn btn-danger'> Next </button></a>";
-        } 
-        $a = 1;
-        
-    ?>
+        </div>
+    <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+             <?php
+                $prev = $orang - 1;
+                $next = $orang + 1;
+                $link = url("calculateFood");
+                if($prev >= 1){
+                    echo "<a href='$link/$prev'><button class='btn btn-danger'><i class='fa fa-arrow-left'></i>  Previous </button></a>";
+                } 
+                echo "&nbsp;&nbsp;&nbsp;";
+                if($next <= $jml){
+                    echo "<a href='$link/$next'><button class='btn btn-danger'><i class='fa fa-arrow-right'></i>  Next </button></a>";
+                }
+
+                $a = 1;
+                    
+                
+            ?>
+        </div>
     </div>
+    
     <div class="panel-body">
         <!-- Display Validation Errors -->
         <!-- New Task Form -->
@@ -63,7 +70,7 @@
             <!-- Add Task Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
+                    <button type="submit" class="btn btn-danger">
                         <i class="fa fa-plus"></i> Tambah Pesanan
                     </button>
                 </div>
@@ -94,31 +101,31 @@
                             <tr>
                                 <!-- Task Name -->
                                 <?php
-    								$menu = App\Menu::find($pesan->id_menu);
+                                    $menu = App\Menu::find($pesan->id_menu);
 
-    							?>	
+                                ?>  
 
                                 <td class="table-text">
-                                	
+                                    
                                     <div>{{$menu->nama}}</div>
                                 </td>
                                 <td class="table-text">
-                                	
-                                    <div>{{$menu->harga}}</div>
+                                    
+                                    <div>Rp.{{$menu->harga}},00</div>
                                 </td>
 
                                  <!-- Delete Button -->
-		    					<td>
+                                <td>
     
-			        				<form action="{{ url('calculateFood')/$orang }}" method="POST">
-			            {{ csrf_field() }}
-			            {{ method_field('DELETE') }}
+                                    <form action="{{ url('calculateFood')/$orang }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
     
-			            <button type="submit" name="pesanan" value="{{ $pesan->id_pesanan }}" class="btn btn-danger">
-                <i class="fa fa-btn fa-trash"></i>Delete
+                        <button type="submit" name="pesanan" value="{{ $pesan->id_pesanan }}" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i> Delete
             </button>
-			        </form>
-		    </td>
+                    </form>
+            </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -127,47 +134,19 @@
         </div>
 
     @endif
-    
+    @if($orang == $jml)           
+        <form action="{{ url('calculate/'.$a.'')}}" method="POST">
+            {{ csrf_field() }}
 
-    @if($orang == $jml)
-    
-
+            <button type="submit" name="hitung" value="hitung" class="btn btn-danger">
+            <i class="fa fa-btn fa-trash"></i>Hitung
+             </button>
+        </form>
+        <br>
+        <br>
     @endif
- <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-            Hitung
-        </button>
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Hitung Patungan</h4>
-              </div>
-              <div class="modal-body">
-              <p> Setelah ini Anda tidak dapat lagi mengubah pesanan, Apakah anda yakin?</p>
-              </div>
-              <div class="modal-footer">
-                <div style="text-align: center">
-              <table>
-              <tr>
-          
-                <td><form action="{{ url('calculate/'.$a.'')}}" method="POST">
-
-    
-                        <td><button type="submit" name="hitung" value="hitung" class="btn btn-danger btn-responsive">
-                <i class="fa fa-btn fa-trash"></i>Ya
-            </button>
-                    </form></td>
-                <td><button type="button" class="btn btn-danger btn-responsive" data-dismiss="modal">Tidak</button></td>
-                
-
-               </tr>
-                </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+    </div>
 </div>
+    <!-- TODO: Current Tasks -->
 @stop
