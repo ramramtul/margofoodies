@@ -44,7 +44,7 @@
 
 				<div class="container" id="search">
 					<div class="row">
-<<<<<<< HEAD
+
 						<div class="col-sm-3 col-sm-offset-10">       
 							<div class="input-group stylish-input-group">
 								<input type="text" class="form-control" name="cari" placeholder="Search" >
@@ -55,7 +55,7 @@
 								</span>                
 							</div>
 						</div>	
-=======
+
 			        	<div class="col-sm-3 col-sm-offset-10">       
 			            	<div class="input-group stylish-input-group">
 			                	<form role="form" action="{{url('/search')}}" method="POST">
@@ -69,7 +69,7 @@
 				                </form>               
 			            	</div>
 			        	</div>	
->>>>>>> master
+
 					</div>
 				</div>
 				
