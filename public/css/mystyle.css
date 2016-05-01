@@ -11,15 +11,15 @@
 }
 
 .nav.navbar-nav.navbar-right li a {
-    color: #7F756B;	
+  color: #7F756B;	
 }
 
 .nav.navbar-nav.navbar-right li a:hover {
-    color: #000000;	
+  color: #000000;	
 }
 .btn-responsive {
-    white-space: normal !important;
-    word-wrap: break-word;
+  white-space: normal !important;
+  word-wrap: break-word;
 }
 .inputan {
 	background-color: #E8E399;
@@ -33,11 +33,11 @@
 }
 
 .content {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    color: inherit;
-    background-color: #eee;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
 }
 
 .res1{
@@ -69,7 +69,7 @@
 	color:white;
 	border-color: #7f756b;
 	border-width: 3px;
-  	border-radius: 15px;
+ border-radius: 15px;
 
 }
 .img-restoran{
@@ -89,7 +89,7 @@
 .btn-singgah:hover {
 	background-color: #EA5B4D;
 	color:white;
-	 border: 2px solid white;
+  border: 2px solid white;
 }
 
 #search {
@@ -100,18 +100,18 @@
 }
 
 #restoCarousel {
-       width: 550px;
-       height:370px;
+ width: 550px;
+ height:370px;
 }
 
 #myCarousel {
-       width: 400px;
-       height:290px;
+ width: 400px;
+ height:290px;
 }
 
 .stylish-input-group .input-group-addon{
-    border-color: #EA5B4D;
-    background: transparent;
+  border-color: #EA5B4D;
+  background: transparent;
 }
 
 .stylish-input-group .form-control{
@@ -134,7 +134,7 @@
 	padding-right :10px;
 	border-color: black;
 	border-style: 2;
-	 width: 100%;
+  width: 100%;
 
 }
 
@@ -161,18 +161,18 @@
   text-indent: -999em;
   width: 110px;
   
- }
-  .star-ratings-sprite-rating {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-    background-position: 0 100%;
-    float: left;
-    height: 21px;
-    display:block;
-  }
+}
+.star-ratings-sprite-rating {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+  background-position: 0 100%;
+  float: left;
+  height: 21px;
+  display:block;
+}
 
-  body{
-  	font-style: Helvetica;
-  }
+body{
+ font-style: Helvetica;
+}
 
 
 ul {
@@ -204,67 +204,67 @@ ul {
   height:700px;
   overflow-y:scroll;
   width:100%;
-}*/
+  }*/
 
-.table-container {
+  .table-container {
     height: 50em;
-}
-table {
+  }
+  table {
     display: flex;
     flex-flow: column;
     height: 100%;
     width: 100%;
-}
-table thead {
+  }
+  table thead {
     /* head takes the height it requires, 
     and it's not scaled when table is resized */
     flex: 0 0 auto;
     width: calc(100% - 0.9em);
-}
-table tbody {
+  }
+  table tbody {
     /* body takes all the remaining available space */
     flex: 1 1 auto;
     display: block;
     overflow-y: scroll;
-}
-table tbody tr {
+  }
+  table tbody tr {
     width: 100%;
-}
-table thead, table tbody tr {
+  }
+  table thead, table tbody tr {
     display: table;
     table-layout: fixed;
-}
-input[type="radio"] {
+  }
+  input[type="radio"] {
     -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
     -moz-appearance: checkbox;    /* Firefox */
     -ms-appearance: checkbox;     /* not currently supported */
     transform: scale(1.5);
-}
-a {
+  }
+  a {
     color: #EA5B4D;
-}
+  }
 
-a:hover {
+  a:hover {
     color: #EA5B4D;
-}
-@media only screen and (max-width: 400px) {
-                    body { font-size:90%;}
-     }
+  }
+  @media only screen and (max-width: 400px) {
+    body { font-size:90%;}
+  }
 
-/*Custom Search Field*/
-#custom-search-input{
+  /*Custom Search Field*/
+  #custom-search-input{
     padding: 3px;
     border: solid 1px #E4E4E4;
     border-radius: 6px;
     background-color: #fff;
-}
+  }
 
-#custom-search-input input{
+  #custom-search-input input{
     border: 0;
     box-shadow: none;
-}
+  }
 
-#custom-search-input button{
+  #custom-search-input button{
     margin: 2px 0 0 0;
     background: none;
     box-shadow: none;
@@ -272,14 +272,205 @@ a:hover {
     color: #666666;
     padding: 0 8px 0 10px;
     border-left: solid 1px #ccc;
-}
+  }
 
-#custom-search-input button:hover{
+  #custom-search-input button:hover{
     border: 0;
     box-shadow: none;
     border-left: solid 1px #ccc;
-}
+  }
 
-#custom-search-input .glyphicon-search{
+  #custom-search-input .glyphicon-search{
     font-size: 23px;
-}
+  }
+
+  /** 
+   * Tambahan dari Putra
+   *
+   * User Profile Sidebar by @keenthemes
+   * A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+   * Licensed under MIT
+   *
+   **/
+
+
+   /* Profile container */
+   .profile {
+    margin: 20px 0;
+  }
+
+  /* Profile sidebar */
+  .profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+  }
+
+  .profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
+
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .profile-usertitle-email {
+    text-transform: lowercase;
+    color: #5b9bd1;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .profile-usertitle-desc {
+    color: black;
+    font-size: 12px;
+    font-weight: 350;
+    margin-bottom: 15px;
+  }
+
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+  }
+
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+
+  .profile-usermenu {
+    margin-top: 30px;
+  }
+
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+  }
+
+  .profile-usermenu ul li:last-child {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  .profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+  }
+
+  .profile-usermenu ul li.active {
+    border-bottom: none;
+  }
+
+  .profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+  }
+
+  /* Profile Content */
+  .profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+  }
+
+  .hovereffect {
+    width:100%;
+    height:100%;
+    float:left;
+    overflow:hidden;
+    position:relative;
+    text-align:center;
+    cursor:default;
+  }
+
+  .hovereffect .overlay {
+    width:50%;
+    height:100%;
+    position:absolute;
+    overflow:hidden;
+    top:0;
+    left:25%;
+    opacity:0;
+    background-color:rgba(0,0,0,0.5);
+    -webkit-transition:all .4s ease-in-out;
+    transition:all .4s ease-in-out
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
+
+  .hovereffect img {
+    display:block;
+    position:relative;
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+  }
+
+  .hovereffect a.info {
+    text-decoration:none;
+    display:inline-block;
+    text-transform:uppercase;
+    color:#fff;
+    border:1px solid #fff;
+    background-color:transparent;
+    opacity:0;
+    filter:alpha(opacity=0);
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out;
+    margin:50px 0 0;
+    padding:7px 14px;
+  }
+
+  .hovereffect a.info:hover {
+    box-shadow:0 0 5px #fff;
+  }
+
+  .hovereffect:hover .overlay {
+    opacity:1;
+    filter:alpha(opacity=100);
+  }
+
+  .hovereffect:hover h2,.hovereffect:hover a.info {
+    opacity:1;
+    filter:alpha(opacity=100);
+    -ms-transform:translatey(0);
+    -webkit-transform:translatey(0);
+    transform:translatey(0);
+  }
+
+  .hovereffect:hover a.info {
+    -webkit-transition-delay:.2s;
+    transition-delay:.2s;
+  }
