@@ -18,9 +18,9 @@ Licensed under MIT
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<div class="hovereffect">
-						<img class="img-responsive" src="images/default_pp.png" class="img-responsive" alt="">
+						<img class="img-responsive" src="{{ $user->id_photo }}" class="img-responsive" alt="">
 						<div class="overlay">
-							<a class="info" href="#">link here</a>
+							<a id="browse" class="info" onclick="browse()">Upload</a>
 						</div>
 					</div>
 				</div>
@@ -174,6 +174,9 @@ Licensed under MIT
 						</div>
 						@endif
 
+						<!-- Image Button -->
+						<input type="file" id="pic-btn" name="pic-btn" style="display:none;">
+
 						<!-- Button -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="singlebutton"></label>
@@ -191,4 +194,14 @@ Licensed under MIT
 </div>
 <br>
 <br>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var a = document.getElementById("browse");
+		a.onclick = function() {
+			var btn = document.getElementById("pic-btn");
+			btn.click();
+		}
+	});
+</script>
 @stop
