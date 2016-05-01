@@ -52,77 +52,76 @@
 	<div class="container">
 		<div class="row">
 		    <div class="col-md-5">  
-		    <div class="panel panel-default">
-        <div class="panel-body res1"> 
-			    	<h3 style="text-align: center"> Hitung Budgetmu! </h3>
-				  	<form role="form" action="{{url('/findFood')}}" method="POST" class="carimakan">
-				  		{!! csrf_field() !!}
-				    	<div class="form-group">
-							<div class="row">
-				        		<div class="col-sm-6 "> 
-				      				<label for="budget">Berapa budgetmu?</label>
-				      				<input type="text" class="form-control" name="budget" id="budget">
-				    			</div>
-				    			
-				    			<div class="col-sm-6 "> 
-				      				<label for="porsi">Jumlah orang?</label>
-				      				<input type="text" class="form-control" name="porsi" id="porsi">
-					     		</div>
-							</div>
-						</div>
-						<div class="row">
-								<div class="col-sm-2 col-sm-offset-10">
-									<button type="submit" class="btn" id="cari">Cari</button>
+		    	<div class="panel panel-default">
+        			<div class="panel-body res1"> 
+				    	<h3 style="text-align: center"> Hitung Budgetmu! </h3>
+					  	<form role="form" action="{{url('/findFood')}}" method="POST" class="carimakan">
+					  		{!! csrf_field() !!}
+					    	<div class="form-group">
+								<div class="row">
+					        		<div class="col-sm-6 "> 
+					      				<label for="budget">Berapa budgetmu?</label>
+					      				<input type="text" class="form-control" name="budget" id="budget">
+					    			</div>
+					    			
+					    			<div class="col-sm-6 "> 
+					      				<label for="porsi">Jumlah orang?</label>
+					      				<input type="text" class="form-control" name="porsi" id="porsi">
+						     		</div>
 								</div>
-						</div>
-				  	</form>
-				  	<br>
+							</div>
+							<div class="row">
+									<div class="col-sm-2 col-sm-offset-10">
+										<button type="submit" class="btn" id="cari">Cari</button>
+									</div>
+							</div>
+					  	</form>
+				  		<br>
 				  	</div>
-				  	</div>
+				</div>
 			</div>
 			<div class="col-md-5 col-md-offset-1">
-			 <div class="panel panel-default">
-        <div class="panel-body res2">
-				  	<form role="form" action="{{url('/calculateFood')}}" method="POST" class="hitungmakan"> 
-				  		{!! csrf_field() !!}
-				  		
-			    		<div style="text-align: center;">
-				    		<h3> Kalkulator Patungan </h3>
-				    		<h5>(<a href="" >Masuk </a> terlebih dahulu)</h5>
-				    	</div>
-		
-					    <div class="form-group">
-							<div class="row">
-				        		<div class="col-sm-10 col-sm-offset-1 "> 
-				        			<?php
-				        			use App\Restoran;
+			 	<div class="panel panel-default">
+        			<div class="panel-body res2">
+					  	<form role="form" action="{{url('/calculateFood')}}" method="POST" class="hitungmakan"> 
+					  		{!! csrf_field() !!}
+					  		
+				    		<div style="text-align: center;">
+					    		<h3> Kalkulator Patungan </h3>
+					    		<h5>(<a href="" >Masuk </a> terlebih dahulu)</h5>
+					    	</div>
+			
+						    <div class="form-group">
+								<div class="row">
+					        		<div class="col-sm-10 col-sm-offset-1 "> 
+					        			<?php
+					        			use App\Restoran;
 
-				        			$restoran = Restoran::orderBy("nama")->get();
-				        			echo "<select class='form-control' name='restoran'>";
-				        			foreach($restoran as $resto) {
-								    echo "<option value='$resto[id]'> $resto[nama] </option>";
-								    
-								    }
-								    echo "</select>";
+					        			$restoran = Restoran::orderBy("nama")->get();
+					        			echo "<select class='form-control' name='restoran'>";
+					        			foreach($restoran as $resto) {
+									    	echo "<option value='$resto[id]'> $resto[nama] </option>";
+									    }
+									    echo "</select>";
 
-				        			?>
-				    			</div>
-				    		</div>
-				    	</div>
-				    	<div class="form-group">
-				    		<div class="row">	
-				    			<div class="col-sm-4 col-sm-offset-1"> 
-				      				<input type="text" pattern="^(?!0+$)\d+$" class="form-control" placeholder="Jumlah orang" name="orang" id="orang" required="true">
-					     		</div>
-				    			
-								<div class="col-sm-2 col-sm-offset-4 ">
-									<button type="submit" class="btn" id="hitung">Hitung</button>
+					        			?>
+					    			</div>
+					    		</div>
+					    	</div>
+					    	<div class="form-group">
+					    		<div class="row">	
+					    			<div class="col-sm-4 col-sm-offset-1"> 
+					      				<input type="text" pattern="^(?!0+$)\d+$" class="form-control" placeholder="Jumlah orang" name="orang" id="orang" required="true">
+						     		</div>
+					    			
+									<div class="col-sm-2 col-sm-offset-4 ">
+										<button type="submit" class="btn" id="hitung">Hitung</button>
+									</div>
 								</div>
 							</div>
-						</div>
-				  	</form>
+					  	</form>
 				  	</div>
-				  	</div>
+				</div>
 			</div>
 		</div>
 	</div>
