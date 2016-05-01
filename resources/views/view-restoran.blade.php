@@ -21,7 +21,7 @@
   		<div class="row">
         	<div class="col-xs-12 col-sm-6 col-md-6">
         		<div id="restoCarousel" class="carousel slide" data-ride="carousel">
-				  <!-- Indicators -->
+				  <!-- Indicator untuk gambar restoran -->
 				  <ol class="carousel-indicators">
 				    <li data-target="#restoCarousel" data-slide-to="0" class="active"></li>
 				    <li data-target="#restoCarousel" data-slide-to="1"></li>
@@ -58,9 +58,9 @@
 				    <span class="sr-only">Next</span>
 				  </a>
 				</div>
-  				<!-- <img src="../images/restoran.jpg" class="img-responsive img-restoran" alt={{$restoran->nama}}> -->
   				<br>
   			</div>
+  			<!-- Menampilkan informasi restoran -->
   			<div class="col-xs-12 col-sm-6 col-md-6">
   				<div class="panel panel-default">
   					<div class="panel-body res1">
@@ -135,9 +135,6 @@
 					</div>
 
 				</div>
-				
- 				
- 			
 			</div>
 		</div>
 	</div>
