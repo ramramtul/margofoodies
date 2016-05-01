@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Input;
+
 use DB;
 use Session;
 
@@ -42,17 +45,15 @@ class UserController extends Controller
         $pass = (Input::get('password'));
         $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
         if($user===null){
-            echo $email.'<br>';
-            echo $pass.'<br>';
-            Session::put(array('loginerr' => 'Wrong email or password'));
-            return Redirect::to('/home');
+            $loginerr = 'Wrong email or password';
+            return Redirect::to('/home')->with('loginerr',$loginerr);
         } else { 
             $userdata = array(
                 'nama'      => $user->nama_lengkap,
                 'email'     => $user->email,
                 'password'  => $user->password
             );
-            Session::put($userdata);
+            Session::put('user',$user);
             return Redirect::to('/home');
         }
     }
@@ -61,6 +62,15 @@ class UserController extends Controller
     {
         Session::flush();
         return Redirect::to('/home');
+    }
+
+    /**
+     * mengembalikan profile user
+     *
+     * @author Putra Muttaqin
+     */
+    public function profile() {
+        return View::make("profile-page");
     }
 
 }
