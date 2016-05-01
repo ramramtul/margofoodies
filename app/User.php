@@ -17,6 +17,6 @@ class User extends Model
     ];
 
     protected $hidden = [
-        're-pass'
+        'password','re-pass'
     ];
 }
