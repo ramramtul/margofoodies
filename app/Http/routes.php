@@ -1,5 +1,5 @@
 <?php
-
+use App\Pesanan;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -25,6 +25,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/','HomeController@home');
+	Route::post('/','HomeController@home');
 	Route::post('home', 'UserController@create');
 	Route::get('home','HomeController@home');
 
@@ -32,6 +33,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('logout','UserController@logout');
 
 	Route::post('findFood','MenuController@findFood');
+
+	Route::post('calculateFood','HomeController@calculateFood');
+	Route::post('calculate','PesananController@reset');
+	Route::post('calculate/{orang}','PesananController@calculateId');
+	Route::get('calculateFood/{orang}', 'PesananController@pesan');
+	Route::post('calculateFood/{orang}','PesananController@create');
+	Route::delete('calculateFood/{orang}', 'PesananController@destroy');
 	
 	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
