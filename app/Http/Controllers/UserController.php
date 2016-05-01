@@ -59,25 +59,27 @@ class UserController extends Controller
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
             $currTime = Carbon::now();
-            $userLog = DB::table('waktu_login_users')->select('login_time')->where('email',$email)->orderBy('login_time','desc')->get(1);
-            $lastLogin = Carbon::parse($userLog->login_time);
+            $userLog = DB::table('waktu_login_users')->select('login_time')->where('email',$email)->orderBy('login_time','desc')->get();
+            
+            if( empty($userLog[1])   ){
+                $lastLogin = Carbon::parse($userLog[0]->login_time);
 
-            if($currTime->DiffInHours($lastLogin) < 24) {
-                if(is_null ( $lastLogin ) ){
+                $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
+                $poinuser = $userpoin->total_point;
+                $poin = $poinuser + 10;
+                
+                DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
+            } else {
+                $lastLogin = Carbon::parse($userLog[1]->login_time);
+
+                if ($currTime->DiffInSeconds($lastLogin) > 86400) {
+                    # code...
                     $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
                     $poinuser = $userpoin->total_point;
                     $poin = $poinuser + 10;
                     
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
-            } else if ($currTime->DiffInHours($lastLogin) > 24) {
-                # code...
-                $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
-                $poinuser = $userpoin->total_point;
-                $poin = $poinuser + 10;
-                
-                DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
-     
             }
             
             return Redirect::to('/home');
