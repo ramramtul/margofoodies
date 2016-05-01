@@ -13,7 +13,7 @@
 	</head>
     <body>
 
-    <nav class="navbar">
+    <nav class="navbar navbar-default">
   		<div class="container-fluid">
     		<div class="navbar-header">
     		 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -57,12 +57,15 @@
 			        	</div>	
 					</div>
 				</div>
-	
     		</div>
   		</div>
 	</nav>
 
-	@yield('content')
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="content">
+        @yield('content')
+      </div>
 
+ 
     </body>
 </html>

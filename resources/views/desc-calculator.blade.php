@@ -37,7 +37,7 @@
             <div class="col-md-6"> 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Hasil Perhitungan
+                        <b>Hasil Perhitungan</b>
                     </div>
 
                     <div class="panel-body">
@@ -86,18 +86,23 @@
                         </table>
                     </div>
                 </div>
-                <form action="{{ url('calculate')}}" method="POST">
-                    {{ csrf_field() }}
-                    <button type="submit"  class="btn btn-danger">
-                        Selesai
-                    </button>
-                </form>
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-10">
+                        <form action="{{ url('calculate')}}" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit"  class="btn btn-danger">
+                                Selesai
+                            </button>
+                        </form>
+                        <br>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6"> 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Rincian Pesanan Orang ke {{$or}}
+                        <b>Rincian Pesanan Orang ke {{$or}}</b>
                     </div>
                     <?php
                         $pesanan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $or)->get();

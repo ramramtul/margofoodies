@@ -122,16 +122,20 @@
                     </div>
                 </div>
             @endif
-            @if($orang == $jml)           
-                <form action="{{ url('calculate/'.$a.'')}}" method="POST">
-                    {{ csrf_field() }}
-                    <button type="submit" name="hitung" value="hitung" class="btn btn-danger">
-                        <i class="fa fa-btn fa-trash"></i>Hitung
-                    </button>
-                </form>
-                <br>
-                <br>
-            @endif
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-9">
+                    @if($orang == $jml)           
+                        <form action="{{ url('calculate/'.$a.'')}}" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit" name="hitung" value="hitung" class="btn btn-danger">
+                                <i class="fa fa-btn fa-trash"></i>Hitung
+                            </button>
+                        </form>
+                        <br>
+                        <br>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>

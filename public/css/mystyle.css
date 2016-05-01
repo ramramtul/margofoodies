@@ -32,6 +32,14 @@
 	padding-top: 15px;
 }
 
+.content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
+}
+
 .res1{
 	border: 6px solid #92c19f;
 	border-radius : 10px;
