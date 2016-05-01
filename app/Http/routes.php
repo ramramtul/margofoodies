@@ -54,5 +54,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('search','MenuController@search');
 
 	Route::get('review/{id}','ReviewController@show');
+	Route::post('createReview/{id}','ReviewController@create');
 });
 
