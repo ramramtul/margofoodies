@@ -76,7 +76,7 @@
                       <span class="star-ratings-sprite-rating" style="width:{{$menu->rate}}%"></span></div>
                     </h4>
                     <h5><b> {{$menu->jumlah_tested}} tasted </b></h5>
-                    <a href="#"><b>Lihat Review</b></a>
+                    <a href="../review/{{$menu->id}}"><b>Lihat Review</b></a>
                 </div>
               </div>
             </div>
