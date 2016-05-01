@@ -26,7 +26,7 @@ class HomeController extends Controller
 
 		$user = $request->session()->get('email');
 		if($user == null){
-			return view('home');
+			return Redirect::to('/home');
 		}
 		$deletedRows = Pesanan::where('id_user', $user)->delete();
 		$request->session()->forget('resto');
