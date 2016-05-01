@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 
+
 class MenuController extends Controller {
 
 	/**
@@ -78,13 +79,13 @@ class MenuController extends Controller {
 	{
 		$syarat = Input::get('query');
 		$temp = '%'.$syarat.'%';
-		$menu = Menu::where('nama', 'like', $temp)->get();
+		$menu = Menu::where('nama', 'like', $temp)->paginate(5);
 		for ($i = 0; $i < count($menu); $i++) {
 			$id = $menu[$i]->id_restoran;
 			$resto = Restoran::find($id);
 			$menu[$i]->resto = $resto->nama;
 		}
-		return view('view-search')->with('menu', $menu);
+		return view('view-search')->with('menu', $menu)->with('query', $syarat);
 	}
 
 	/**
@@ -268,14 +269,14 @@ class MenuController extends Controller {
 	 */
 	public function findFood()
 	{   
-		$menus= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',Input::get('budget')],['kapasitas','<=',Input::get('porsi')]])->orderBy('id_restoran')->orderBy('jenis')->get();
+		$menus= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',Input::get('budget')],['kapasitas','<=',Input::get('porsi')],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('jenis')->get();
 		if($menus===null){
 			return Redirect::to('/');
 		} else { 
-			$result = $this->combination($menus, Input::get('budget'), Input::get('porsi'));
-			// $result = $menus;
-			var_dump($result);
-			// return View::make("kombinasi-makanan")->with('menus', $result);
+			// $result = $this->combination($menus, Input::get('budget'), Input::get('porsi'));
+			$result = $menus;
+			// var_dump($result);
+			return View::make("kombinasi-makanan")->with('menus', $result);
 		}
 	}
 
