@@ -40,8 +40,12 @@
    				@include('register')
   
 				@include('login')
+<<<<<<< HEAD
+			
+=======
 	  			
 
+>>>>>>> refs/remotes/origin/master
 
 			   	<div class="container" id="search">
 					<div class="row">

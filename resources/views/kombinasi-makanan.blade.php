@@ -55,7 +55,6 @@
       </div>
       <nav>
         <ul class="pager">
-          {{var_dump($menus)}}
           <li><a id="prev" href="#">Previous</a></li>
           <li><a id="page" href="#">page</a></li>
           <li><a id="next" href="#">Next</a></li>
