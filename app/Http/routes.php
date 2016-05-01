@@ -46,4 +46,6 @@ Route::group(['middleware' => ['web']], function () {
 	
 	Route::get('menus/{id}','MenuController@showList');
 	Route::post('search','MenuController@search');
+
+	Route::get('review/{id}','ReviewController@show');
 });
