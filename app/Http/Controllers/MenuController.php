@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 
+
 class MenuController extends Controller {
 
 	/**
@@ -78,13 +79,13 @@ class MenuController extends Controller {
 	{
 		$syarat = Input::get('query');
 		$temp = '%'.$syarat.'%';
-		$menu = Menu::where('nama', 'like', $temp)->get();
+		$menu = Menu::where('nama', 'like', $temp)->paginate(5);
 		for ($i = 0; $i < count($menu); $i++) {
 			$id = $menu[$i]->id_restoran;
 			$resto = Restoran::find($id);
 			$menu[$i]->resto = $resto->nama;
 		}
-		return view('view-search')->with('menu', $menu);
+		return view('view-search')->with('menu', $menu)->with('query', $syarat);
 	}
 
 	/**

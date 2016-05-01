@@ -43,10 +43,6 @@
 				</ul>
 				@endif
 
-
-
-
-
 				<div class="container" id="search">
 					<div class="row">
 						<div class="col-sm-3 col-sm-offset-10">       
