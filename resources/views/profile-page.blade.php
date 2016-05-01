@@ -29,7 +29,7 @@ Licensed under MIT
 						{{ $user->email }}
 					</div>
 					<div class="profile-usertitle-desc">
-
+						{{ $user->deskripsi }}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -42,11 +42,11 @@ Licensed under MIT
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<!-- <li class="active">
-							<a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
-						</li> -->
+						<li class="active">
+							<a href="{{ URL::to('/profile') }}"><i class="glyphicon glyphicon-home"></i> My Profile </a>
+						</li>
 						<li>
-							<a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
+							<a href="{{ URL::to('/editProfile') }}"><i class="glyphicon glyphicon-user"></i> Account Settings </a>
 						</li>
 						<!-- <li>
 							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>
