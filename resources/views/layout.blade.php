@@ -48,14 +48,16 @@
 
 			        	<div class="col-sm-3 col-sm-offset-10">       
 			            	<div class="input-group stylish-input-group">
-			                	<form role="form" action="{{url('/search')}}" method="POST">
+			                	<form class="form-inline" role="form" action="{{url('/search')}}" method="POST">
 		  							{!! csrf_field() !!}
-				                	<input type="text" class="form-control" name="query" placeholder="Search" >
-				                	<span class="input-group-addon">
+		  							<div class="form-group">
+				                		<input type="text" class="form-control" name="query" placeholder="Search" >
+  									</div>
+				                	<div class="form-group">
 					                    <button type="submit">
 					                    	<span class="glyphicon glyphicon-search"></span>
 					                    </button> 
-				                	</span> 
+				                	</div>
 				                </form>               
 			            	</div>
 			        	</div>	
