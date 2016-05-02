@@ -23,9 +23,14 @@ class ReviewController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		//
+		$user = session()->get('email');
+		if($user != null) {
+			$review = new Review;
+			$review->id = DB::table('review')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
+		}
+		return Redirect::to('review/'.$id);
 	}
 
 	/**
