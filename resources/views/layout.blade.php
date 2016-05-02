@@ -73,7 +73,16 @@
 	<div class="content">
 		@yield('content')
 	</div>
-
+	
+	<div class="footer">
+		<div class = "tombolfooter-container">
+		
+			<a href="http://localhost/margofoodies/public/panel/login" class="btn btn-info" role="button">Admin</a>
+		
+			<a href="http://localhost/margofoodies/public/restoran" class="btn btn-info" role="button">Restoran</a>
+		
+		</div>
+	</div>
 
 </body>
 </html>
