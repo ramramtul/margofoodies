@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
->>>>>>> master
 use App\Http\Requests;
 use App\User;
-
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -57,10 +53,8 @@ class UserController extends Controller
         $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
         if($user===null){
 
-            echo $email.'<br>';
-            echo $pass.'<br>';
-            Session::put(array('loginerr' => 'Wrong email or password'));
-            return Redirect::to('/home');
+            $loginerr = 'Wrong email or password';
+            return Redirect::to('/home')->with('loginerr',$loginerr);
         } else {
 
             $userdata = array(
@@ -68,7 +62,7 @@ class UserController extends Controller
                 'email'     => $user->email,
                 'password'  => $user->password
             );
-            Session::put($userdata);
+            Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
@@ -95,12 +89,15 @@ class UserController extends Controller
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
             }
-            $loginerr = 'Wrong email or password';
-            return Redirect::to('/home')->with('loginerr',$loginerr);
-        } else { 
-            Session::put('user',$user);
+
             return Redirect::to('/home');
-        }
+            // $loginerr = 'Wrong email or password';
+            // return Redirect::to('/home')->with('loginerr',$loginerr);
+        } 
+        // else { 
+        //     Session::put('user',$user);
+        //     return Redirect::to('/home');
+        // }
     }
 
     /**
@@ -110,8 +107,8 @@ class UserController extends Controller
      */
     public function logout()
     {
-        //Session::flush();
-        Session::forget('nama','email','password');
+        Session::flush();
+        //Session::forget('nama','email','password');
         return Redirect::to('/home');
     }
 
