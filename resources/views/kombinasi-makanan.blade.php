@@ -13,7 +13,7 @@
     <div class="col-xs-12 col-sm-6 col-md-3">
       <div class="panel panel-default">
         <div class="panel-body res2">
-          <!-- <h3><b> FILTER <b></h3>
+          <h3><b> FILTER <b></h3>
 
           <form role="form">
             <div class="radio">
@@ -44,7 +44,7 @@
               <h4><label><input type="radio" name="optradio">Filter 7</label></h4>
             </div>
 
-          </form> -->
+          </form>
         </div>
       </div>
     </div>
