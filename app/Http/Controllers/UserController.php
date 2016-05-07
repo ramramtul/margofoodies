@@ -37,7 +37,7 @@ class UserController extends Controller
         $user->email = Input::get('email');
         $user->password = Input::get('password');
         $user->save();
-        Session::put('user',$user);
+        //Session::put('user',$user);
         return Redirect::to('/home');
     }
 
