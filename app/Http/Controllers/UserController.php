@@ -62,7 +62,7 @@ class UserController extends Controller
                 'email'     => $user->email,
                 'password'  => $user->password
             );
-            Session::put('user',$user);
+            //Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
@@ -71,11 +71,11 @@ class UserController extends Controller
             
             if( empty($userLog[1])   ){
                 $lastLogin = Carbon::parse($userLog[0]->login_time);
-
                 $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
                 $poinuser = $userpoin->total_point;
                 $poin = $poinuser + 10;
-                
+
+                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime]);
                 DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
             } else {
                 $lastLogin = Carbon::parse($userLog[1]->login_time);
@@ -86,6 +86,7 @@ class UserController extends Controller
                     $poinuser = $userpoin->total_point;
                     $poin = $poinuser + 10;
                     
+                    DB::table('point_history')->insert(['email' => $email , 'id_point' => 'PFL' , 'waktu' => $loginTime]);
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
             }
@@ -157,3 +158,4 @@ class UserController extends Controller
 
 }
      
+                
