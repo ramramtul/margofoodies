@@ -62,7 +62,7 @@ class UserController extends Controller
                 'email'     => $user->email,
                 'password'  => $user->password
             );
-            //Session::put('user',$user);
+            Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
