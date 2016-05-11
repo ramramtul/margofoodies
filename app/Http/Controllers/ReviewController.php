@@ -27,7 +27,7 @@ class ReviewController extends Controller {
 	public function show($id)
 	{
 		//id yang masuk adalah id menu
-		$review = Review::where('id_menu', '=', $id)->get();;
+		$review = Review::where([['id_menu', '=', $id],['status','=','1']])->get();;
 		$menu = Menu::find($id);
 		$restoran = Restoran::find($menu->id_restoran);
 		// for ($i = 0; $i < count($review); $i++) {
