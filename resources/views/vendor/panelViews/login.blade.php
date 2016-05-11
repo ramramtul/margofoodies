@@ -15,25 +15,26 @@ login
                     <div class="login-panel panel panel-default animated fadeInDown">
                      
                         <div class="panel-heading">
-                            @if($mesType=='message') <h3 class="panel-title">{{$message}}</h3>  @endif
+                            <!-- @if($mesType=='message') <h3 class="panel-title">{{$message}}</h3>  @endif -->
+                            <h3> Silahkan login !</h3>
                         </div>
                         <div class="panel-body">
                             <div class="logo-holder">
-                                 <!-- <img src="{{asset(Config::get('panel.logo'))}}" /> -->
+                                <!-- <img src="{{asset(Config::get('panel.logo'))}}" /> -->
                                 <img src="../images/logo.png" class="img-responsive">
                             </div>
                             {!! Form::open(array('url' => 'panel/login')) !!}
                                 <fieldset>
                                     <div class="form-group">
-					@if (\Config::get('panel.demo') == true)
-						<p><i>Demo Username: admin@change.me</i></p>
-					@endif
+                    @if (\Config::get('panel.demo') == true)
+                        <p><i>Demo Username: admin@change.me</i></p>
+                    @endif
                                         <input class="form-control" placeholder="{{ \Lang::get('panel::fields.email') }}" name="email" type="text" autofocus>
                                     </div>
                                     <div class="form-group">
-					@if (\Config::get('panel.demo') == true)
-						<p><i>Demo Password: 12345</i></p>
-					@endif
+                    @if (\Config::get('panel.demo') == true)
+                        <p><i>Demo Password: 12345</i></p>
+                    @endif
                                         <input class="form-control" placeholder="{{ \Lang::get('panel::fields.password') }}" name="password" type="password" value="">
                                     </div>
                                     <div class="checkbox">
