@@ -60,7 +60,6 @@ class UserController extends Controller
                 'password'  => $user->password,
                 'total_poin' => $user->total_point
             );
-            Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
@@ -89,6 +88,7 @@ class UserController extends Controller
                 }
             }
 
+            Session::put('user',$user);
             return Redirect::to('/home');
             // $loginerr = 'Wrong email or password';
             // return Redirect::to('/home')->with('loginerr',$loginerr);
