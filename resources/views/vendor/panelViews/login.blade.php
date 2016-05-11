@@ -19,7 +19,8 @@ login
                         </div>
                         <div class="panel-body">
                             <div class="logo-holder">
-                                <img src="{{asset(Config::get('panel.logo'))}}" />
+                                 <!-- <img src="{{asset(Config::get('panel.logo'))}}" /> -->
+                                <img src="../images/logo.png" class="img-responsive">
                             </div>
                             {!! Form::open(array('url' => 'panel/login')) !!}
                                 <fieldset>
