@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01 Mei 2016 pada 14.28
--- Versi Server: 10.1.10-MariaDB
--- PHP Version: 7.0.4
+-- Generation Time: May 02, 2016 at 01:34 PM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,58 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `check_in`
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `permissions` text COLLATE utf8_unicode_ci,
+  `activated` tinyint(1) NOT NULL DEFAULT '0',
+  `activation_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `activated_at` timestamp NULL DEFAULT NULL,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `persist_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `email`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `remember_token`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
+(1, 'admin@change.me', '$2y$10$jdqdFoxGYjCGUQXUHgZ62e7EFECJNR38UCBCqtag.4vF4THhFtzJK', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'WdinHL5QQpopfWPk9sho41wV66xT4OxvuQv9FtSnIZiz9GO5dE4rBPm4NLGz', NULL, NULL, '2016-04-10 05:35:46', '2016-04-10 05:48:07'),
+(2, 'admin@margofoodies.com', '$2y$10$0uklgLvTqwUWWn9WaqTNb.s.Rbaeog6EOe6tuawsvKiZXZBO6KBJW', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'NnxR8GWNdoUksTXjrqYfkYHltlCd2jx3qo6NfV4e2l7onadsMsYico3U417T', 'margo', 'foodies', '2016-04-10 05:36:59', '2016-05-01 20:50:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_role`
+--
+
+CREATE TABLE `admin_role` (
+  `role_id` int(10) UNSIGNED NOT NULL,
+  `admin_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `admin_role`
+--
+
+INSERT INTO `admin_role` (`role_id`, `admin_id`) VALUES
+(1, 1),
+(1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `check_in`
 --
 
 CREATE TABLE `check_in` (
@@ -35,7 +86,7 @@ CREATE TABLE `check_in` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `fasilitas_restorans`
+-- Table structure for table `fasilitas_restorans`
 --
 
 CREATE TABLE `fasilitas_restorans` (
@@ -44,7 +95,7 @@ CREATE TABLE `fasilitas_restorans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `fasilitas_restorans`
+-- Dumping data for table `fasilitas_restorans`
 --
 
 INSERT INTO `fasilitas_restorans` (`id_restoran`, `nama_fasilitas`) VALUES
@@ -200,7 +251,7 @@ INSERT INTO `fasilitas_restorans` (`id_restoran`, `nama_fasilitas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_masakans`
+-- Table structure for table `jenis_masakans`
 --
 
 CREATE TABLE `jenis_masakans` (
@@ -209,7 +260,7 @@ CREATE TABLE `jenis_masakans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_masakans`
+-- Dumping data for table `jenis_masakans`
 --
 
 INSERT INTO `jenis_masakans` (`id_restoran`, `jenis_masakan`) VALUES
@@ -296,7 +347,32 @@ INSERT INTO `jenis_masakans` (`id_restoran`, `jenis_masakan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menus`
+-- Table structure for table `links`
+--
+
+CREATE TABLE `links` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `display` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `main` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`id`, `display`, `url`, `created_at`, `updated_at`, `main`) VALUES
+(4, 'Admins', 'Admin', NULL, '2016-04-27 05:52:37', 1),
+(5, 'restoranss', 'restorans', '2016-04-10 05:52:23', '2016-04-10 05:52:23', NULL),
+(6, 'menuss', 'menus', '2016-04-10 07:15:37', '2016-04-10 07:15:37', NULL),
+(7, 'reviewss', 'reviews', '2016-05-01 08:47:48', '2016-05-01 08:47:48', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menus`
 --
 
 CREATE TABLE `menus` (
@@ -316,7 +392,7 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `menus`
+-- Dumping data for table `menus`
 --
 
 INSERT INTO `menus` (`id`, `nama`, `harga`, `id_restoran`, `kapasitas`, `jenis`, `kategori`, `deskripsi`, `id_photo`, `rate`, `jumlah_tested`, `Is_Paket_Tanpa_Minum`, `Is_Paket_Dgn_Minum`) VALUES
@@ -3976,7 +4052,66 @@ INSERT INTO `menus` (`id`, `nama`, `harga`, `id_restoran`, `kapasitas`, `jenis`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pesanan`
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2014_11_16_205658_create_admins_table', 1),
+('2014_12_02_152920_create_password_reminders_table', 1),
+('2015_02_20_130902_create_url_table', 1),
+('2015_03_15_123956_edit_url_table', 1),
+('2016_02_10_181651_create_roles_tables', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reminders`
+--
+
+CREATE TABLE `password_reminders` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_role`
+--
+
+CREATE TABLE `permission_role` (
+  `permission_id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pesanan`
 --
 
 CREATE TABLE `pesanan` (
@@ -3989,7 +4124,7 @@ CREATE TABLE `pesanan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `point`
+-- Table structure for table `point`
 --
 
 CREATE TABLE `point` (
@@ -4001,7 +4136,7 @@ CREATE TABLE `point` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `point_history`
+-- Table structure for table `point_history`
 --
 
 CREATE TABLE `point_history` (
@@ -4013,7 +4148,7 @@ CREATE TABLE `point_history` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `promo`
+-- Table structure for table `promo`
 --
 
 CREATE TABLE `promo` (
@@ -4028,7 +4163,7 @@ CREATE TABLE `promo` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `restorans`
+-- Table structure for table `restorans`
 --
 
 CREATE TABLE `restorans` (
@@ -4042,7 +4177,7 @@ CREATE TABLE `restorans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `restorans`
+-- Dumping data for table `restorans`
 --
 
 INSERT INTO `restorans` (`id`, `nama`, `no_telepon`, `lokasi`, `deskripsi`, `tax`, `rate`) VALUES
@@ -4107,22 +4242,53 @@ INSERT INTO `restorans` (`id`, `nama`, `no_telepon`, `lokasi`, `deskripsi`, `tax
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `review`
+-- Table structure for table `reviews`
 --
 
-CREATE TABLE `review` (
-  `id` char(10) NOT NULL,
-  `id_user` char(8) NOT NULL,
+CREATE TABLE `reviews` (
+  `id` int(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `id_menu` char(8) NOT NULL,
   `isi_review` text NOT NULL,
   `rate` decimal(2,0) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `email`, `id_menu`, `isi_review`, `rate`, `status`) VALUES
+(1, 'clara@gmail.com', '00000001', 'enak bangettt', '4', 0),
+(2, 'clara@gmail.com', '00000001', 'pengen lagii', '5', 1),
+(3, 'clara@gmail.com', '00000001', 'kurang enak', '2', 0),
+(4, 'ram@g.co', '00000001', 'jsaasjdkdhkjsdhsahafhjffhhhsahdsaiod jajanken', '1', 0);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `label`, `created_at`, `updated_at`) VALUES
+(1, 'super', 'This goup has all permissions', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -4135,17 +4301,53 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`nama_lengkap`, `email`, `password`, `id_photo`, `deskripsi`, `total_point`) VALUES
 ('Clara Indriyani', 'clara.ara7@gmail.com', '$2y$10$lwDhsXv31iz9w49X8bnF8Ozz9L4FBOzM9Ef2y5c/wMMIUllfloa/a', '', '', 0),
-('Clara', 'clara@gmail.com', 'sederhana', '', '', 0);
+('Clara', 'clara@gmail.com', 'sederhana', '', '', 10),
+('gaga gaga', 'gaga@gmail.com', '123456', '', '', 10),
+('pplbaru', 'ppl@gmail.com', '123456', '', 'ppl 2016', 10),
+('ram', 'ram@g.co', '123456', '', '', 10),
+('tes', 'tes@gmail.com', '123456', '', '', 10),
+('testing', 'testing@tes.com', 'testing', '', '', 10),
+('vitri vitri', 'vitri@gmail.com', '123456', '', '', 10);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `waktu_operasionals`
+-- Table structure for table `waktu_login_users`
+--
+
+CREATE TABLE `waktu_login_users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `waktu_login_users`
+--
+
+INSERT INTO `waktu_login_users` (`id`, `email`, `login_time`) VALUES
+(1, 'clara@gmail.com', '2016-05-02 01:48:30'),
+(2, 'ram@g.co', '2016-05-02 02:46:43'),
+(3, 'ram@g.co', '2016-05-02 02:47:34'),
+(4, 'ram@g.co', '2016-05-02 02:48:11'),
+(5, 'testing@tes.com', '2016-05-02 02:54:21'),
+(6, 'vitri@gmail.com', '2016-05-02 03:26:50'),
+(7, 'gaga@gmail.com', '2016-05-02 03:43:53'),
+(8, 'tes@gmail.com', '2016-05-02 03:47:58'),
+(9, 'tes@gmail.com', '2016-05-02 03:48:31'),
+(10, 'ppl@gmail.com', '2016-05-02 04:00:13'),
+(11, 'ppl@gmail.com', '2016-05-02 04:05:27'),
+(12, 'ppl@gmail.com', '2016-05-02 04:06:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `waktu_operasionals`
 --
 
 CREATE TABLE `waktu_operasionals` (
@@ -4156,7 +4358,7 @@ CREATE TABLE `waktu_operasionals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `waktu_operasionals`
+-- Dumping data for table `waktu_operasionals`
 --
 
 INSERT INTO `waktu_operasionals` (`id_restoran`, `hari`, `waktu_buka`, `waktu_tutup`) VALUES
@@ -4558,6 +4760,22 @@ INSERT INTO `waktu_operasionals` (`id_restoran`, `hari`, `waktu_buka`, `waktu_tu
 --
 
 --
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`),
+  ADD KEY `admins_activation_code_index` (`activation_code`),
+  ADD KEY `admins_reset_password_code_index` (`reset_password_code`);
+
+--
+-- Indexes for table `admin_role`
+--
+ALTER TABLE `admin_role`
+  ADD PRIMARY KEY (`role_id`,`admin_id`),
+  ADD KEY `admin_role_admin_id_foreign` (`admin_id`);
+
+--
 -- Indexes for table `check_in`
 --
 ALTER TABLE `check_in`
@@ -4576,12 +4794,38 @@ ALTER TABLE `jenis_masakans`
   ADD PRIMARY KEY (`id_restoran`,`jenis_masakan`);
 
 --
+-- Indexes for table `links`
+--
+ALTER TABLE `links`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `menus`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`),
   ADD KEY `id_2` (`id`);
+
+--
+-- Indexes for table `password_reminders`
+--
+ALTER TABLE `password_reminders`
+  ADD KEY `password_reminders_email_index` (`email`),
+  ADD KEY `password_reminders_token_index` (`token`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `permission_role_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `pesanan`
@@ -4614,9 +4858,15 @@ ALTER TABLE `restorans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `review`
+-- Indexes for table `reviews`
 --
-ALTER TABLE `review`
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4625,6 +4875,12 @@ ALTER TABLE `review`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`email`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `waktu_login_users`
+--
+ALTER TABLE `waktu_login_users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `waktu_operasionals`
@@ -4637,28 +4893,72 @@ ALTER TABLE `waktu_operasionals`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `links`
+--
+ALTER TABLE `links`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_pesanan` bigint(20) NOT NULL AUTO_INCREMENT;
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `waktu_login_users`
+--
+ALTER TABLE `waktu_login_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `fasilitas_restorans`
+-- Constraints for table `admin_role`
+--
+ALTER TABLE `admin_role`
+  ADD CONSTRAINT `admin_role_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `admin_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `fasilitas_restorans`
 --
 ALTER TABLE `fasilitas_restorans`
   ADD CONSTRAINT `fasilitas_restorans_ibfk_1` FOREIGN KEY (`id_restoran`) REFERENCES `restorans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `jenis_masakans`
+-- Constraints for table `jenis_masakans`
 --
 ALTER TABLE `jenis_masakans`
   ADD CONSTRAINT `jenis_masakans_ibfk_1` FOREIGN KEY (`id_restoran`) REFERENCES `restorans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `waktu_operasionals`
+-- Constraints for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `waktu_operasionals`
 --
 ALTER TABLE `waktu_operasionals`
   ADD CONSTRAINT `waktu_operasionals_ibfk_1` FOREIGN KEY (`id_restoran`) REFERENCES `restorans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

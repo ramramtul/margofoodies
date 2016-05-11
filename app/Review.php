@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model {
 
 	//
-	protected $table = "review";
+	protected $table = "reviews";
     protected $primaryKey = 'id';
     public $incrementing = false;
 	

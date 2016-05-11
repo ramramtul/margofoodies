@@ -28,7 +28,7 @@ class ReviewController extends Controller {
 		if(session()->has('user')) {
 			$user = session()->get('user')->email;
 			$review = new Review;
-			$review->id = DB::table('review')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
+			$review->id = DB::table('reviews')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
 		}
 		return Redirect::to('review/'.$id);
 	}
