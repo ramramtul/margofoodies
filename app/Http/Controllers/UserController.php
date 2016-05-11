@@ -117,7 +117,7 @@ class UserController extends Controller
      * @author Putra Muttaqin
      */
     public function profile() {
-
+        //$poin = DB::table('users')->select('total_point')->where('email',Session::get('user')->email)->first();
         return View::make("profile-page");
     }
 

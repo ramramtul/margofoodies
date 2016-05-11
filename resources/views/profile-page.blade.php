@@ -7,7 +7,7 @@
 @section('content')
 <?php 
 	$user = App\User::where('email',Session::get('user')->email)->first();
-	$poin = DB::table('users')->select('total_point')->where(['email',Session::get('user')->email])->first();
+	//$poin = DB::table('users')->select('total_point')->where(['email',Session::get('user')->email])->first();
 ?>
 <!--
 User Profile Sidebar by @keenthemes
@@ -35,7 +35,7 @@ Licensed under MIT
 						{{ $user->deskripsi }}
 					</div></br>
 					<div class="profile-usertitle-poin">
-						Poin : {{ $poin->total_point }}
+						<!-- Poin : {{ $poin }} -->
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
