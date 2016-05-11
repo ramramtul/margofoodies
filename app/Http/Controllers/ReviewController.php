@@ -25,9 +25,10 @@ class ReviewController extends Controller {
 	 */
 	public function create($id)
 	{
-		$user = session()->get('email');
-		if($user != null) {
+		if(session()->has('user')) {
+			$user = session()->get('user')->email;
 			$review = new Review;
+
 			$review->id = DB::table('review')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
 			// code by rama
 			// user akan mendapatkan poin 5 untuk sebuah review di setiap menu
@@ -40,6 +41,8 @@ class ReviewController extends Controller {
 	            DB::table('users')->where('email', $email)->update(['total_point' => $poin]);	
 			}
 			// end of code
+
+			$review->id = DB::table('reviews')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
 		}
 		return Redirect::to('review/'.$id);
 	}

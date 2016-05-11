@@ -1,0 +1,2 @@
+1. BUat database dengan 'margofoodies'
+2. pilih import dan import file 'margofooodies.sql'

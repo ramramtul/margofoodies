@@ -30,14 +30,11 @@ class UserController extends Controller
             'password' => 'required|min:6|required',
             're-pass' => 'required|same:password',
         ]);
-
-
         $user = new User;
         $user->nama_lengkap = Input::get('nama');
         $user->email = Input::get('email');
         $user->password = Input::get('password');
         $user->save();
-        //Session::put('user',$user);
         return Redirect::to('/home');
     }
 

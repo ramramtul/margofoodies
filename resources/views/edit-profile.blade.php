@@ -18,7 +18,7 @@ Licensed under MIT
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<div class="hovereffect">
-						<img class="img-responsive" src="{{ $user->id_photo }}" class="img-responsive" alt="">
+						<img class="img-responsive" src="images/default_pp.png" class="img-responsive" alt="">
 						<div class="overlay">
 							<a id="browse" class="info" onclick="browse()">Upload</a>
 						</div>
