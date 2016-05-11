@@ -5,10 +5,6 @@
 @stop
 
 @section('content')
-<?php 
-	$user = App\User::where('email',Session::get('user')->email)->first();
-	//$poin = DB::table('users')->select('total_point')->where(['email',Session::get('user')->email])->first();
-?>
 <!--
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
@@ -35,7 +31,7 @@ Licensed under MIT
 						{{ $user->deskripsi }}
 					</div></br>
 					<div class="profile-usertitle-poin">
-						<!-- Poin : {{ $poin }} -->
+						Poin : {{ $user->total_point }}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
