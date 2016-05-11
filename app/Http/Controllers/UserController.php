@@ -60,7 +60,8 @@ class UserController extends Controller
             $userdata = array(
                 'nama'      => $user->nama_lengkap,
                 'email'     => $user->email,
-                'password'  => $user->password
+                'password'  => $user->password,
+                'total_poin' => $user->total_point
             );
             Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
@@ -75,7 +76,7 @@ class UserController extends Controller
                 $poinuser = $userpoin->total_point;
                 $poin = $poinuser + 10;
 
-                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime]);
+                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
                 DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
             } else {
                 $lastLogin = Carbon::parse($userLog[1]->login_time);
@@ -86,7 +87,7 @@ class UserController extends Controller
                     $poinuser = $userpoin->total_point;
                     $poin = $poinuser + 10;
                     
-                    DB::table('point_history')->insert(['email' => $email , 'id_point' => 'PFL' , 'waktu' => $loginTime]);
+                    DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
             }
@@ -119,6 +120,7 @@ class UserController extends Controller
      * @author Putra Muttaqin
      */
     public function profile() {
+
         return View::make("profile-page");
     }
 
