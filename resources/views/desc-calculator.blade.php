@@ -9,7 +9,7 @@
     use App\Pesanan;
     $jmlOrang = Session::get('jmlOrang');
     $resto = Session::get('resto');
-    $user = Session::get('email');
+    $user = Session::get('user')->email;
     $jml = $jmlOrang + 1;
     $patungan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $jml)->get();
     $totalPatungan = 0;

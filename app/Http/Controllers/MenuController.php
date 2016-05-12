@@ -237,25 +237,30 @@ class MenuController extends Controller {
 	 * @param  array of menu yang harganya di bawah budget dan porsi yang sesuai
 	 * @return kombinasi menu
 	 */
-	public function combination($menus, $harga, $porsi)
+	public function combination($budget, $porsi)
 	{
 		$i = 0;
+		$j = 0;
 		$result = [];
-		while ($i < sizeof($menus)) {
-			$j = 0;
-			// var_dump($menus->$i)
-			$id_resto = $menus[$i]->resto_id;
-			$menu_resto = [];
-			while ($i < sizeof($menus) && $menus[$i]->resto_id == $id_resto) {
-				$menu_resto[$j] = $menus[$i];
-				$i++;
-				$j++;
+		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('harga')->get();
+		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('harga')->get();
+		foreach ($main as $mainMenu) {
+			foreach ($drinks as $drink) {
+				$temp = array(
+					'nama_menu' => $mainMenu->nama_menu." + ".$drink->nama_menu,
+					'deskripsi' => $mainMenu->deskripsi,
+					'jenis' 	=> $mainMenu->jenis." + ".$drink->jenis,
+					'harga'		=> $mainMenu->harga + $drink->harga,
+					'nama_resto'=> $mainMenu->nama_menu,
+					'rate_menu'	=> $mainMenu->rate_menu,
+					'jumlah_tested'=> $mainMenu->jumlah_tested
+				);
+				if ($temp['harga'] <= $budget) {
+					array_push($result, $temp);
+					$i++;
+					if ($i>600) return $result;
+				}
 			}
-			$kombinasi_menu_resto = $this->kombinasi(0, $menu_resto, [], "", []);
-			echo "Resto ".$id_resto."<br>";
-			var_dump($kombinasi_menu_resto);
-			echo "<br>=======================================================================================================================================<br><br><br><br><br><br><br><br>";
-			$result = $this->merge_kombinasi($result,$kombinasi_menu_resto, $harga, $porsi);
 		}
 		return $result;
 	}
@@ -269,12 +274,10 @@ class MenuController extends Controller {
 	 */
 	public function findFood()
 	{   
-		$menus= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',Input::get('budget')],['kapasitas','<=',Input::get('porsi')],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('jenis')->get();
-		if($menus===null){
+		$result = $this->combination(Input::get('budget'), Input::get('porsi'));
+		if($result === null){
 			return Redirect::to('/');
 		} else { 
-			// $result = $this->combination($menus, Input::get('budget'), Input::get('porsi'));
-			$result = $menus;
 			// var_dump($result);
 			return View::make("kombinasi-makanan")->with('menus', $result);
 		}

@@ -25,10 +25,10 @@ class ReviewController extends Controller {
 	 */
 	public function create($id)
 	{
-		$user = session()->get('email');
-		if($user != null) {
+		if(session()->has('user')) {
+			$user = session()->get('user')->email;
 			$review = new Review;
-			$review->id = DB::table('review')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
+			$review->id = DB::table('reviews')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
 		}
 		return Redirect::to('review/'.$id);
 	}
@@ -51,10 +51,13 @@ class ReviewController extends Controller {
 	 */
 	public function show($id)
 	{
+		
 		//id yang masuk adalah id menu
-		$review = Review::where('id_menu', '=', $id)->get();;
+		
+		$review = Review::where([['id_menu', '=', $id],['status','=','1']])->get();;
 		$menu = Menu::find($id);
 		$restoran = Restoran::find($menu->id_restoran);
+		
 		// for ($i = 0; $i < count($review); $i++) {
 		// 	$user = User::find($review->email);
 		// 	$review[$i]->user = $user->nama_lengkap;

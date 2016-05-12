@@ -45,16 +45,24 @@
 
 				<div class="container" id="search">
 					<div class="row">
-						<div class="col-sm-3 col-sm-offset-10">       
-							<div class="input-group stylish-input-group">
-								<input type="text" class="form-control" name="cari" placeholder="Search" >
-								<span class="input-group-addon">
-									<button type="submit">
-										<span class="glyphicon glyphicon-search"></span>
-									</button> 
-								</span>                
-							</div>
-						</div>	
+
+			        	<div class="col-sm-3 col-sm-offset-10">       
+			            	<div class="input-group stylish-input-group">
+			                	<form class="form-inline" role="form" action="{{url('/search')}}" method="POST">
+		  							{!! csrf_field() !!}
+		  							<div class="form-group">
+				                		<input type="text" class="form-control" name="query" placeholder="Search" >
+  									</div>
+				                	<div class="form-group">
+					                    <button type="submit">
+					                    	<span class="glyphicon glyphicon-search"></span>
+					                    </button> 
+				                	</div>
+				                </form>               
+			            	</div>
+			        	</div>	
+
+
 					</div>
 				</div>
 			</div>
@@ -65,7 +73,16 @@
 	<div class="content">
 		@yield('content')
 	</div>
-
+	
+	<div class="footer">
+		<div class = "tombolfooter-container">
+		
+			<a href="http://localhost/margofoodies/public/panel/login" class="btn btn-info" role="button">Admin</a>
+		
+			<a href="http://localhost/margofoodies/public/restoran" class="btn btn-info" role="button">Restoran</a>
+		
+		</div>
+	</div>
 
 </body>
 </html>

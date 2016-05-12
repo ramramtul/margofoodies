@@ -13,7 +13,8 @@ class User extends Model
         'nama_lengkap',
         'email',
         'password',
-        're-pass'
+        're-pass',
+        'total_point'
     ];
 
     protected $hidden = [
