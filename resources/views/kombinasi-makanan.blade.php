@@ -55,7 +55,6 @@
       </div>
       <nav>
         <ul class="pager">
-          {{var_dump($menus)}}
           <li><a id="prev" href="#">Previous</a></li>
           <li><a id="page" href="#">page</a></li>
           <li><a id="next" href="#">Next</a></li>
@@ -70,16 +69,16 @@
               <img src="/margofoodies/public/images/menu.jpg" class="img-responsive img-menu">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-              <h4><b>{{ $menu->nama_menu }}</b></h4>
-              <h5> {{$menu->deskripsi}} </h5>
-              <h4 style="color: #EA5B4D;"> Rp.{{ $menu->harga }},00</h4>
-              <h5> Restoran : {{$menu->nama_resto}} </h5>
-              <h5> Jenis : {{$menu->jenis}} </h5>
+              <h4><b>{{ $menu['nama_menu'] }}</b></h4>
+              <h5> {{$menu['deskripsi']}} </h5>
+              <h4 style="color: #EA5B4D;"> Rp.{{ $menu['harga'] }},00</h4>
+              <h5> Restoran : {{$menu['nama_resto']}} </h5>
+              <h5> Jenis : {{$menu['jenis']}} </h5>
               <h5> 
                 <div class="star-ratings-sprite">
-                  <span class="star-ratings-sprite-rating" style="width:{{$menu->rate_menu}}%"></span></div>
+                  <span class="star-ratings-sprite-rating" style="width:{{$menu['rate_menu']}}%"></span></div>
                 </h4>
-                <h5><b> {{$menu->jumlah_tested}} tasted </b></h5>
+                <h5><b> {{$menu['jumlah_tested']}} tasted </b></h5>
                 <a href="#"><b>Lihat Review</b></a>
               </div>
             </div>

@@ -24,7 +24,7 @@ class HomeController extends Controller
 	public function calculateFood(Request $request)
 	{
 
-		$user = $request->session()->get('email');
+		$user = $request->session()->get('user')->email;
 		if($user == null){
 			return Redirect::to('/home');
 		}
@@ -32,7 +32,7 @@ class HomeController extends Controller
 		$request->session()->forget('resto');
 		$request->session()->forget('jmlOrang');
 		$request->session()->forget('menus');
-		$request->session()->forget('resto');
+		$request->session()->forget('orang');
 		$restoran = Input::get('restoran');
 		$jmlOrang =Input::get('orang');
 		if($restoran===null){

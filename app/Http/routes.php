@@ -44,6 +44,16 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
 	
+	Route::get('profile','UserController@profile');
+	Route::get('editProfile', function() {
+		return View::make('edit-profile');
+	});
+	Route::post('editProfile','UserController@confirmEdit');
+
 	Route::get('menus/{id}','MenuController@showList');
 	Route::post('search','MenuController@search');
+
+	Route::get('review/{id}','ReviewController@show');
+	Route::post('createReview/{id}','ReviewController@create');
 });
+
