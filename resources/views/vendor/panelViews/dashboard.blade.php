@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                                 <div class="panel-footer">
-
+echo capatuh
                                      <a href='{{$box['showListUrl']}}' class="pull-left">{{ \Lang::get('panel::fields.showList') }} <i class="icon ic-chevron-right"></i></a>
                                     <div class="pull-right"> <a class="add " href="{{$box['addUrl']}}">{{ \Lang::get('panel::fields.Add') }}  </a></div>
 
