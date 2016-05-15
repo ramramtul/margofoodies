@@ -32,6 +32,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('dologin','UserController@dologin');
 	Route::get('logout','UserController@logout');
 
+	Route::get('editRestoran', 'RestoranController@edit');
+	Route::post('uploadPhoto', 'RestoranController@fotoMenu');
+	Route::get('editMenu', 'RestoranController@editMenu');
+	Route::get('profileRestoran', 'RestoranController@view');
+
 	Route::post('findFood','MenuController@findFood');
 
 	Route::post('calculateFood','HomeController@calculateFood');

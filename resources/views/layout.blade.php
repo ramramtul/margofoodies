@@ -76,11 +76,21 @@
 	
 	<div class="footer">
 		<div class = "tombolfooter-container">
-		
+			<div style="margin: left;">
 			<a href="http://localhost/margofoodies/public/panel/login" class="btn btn-info" role="button">Admin</a>
-		
-			<a href="http://localhost/margofoodies/public/restoran" class="btn btn-info" role="button">Restoran</a>
-		
+			<a href="http://localhost/margofoodies/public/home" class="btn btn-info" role="button">Home</a>
+			<a href="http://localhost/margofoodies/public/restoran" class="btn btn-info" role="button"> Daftar Restoran</a>
+			<?php
+			if(Session::has('user')){
+				echo "<a href='http://localhost/margofoodies/public/profile' class='btn btn-info' role='button'> My Profile</a>";
+				$user = Session::get('user')->isClient;
+				if($user){
+					echo "<a href='http://localhost/margofoodies/public/profileRestoran' class='btn btn-info' role='button'>My Restourant</a>";
+				}
+			}
+
+			?>
+		</div>
 		</div>
 	</div>
 

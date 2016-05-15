@@ -28,4 +28,10 @@ class Restoran extends Model {
         return $this->hasMany('WaktuOperasional');
     }
 
+     public function user()
+    {
+        return $this->hasOne('User');
+    }
+
+
 }
