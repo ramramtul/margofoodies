@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2016 at 01:34 PM
+-- Generation Time: May 15, 2016 at 07:44 PM
 -- Server version: 10.1.10-MariaDB
--- PHP Version: 7.0.3
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -50,7 +50,7 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `email`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `remember_token`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
 (1, 'admin@change.me', '$2y$10$jdqdFoxGYjCGUQXUHgZ62e7EFECJNR38UCBCqtag.4vF4THhFtzJK', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'WdinHL5QQpopfWPk9sho41wV66xT4OxvuQv9FtSnIZiz9GO5dE4rBPm4NLGz', NULL, NULL, '2016-04-10 05:35:46', '2016-04-10 05:48:07'),
-(2, 'admin@margofoodies.com', '$2y$10$0uklgLvTqwUWWn9WaqTNb.s.Rbaeog6EOe6tuawsvKiZXZBO6KBJW', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'NnxR8GWNdoUksTXjrqYfkYHltlCd2jx3qo6NfV4e2l7onadsMsYico3U417T', 'margo', 'foodies', '2016-04-10 05:36:59', '2016-05-01 20:50:59');
+(2, 'admin@margofoodies.com', '$2y$10$0uklgLvTqwUWWn9WaqTNb.s.Rbaeog6EOe6tuawsvKiZXZBO6KBJW', NULL, 0, NULL, NULL, NULL, NULL, NULL, 'QgR0hCZZEyvzu8ujoxCgT8gzQgIoNCCKtdQqU5NAWFsI5gwTD5gKfulykIf4', 'margo', 'foodies', '2016-04-10 05:36:59', '2016-05-14 07:00:14');
 
 -- --------------------------------------------------------
 
@@ -4170,74 +4170,75 @@ CREATE TABLE `restorans` (
   `id` char(3) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `no_telepon` varchar(20) DEFAULT NULL,
-  `lokasi` varchar(5) NOT NULL,
+  `lokasi` varchar(30) NOT NULL,
   `deskripsi` text,
   `tax` int(11) NOT NULL,
-  `rate` decimal(5,2) NOT NULL
+  `rate` decimal(5,2) NOT NULL,
+  `admin` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `restorans`
 --
 
-INSERT INTO `restorans` (`id`, `nama`, `no_telepon`, `lokasi`, `deskripsi`, `tax`, `rate`) VALUES
-('001', 'Ayam Bakar Pawon', '', 'FL2', '', 10, '0.00'),
-('002', 'Ayam Goreng Fatmawati', '', 'FL2', '', 10, '0.00'),
-('003', 'Bakmi GM', '0215655007', 'FL2', '', 10, '0.00'),
-('004', 'Bakso Kota Cak Man', '', 'FL2', '', 10, '0.00'),
-('005', 'Bluenote Coffee', '', 'FL2', '', 10, '0.00'),
-('006', 'BreadTalk', '02178870892', 'FL2', '', 0, '0.00'),
-('007', 'CFC (California Fried Chicken)', '', 'FL2', '', 10, '0.00'),
-('008', 'Chatime', '', 'FL2', '', 10, '0.00'),
-('009', 'Clemmons', '', 'FL2', '', 10, '0.00'),
-('010', 'Dapur Iga', '08112144111', 'FL2', '', 10, '0.00'),
-('011', 'Tous Le Jours', '02129049256', 'FL1', '', 10, '0.00'),
-('012', 'Doner Kebab', '', 'FL2', '', 10, '0.00'),
-('013', 'Es Teler 77', '02178870877', 'LG', '', 10, '0.00'),
-('014', 'Fiesta Steak', '02178871062', 'FL1', '', 10, '0.00'),
-('015', 'Gula Merah', '', 'GF', '', 10, '0.00'),
-('016', 'Hanamasa', '02178870911', 'FL1', '', 10, '0.00'),
-('017', 'Hoka Hoka Bento', '0211500505', 'FL2', '', 10, '0.00'),
-('018', 'Hop Hop', '', 'FL2', '', 0, '0.00'),
-('019', 'Ichiban Sushi', '02178870921', 'GF', '', 10, '0.00'),
-('020', 'Ichiban Teppanyaki', '', 'FL2', '', 10, '0.00'),
-('021', 'Es Krim Uncle', '', 'FL2', '', 0, '0.00'),
-('022', 'Popcorn Stall', '', 'FL2', '', 0, '0.00'),
-('023', 'Wingstop', '0211500993', 'FL1', '', 10, '0.00'),
-('024', 'Imperial Cakery', '021 29049270', 'GF', '', 10, '0.00'),
-('025', 'Imperial Kitchen', '02129049220', 'FL2', '', 10, '0.00'),
-('026', 'Itasuki', '02129049244', 'FL1', '', 10, '0.00'),
-('027', 'J.CO Donuts', '02178870998', 'GF', '', 10, '0.00'),
-('028', 'Killiney Kopitiam', '02129049248', 'GF', '', 10, '0.00'),
-('029', 'Lotteria', '02129049244', 'FL2', '', 10, '0.00'),
-('030', 'Marugame Udon & Tempura', '', 'GF', '', 10, '0.00'),
-('031', 'MM Juice', '', 'FL2', '', 10, '0.00'),
-('032', 'Mujigae', '02129049202', 'GF', '', 10, '0.00'),
-('033', 'Pecel Lele Lela', '02131713000', 'FL2', '', 10, '0.00'),
-('034', 'Nanny''s Pavillon', '', 'FL1', '', 10, '0.00'),
-('035', 'O''Crepes', '', 'FL2', '', 10, '0.00'),
-('036', 'Pawon Nyonya', '02178871085', 'LG', '', 10, '0.00'),
-('037', 'Pizza Hut', '02178884661', 'LG', '', 10, '0.00'),
-('038', 'Rainbow Express', '', 'FL2', '', 10, '0.00'),
-('039', 'Ramen 1', '', 'FL1', '', 10, '0.00'),
-('040', 'Rotiboy', '021788710999', 'LG', '', 0, '0.00'),
-('041', 'Yoshinoya', '021500566', 'FL2', '', 10, '0.00'),
-('042', 'Saboga', '', 'FL2', '', 10, '0.00'),
-('043', 'Sagoo Kitchen', '02176671067', 'GF', '', 10, '0.00'),
-('044', 'Sosialita', '', 'FL1', '', 15, '0.00'),
-('045', 'Starbucks', '02178870894', 'GF', '', 0, '0.00'),
-('046', 'Ta Wan', '02178870920', 'GF', '', 10, '0.00'),
-('047', 'Shihlin Thailand Snack', '02129049265', 'FL2', '', 10, '0.00'),
-('048', 'Solaria', '02178870865', 'FL1', '', 15, '0.00'),
-('049', 'Soto Betawi Pancar', '', 'FL2', '', 10, '0.00'),
-('050', 'Tako and Sushi Box', '', 'FL2', '', 10, '0.00'),
-('051', 'Puyo', '02129704981', 'FL2', '', 0, '0.00'),
-('052', 'Shirokuma', '02129049284', 'GF', '', 10, '0.00'),
-('053', 'BaskinRobbins', '', 'GF', '', 10, '0.00'),
-('054', 'Mochi Mochi', '', 'GF', '', 0, '0.00'),
-('055', 'Orchard Road Ice Cream', '', 'GF', '', 0, '0.00'),
-('056', 'Marugame Udon', '', 'GF', '', 0, '0.00'),
-('057', 'Sugar Cane', '', 'FL2', '', 0, '0.00');
+INSERT INTO `restorans` (`id`, `nama`, `no_telepon`, `lokasi`, `deskripsi`, `tax`, `rate`, `admin`) VALUES
+('001', 'Ayam Bakar Pawon', '', 'Lantai 2', '', 10, '0.00', ''),
+('002', 'Ayam Goreng Fatmawati', '', 'Lantai 2', '', 10, '0.00', ''),
+('003', 'Bakmi GM', '0215655007', 'Lantai 2', '', 10, '0.00', ''),
+('004', 'Bakso Kota Cak Man', '', 'Lantai 2', '', 10, '0.00', ''),
+('005', 'Bluenote Coffee', '', 'Lantai 2', '', 10, '0.00', ''),
+('006', 'BreadTalk', '02178870892', 'Lantai 2', '', 0, '0.00', ''),
+('007', 'CFC (California Fried Chicken)', '', 'Lantai 2', '', 10, '0.00', ''),
+('008', 'Chatime', '', 'Lantai 2', '', 10, '0.00', ''),
+('009', 'Clemmons', '', 'Lantai 2', '', 10, '0.00', ''),
+('010', 'Dapur Iga', '08112144111', 'Lantai 2', '', 10, '0.00', ''),
+('011', 'Tous Le Jours', '02129049256', 'Lantai 1', '', 10, '0.00', ''),
+('012', 'Doner Kebab', '', 'Lantai 2', '', 10, '0.00', ''),
+('013', 'Es Teler 77', '02178870877', 'Lantai Paling Dasar', '', 10, '0.00', ''),
+('014', 'Fiesta Steak', '02178871062', 'Lantai 1', '', 10, '0.00', ''),
+('015', 'Gula Merah', '', 'Lantai Dasar', '', 10, '0.00', ''),
+('016', 'Hanamasa', '02178870911', 'Lantai 1', '', 10, '0.00', ''),
+('017', 'Hoka Hoka Bento', '0211500505', 'Lantai 2', 'test', 10, '0.00', 'hokahoka@bento.com'),
+('018', 'Hop Hop', '', 'Lantai 2', '', 0, '0.00', ''),
+('019', 'Ichiban Sushi', '02178870921', 'Lantai Dasar', '', 10, '0.00', ''),
+('020', 'Ichiban Teppanyaki', '', 'Lantai 2', '', 10, '0.00', ''),
+('021', 'Es Krim Uncle', '', 'Lantai 2', '', 0, '0.00', ''),
+('022', 'Popcorn Stall', '', 'Lantai 2', '', 0, '0.00', ''),
+('023', 'Wingstop', '0211500993', 'Lantai 1', '', 10, '0.00', ''),
+('024', 'Imperial Cakery', '021 29049270', 'Lantai Dasar', '', 10, '0.00', ''),
+('025', 'Imperial Kitchen', '02129049220', 'Lantai 2', '', 10, '0.00', ''),
+('026', 'Itasuki', '02129049244', 'Lantai 1', '', 10, '0.00', ''),
+('027', 'J.CO Donuts', '02178870998', 'Lantai Dasar', '', 10, '0.00', ''),
+('028', 'Killiney Kopitiam', '02129049248', 'Lantai Dasar', '', 10, '0.00', ''),
+('029', 'Lotteria', '02129049244', 'Lantai 2', '', 10, '0.00', ''),
+('030', 'Marugame Udon & Tempura', '', 'Lantai Dasar', '', 10, '0.00', ''),
+('031', 'MM Juice', '', 'Lantai 2', '', 10, '0.00', ''),
+('032', 'Mujigae', '02129049202', 'Lantai Dasar', '', 10, '0.00', ''),
+('033', 'Pecel Lele Lela', '02131713000', 'Lantai 2', '', 10, '0.00', ''),
+('034', 'Nanny''s Pavillon', '', 'Lantai 1', '', 10, '0.00', ''),
+('035', 'O''Crepes', '', 'Lantai 2', '', 10, '0.00', ''),
+('036', 'Pawon Nyonya', '02178871085', 'Lantai Paling Dasar', '', 10, '0.00', ''),
+('037', 'Pizza Hut', '02178884661', 'Lantai Paling Dasar', '', 10, '0.00', ''),
+('038', 'Rainbow Express', '', 'Lantai 2', '', 10, '0.00', ''),
+('039', 'Ramen 1', '', 'Lantai 1', '', 10, '0.00', ''),
+('040', 'Rotiboy', '021788710999', 'Lantai Paling Dasar', '', 0, '0.00', ''),
+('041', 'Yoshinoya', '021500566', 'Lantai 2', '', 10, '0.00', ''),
+('042', 'Saboga', '', 'Lantai 2', '', 10, '0.00', ''),
+('043', 'Sagoo Kitchen', '02176671067', 'Lantai Dasar', '', 10, '0.00', ''),
+('044', 'Sosialita', '', 'Lantai 1', '', 15, '0.00', ''),
+('045', 'Starbucks', '02178870894', 'Lantai Dasar', '', 0, '0.00', ''),
+('046', 'Ta Wan', '02178870920', 'Lantai Dasar', '', 10, '0.00', ''),
+('047', 'Shihlin Thailand Snack', '02129049265', 'Lantai 2', '', 10, '0.00', ''),
+('048', 'Solaria', '02178870865', 'Lantai 1', '', 15, '0.00', ''),
+('049', 'Soto Betawi Pancar', '', 'Lantai 2', '', 10, '0.00', ''),
+('050', 'Tako and Sushi Box', '', 'Lantai 2', '', 10, '0.00', ''),
+('051', 'Puyo', '02129704981', 'Lantai 2', '', 0, '0.00', ''),
+('052', 'Shirokuma', '02129049284', 'Lantai Dasar', '', 10, '0.00', ''),
+('053', 'BaskinRobbins', '', 'Lantai Dasar', '', 10, '0.00', ''),
+('054', 'Mochi Mochi', '', 'Lantai Dasar', '', 0, '0.00', ''),
+('055', 'Orchard Road Ice Cream', '', 'Lantai Dasar', '', 0, '0.00', ''),
+('056', 'Marugame Udon', '', 'Lantai Dasar', '', 0, '0.00', ''),
+('057', 'Sugar Cane', '', 'Lantai 2', '', 0, '0.00', '');
 
 -- --------------------------------------------------------
 
@@ -4297,22 +4298,24 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `id_photo` char(9) NOT NULL,
   `deskripsi` text NOT NULL,
-  `total_point` int(11) NOT NULL
+  `total_point` int(11) NOT NULL,
+  `isClient` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`nama_lengkap`, `email`, `password`, `id_photo`, `deskripsi`, `total_point`) VALUES
-('Clara Indriyani', 'clara.ara7@gmail.com', '$2y$10$lwDhsXv31iz9w49X8bnF8Ozz9L4FBOzM9Ef2y5c/wMMIUllfloa/a', '', '', 0),
-('Clara', 'clara@gmail.com', 'sederhana', '', '', 10),
-('gaga gaga', 'gaga@gmail.com', '123456', '', '', 10),
-('pplbaru', 'ppl@gmail.com', '123456', '', 'ppl 2016', 10),
-('ram', 'ram@g.co', '123456', '', '', 10),
-('tes', 'tes@gmail.com', '123456', '', '', 10),
-('testing', 'testing@tes.com', 'testing', '', '', 10),
-('vitri vitri', 'vitri@gmail.com', '123456', '', '', 10);
+INSERT INTO `users` (`nama_lengkap`, `email`, `password`, `id_photo`, `deskripsi`, `total_point`, `isClient`) VALUES
+('Clara Indriyani', 'clara.ara7@gmail.com', '$2y$10$lwDhsXv31iz9w49X8bnF8Ozz9L4FBOzM9Ef2y5c/wMMIUllfloa/a', '', '', 0, 0),
+('Clara', 'clara@gmail.com', 'sederhana', '', '', 20, 0),
+('gaga gaga', 'gaga@gmail.com', '123456', '', '', 10, 0),
+('Hoka Hoka Bento', 'hokahoka@bento.com', 'hokahoka', '', '', 10, 1),
+('pplbaru', 'ppl@gmail.com', '123456', '', 'ppl 2016', 10, 0),
+('ram', 'ram@g.co', '123456', '', '', 10, 0),
+('tes', 'tes@gmail.com', '123456', '', '', 10, 0),
+('testing', 'testing@tes.com', 'testing', '', '', 10, 0),
+('vitri vitri', 'vitri@gmail.com', '123456', '', '', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -4342,7 +4345,16 @@ INSERT INTO `waktu_login_users` (`id`, `email`, `login_time`) VALUES
 (9, 'tes@gmail.com', '2016-05-02 03:48:31'),
 (10, 'ppl@gmail.com', '2016-05-02 04:00:13'),
 (11, 'ppl@gmail.com', '2016-05-02 04:05:27'),
-(12, 'ppl@gmail.com', '2016-05-02 04:06:59');
+(12, 'ppl@gmail.com', '2016-05-02 04:06:59'),
+(13, 'hokahoka@bento.com', '2016-05-14 14:02:12'),
+(14, 'hokahoka@bento.com', '2016-05-14 14:16:53'),
+(15, 'clara@gmail.com', '2016-05-14 14:17:26'),
+(16, 'clara@gmail.com', '2016-05-14 14:27:39'),
+(17, 'hokahoka@bento.com', '2016-05-14 14:33:02'),
+(18, 'hokahoka@bento.com', '2016-05-15 04:39:58'),
+(19, 'hokahoka@bento.com', '2016-05-15 04:53:16'),
+(20, 'hokahoka@bento.com', '2016-05-15 14:46:55'),
+(21, 'hokahoka@bento.com', '2016-05-15 16:03:05');
 
 -- --------------------------------------------------------
 
@@ -4926,7 +4938,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `waktu_login_users`
 --
 ALTER TABLE `waktu_login_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Constraints for dumped tables
 --

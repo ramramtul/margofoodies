@@ -43,11 +43,17 @@
 						<li>
 							<a href="{{ URL::to('/profileRestoran') }}"><i class="glyphicon glyphicon-home"></i> My Profile </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="{{ URL::to('/editMenu') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
+						</li>
+						<li>
+							<a href="{{ URL::to('/editWaktuOperasional') }}"><i class="glyphicon glyphicon-grain"></i> Edit Waktu Operasional </a>
+						</li>
+						<li>
+							<a href="{{ URL::to('/editFasilitasRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Fasilitas Restoran </a>
 						</li>
 						<!-- <li>
 							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>

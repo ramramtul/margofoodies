@@ -28,12 +28,12 @@
 		  			@endif
 	   				<div class = "col-sm-6 col-md-4">
 	      				<div class = "thumbnail">
-	        				<img src = "images/restoran.jpg" alt = "Generic placeholder thumbnail">
+	        				<img src = "uploads/{{$res->nama}}.png" alt = "Generic placeholder thumbnail">
 	      				</div>
 	      
 	     				<div class = "caption">
 	         				<h3 style="text-align: center"><a href="restoran/{{$res->id}}">{{$res->nama}}</a></h3>
-	         				<p>{{$res->deskripsi}}</p>
+	         				<p style="text-align: center;">{{$res->deskripsi}}</p>
 	        			</div>
 	   					</div>
 				   	

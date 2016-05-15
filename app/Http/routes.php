@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('uploadPhoto', 'RestoranController@fotoMenu');
 	Route::get('editMenu', 'RestoranController@editMenu');
 	Route::get('profileRestoran', 'RestoranController@view');
+	Route::post('editRestoran','RestoranController@confirmEdit');
 
 	Route::post('findFood','MenuController@findFood');
 

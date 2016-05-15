@@ -49,6 +49,12 @@
 						<li class="active">
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
 						</li>
+						li>
+							<a href="{{ URL::to('/editWaktuOperasional') }}"><i class="glyphicon glyphicon-grain"></i> Edit Waktu Operasional </a>
+						</li>
+						<li>
+							<a href="{{ URL::to('/editFasilitasRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Fasilitas Restoran </a>
+						</li>
 						<!-- <li>
 							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>
 						</li>
@@ -92,9 +98,10 @@
 				      	</div>
 		  			</div>
 				</div>
-				<form class="form-horizontal" action="{{ url('/editProfile') }}" method="POST">
+
+				<form class="form-horizontal" action="{{ url('/editRestoran') }}" method="POST">
 					{!! csrf_field() !!}
-					@if(isset($passErr)) {{ $passErr }}
+					@if(isset($passErr)) {{$restoran }} {{ $passErr }}
 					@endif
 					@if(isset($dbErr)) {{ $dbErr }}
 					@endif
@@ -130,15 +137,23 @@
 						<div class="form-group has-error">
 							<label class="col-md-4 control-label" for="newPass">No Telepon</label>
 							<div class="col-md-4 controls">
+								@if($errors->isEmpty() && !Session::has('passErr'))
 								<input id="telepon" name="telepon" placeholder="" class="form-control input-md" type="text" value="{{ $restoran->no_telepon }}">
-								<span class="help-block">Password terlalu pendek</span>
+								@else
+								<input id="telepon" name="telepon" placeholder="" class="form-control input-md" type="text" value="{{ old('telepon') }}">
+								@endif
+								<span class="help-block">Masukkan format yang sesuai</span>
 							</div>
 						</div>
 						@else
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="telepon">No Telepon</label>
 							<div class="col-md-4">
-								<input id="telepon" name="telepon" placeholder="" class="form-control input-md" type="text" value="{{ old('telepon') }}">
+								@if($errors->isEmpty() && !Session::has('passErr'))
+								<input id="telepon" name="telepon" placeholder="021xxxxxxx" class="form-control input-md" type="text" value="{{ $restoran->no_telepon }}">
+								@else
+								<input id="telepon" name="telepon" placeholder="021xxxxxxx" class="form-control input-md" type="text" value="{{ old('telepon') }}">
+								@endif
 							</div>
 						</div>
 						@endif
@@ -210,32 +225,51 @@
 						@if($errors->has('deskripsi'))
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="textarea">Deskripsi</label>
-							<div class="col-md-4">                     
+							<div class="col-md-4"> 
+								@if($errors->isEmpty() && !Session::has('passErr'))
 								<textarea class="form-control" id="desc" name="desc">{{ $restoran->deskripsi }}</textarea>
+								@else
+								<textarea class="form-control" id="desc" name="desc">{{ old('desc') }}</textarea>
+								@endif                  
+								
 							</div>
 						</div>
 						@else
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="textarea">Deskripsi</label>
 							<div class="col-md-4">                     
+								@if($errors->isEmpty() && !Session::has('passErr'))
+								<textarea class="form-control" id="desc" name="desc">{{ $restoran->deskripsi }}</textarea>
+								@else
 								<textarea class="form-control" id="desc" name="desc">{{ old('desc') }}</textarea>
+								@endif     
 							</div>
 						</div>
 						@endif
 
 						<!-- Tax -->
-						@if(!$errors->has('tax'))
+						@if($errors->has('tax'))
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="tax">Tax</label>
-							<div class="col-md-4">                     
+							<div class="col-md-4">     
+								@if($errors->isEmpty() && !Session::has('passErr'))
 								<input id="tax" name="tax" placeholder="" class="form-control input-md" type="text" value="{{ $restoran->tax }}">
+								@else
+								<input id="tax" name="tax" placeholder="" class="form-control input-md" type="text" value="{{ old('tax')}}">
+								@endif                
+								
 							</div>
+							<span class="help-block">Masukkan tax yang benar</span>
 						</div>
 						@else
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="tax">Tax</label>
 							<div class="col-md-4">                     
+								@if($errors->isEmpty() && !Session::has('passErr'))
+								<input id="tax" name="tax" placeholder="" class="form-control input-md" type="text" value="{{ $restoran->tax }}">
+								@else
 								<input id="tax" name="tax" placeholder="" class="form-control input-md" type="text" value="{{ old('tax')}}">
+								@endif   
 							</div>
 						</div>
 						@endif
@@ -245,7 +279,7 @@
 						<div class="form-group has-error">
 							<label class="col-md-4 control-label" for="currPass">Password sekarang</label>
 							<div class="col-md-4 controls">
-								<input id="currPass" name="currPass" placeholder="required" class="form-control input-md" type="password">
+								<input id="currPass" name="currPass" placeholder="required" required class="form-control input-md" type="password">
 								<span class="help-block">Password salah!</span>
 							</div>
 						</div>
@@ -253,8 +287,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="passwordinput">Password sekarang</label>
 							<div class="col-md-4">
-								<input id="currPass" name="currPass" placeholder="required" class="form-control input-md" type="password">
-
+								<input id="currPass" name="currPass" placeholder="required" required class="form-control input-md" type="password">
 							</div>
 						</div>
 						@endif
@@ -278,15 +311,5 @@
 </div>
 <br>
 <br>
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		var a = document.getElementById("browse");
-		a.onclick = function() {
-			var btn = document.getElementById("pic-btn");
-			btn.click();
-		}
-	});
-</script>
 </div>
 @stop

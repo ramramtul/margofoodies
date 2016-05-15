@@ -40,14 +40,20 @@
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li>
+						<li class="active">
 							<a href="{{ URL::to('/profileRestoran') }}"><i class="glyphicon glyphicon-home"></i> My Profile </a>
 						</li>
 						<li>
 							<a href="{{ URL::to('/editMenu') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
+						</li>
+						<li>
+							<a href="{{ URL::to('/editWaktuOperasional') }}"><i class="glyphicon glyphicon-grain"></i> Edit Waktu Operasional </a>
+						</li>
+						<li>
+							<a href="{{ URL::to('/editFasilitasRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Fasilitas Restoran </a>
 						</li>
 						<!-- <li>
 							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>
@@ -70,7 +76,14 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h5 id="lokasi"><b>Lokasi : </b>{{$restoran->lokasi}}</h5>
-						<h5 id="no-telp">  </h5>
+						<?php
+							if($restoran->no_telepon == null){
+								echo "<h5 id='no-telp'><b> No Telepon : </b> Tidak tersedia </h5>";
+							} else {
+								echo "<h5 id='no-telp'><b> No Telepon : </b> $restoran->no_telepon </h5>";
+							}
+						?>
+						
 						<h5 id="tax"><b>Tax : </b>{{$restoran->tax}}%</h5>
 						
 						<h5><b>Jenis Masakan : </b></h5>

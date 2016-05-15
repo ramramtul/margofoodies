@@ -25,7 +25,7 @@ class RestoranController extends Controller {
 	public function showList()
 	{
 		//
-		$restoran = Restoran::paginate(6);
+		$restoran = Restoran::orderBy('nama', 'asc')->paginate(6);
 		return view('view-restoran-all')->with('restoran', $restoran);
 	}
 	
@@ -200,5 +200,34 @@ class RestoranController extends Controller {
 	{
 		//
 	}
+
+	public function confirmEdit(Request $request) {
+        $this->validate($request, [
+            'nama' => 'min:3|max:255',
+            'telepon' => 'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
+            'tax' => 'numeric|min:0|max:100',
+            'desc' => '',
+            'lokasi' => '',
+            'currPass' => 'required'
+        ]);
+        $user = Session::get('user');
+        $restoran = Restoran::where('admin',Session::get('user')->email)->first();
+        $currPass = Input::get('currPass');
+        $nama = Input::get('nama', $restoran->nama_lengkap);
+        $telepon = Input::get('telepon', $restoran->no_telepon);
+        $tax = Input::get('tax', $restoran->tax);
+        $lokasi = Input::get('lokasi', $restoran->lokasi);
+        $desc = Input::get('desc', $restoran->deskripsi);
+
+        if ($currPass == $user->password) {
+            if (Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'lokasi' => $lokasi, 'no_telepon' => $telepon,'tax' => $tax , 'deskripsi' => $desc])) {
+                return Redirect::to('profileRestoran');
+            } else {
+                return Redirect::to('editRestoran')->with('dbErr','Error saat menyimpan ke database')->withInput();
+            }       
+        } else {
+            return Redirect::to('editRestoran')->with('passErr','Password Salah!')->withInput();
+        }
+    }
 
 }
