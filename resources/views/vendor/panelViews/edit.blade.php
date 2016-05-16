@@ -10,6 +10,7 @@
     @endif
 
     <p>
-        {!! $edit !!}
+        {!! $edit !!} 
     </p>
+<a  type="button" class="btn btn-primary" href="all"  > Back to Table </a>
 @stop
