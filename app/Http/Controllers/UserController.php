@@ -157,6 +157,13 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * user akan mendapatkan poin apabila melalukan 'Check in' ke suatu restoran
+     * @author rama
+    **/
+    public function visit() {
+        
+    }
 }
      
                 

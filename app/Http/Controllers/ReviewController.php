@@ -52,9 +52,9 @@ class ReviewController extends Controller {
 			// code by rama
 			// user akan mendapatkan poin 5 untuk sebuah review di setiap menu
 			$isireview = DB::table('reviews')->select('email')->where('id_menu',$id)->first();
-			$status = $isireview->status;
+			
 			if(empty ($isireview) && $status = 1) {
-				$statusrev = DB::table('reviews')->select('status')->where([['email',$user],['id_menu',$id]])
+				$statusrev = DB::table('reviews')->select('status')->where([['email',$user],['id_menu',$id]]);
 				if($statusrev = 1){
 					$userpoin = DB::table('users')->select('total_point')->where('email', $user)->first();
 		            $poinuser = $userpoin->total_point;

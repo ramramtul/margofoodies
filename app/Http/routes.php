@@ -32,6 +32,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('dologin','UserController@dologin');
 	Route::get('logout','UserController@logout');
 
+	Route::get('profile','UserController@profile');
+	Route::get('editProfile', function() {
+		return View::make('edit-profile');
+	});
+	Route::post('editProfile','UserController@confirmEdit');
+
+	Route::post('view-restoran', 'UserController@visit');
+
 	Route::post('findFood','MenuController@findFood');
 
 	Route::post('calculateFood','HomeController@calculateFood');
@@ -44,11 +52,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
 	
-	Route::get('profile','UserController@profile');
-	Route::get('editProfile', function() {
-		return View::make('edit-profile');
-	});
-	Route::post('editProfile','UserController@confirmEdit');
 
 	Route::get('menus/{id}','MenuController@showList');
 	Route::post('search','MenuController@search');
