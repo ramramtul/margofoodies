@@ -193,6 +193,10 @@ body{
  font-style: Helvetica;
 }
 
+.iLine input{
+float:left;
+}` 
+
 
 ul {
   list-style: none;

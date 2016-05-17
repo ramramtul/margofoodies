@@ -49,7 +49,7 @@
 						<li class="active">
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
 						</li>
-						li>
+						<li>
 							<a href="{{ URL::to('/editWaktuOperasional') }}"><i class="glyphicon glyphicon-grain"></i> Edit Waktu Operasional </a>
 						</li>
 						<li>

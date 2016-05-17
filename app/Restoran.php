@@ -7,8 +7,8 @@ class Restoran extends Model {
 	//
     protected $table = "restorans";
     protected $primaryKey = 'id';
-    public $incrementing = false; 
-    public $timestamps = false;
+    public $incrementing = false;
+    
 	public function menu()
     {
         return $this->hasMany('Menu');

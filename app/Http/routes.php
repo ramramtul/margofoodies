@@ -37,6 +37,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('editMenu', 'RestoranController@editMenu');
 	Route::get('profileRestoran', 'RestoranController@view');
 	Route::post('editRestoran','RestoranController@confirmEdit');
+	Route::get('editWaktuOperasional','RestoranController@editWaktu');
+	Route::get('editFasilitasRestoran','RestoranController@editFasilitas');
+	Route::post('editWaktuOperasional','RestoranController@confirmEditWaktu');
 
 	Route::post('findFood','MenuController@findFood');
 
