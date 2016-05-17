@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="container">
- 	<h1> Edit Restoran </h1>
  	<div class="row profileResto">
 		<div class="col-md-4">
 			<div class="profile-sidebar">

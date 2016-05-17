@@ -1,5 +1,6 @@
 <?php
 use App\Pesanan;
+use App\FasilitasRestoran;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -38,8 +39,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('profileRestoran', 'RestoranController@view');
 	Route::post('editRestoran','RestoranController@confirmEdit');
 	Route::get('editWaktuOperasional','RestoranController@editWaktu');
-	Route::get('editFasilitasRestoran','RestoranController@editFasilitas');
 	Route::post('editWaktuOperasional','RestoranController@confirmEditWaktu');
+	Route::get('editFasilitasRestoran','RestoranController@editFasilitas');
+	Route::post('editFasilitasRestoran','RestoranController@addFasilitas');
+	Route::delete('editFasilitasRestoran/{id}/{nama}', function ($id, $nama) {
+    	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
+    	return redirect('/editFasilitasRestoran');
+	});
 
 	Route::post('findFood','MenuController@findFood');
 

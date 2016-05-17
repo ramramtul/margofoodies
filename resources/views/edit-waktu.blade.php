@@ -68,7 +68,7 @@
 		</div>
 		<div class="col-md-8">
 			<div class="profile-content">
-				<h2>Edit Waktu Operasional</h2>
+				<h2 style="color : red;">Edit Waktu Operasional</h2>
 
 				<form class="form-horizontal" action="{{ url('/editWaktuOperasional') }}" method="POST">
 					{!! csrf_field() !!}
