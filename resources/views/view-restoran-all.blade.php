@@ -28,7 +28,12 @@
 		  			@endif
 	   				<div class = "col-sm-6 col-md-4">
 	      				<div class = "thumbnail">
-	        				<img src = "uploads/{{$res->nama}}.png" alt = "Generic placeholder thumbnail">
+	      					@if($res->id_photo <> "")
+		            			<img class="img-responsive" src="{{url('uploads/r'.$res->id.'.png')}}" alt="{{$res->nama}}">
+			            	@else
+			            		<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$res->nama}}">
+			            	@endif
+	        				
 	      				</div>
 	      
 	     				<div class = "caption">

@@ -13,7 +13,11 @@
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-restopic">
 					<div class="hovereffect">
-						<img class="img-responsive fotoRestoran" src="uploads/{{$restoran->nama}}.png" alt="">
+						@if($restoran->id_photo <> "")
+		            		<img class="img-responsive fotoRestoran" src="{{url('uploads/r'.$restoran->id.'.png')}}" alt="">
+		            	@else
+		            		<img class="img-responsive fotoRestoran" src="{{url('images/default-pic.png')}}" alt="">
+		            	@endif
 				        <br>
 					</div>
 				</div>
@@ -44,7 +48,7 @@
 							<a href="{{ URL::to('/profileRestoran') }}"><i class="glyphicon glyphicon-home"></i> My Profile </a>
 						</li>
 						<li>
-							<a href="{{ URL::to('/editMenu') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
+							<a href="{{ URL::to('/editMenuRestoran') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
 						</li>
 						<li >
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
@@ -55,12 +59,9 @@
 						<li>
 							<a href="{{ URL::to('/editFasilitasRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Fasilitas Restoran </a>
 						</li>
-						<!-- <li>
-							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>
-						</li>
 						<li>
-							<a href="#"><i class="glyphicon glyphicon-flag"></i>Help </a>
-						</li> -->
+							<a href="{{ URL::to('/helpRestoran') }}"><i class="glyphicon glyphicon-flag"></i> Help </a>
+						</li>
 					</ul>
 				</div>
 				<!-- END MENU -->
@@ -69,7 +70,7 @@
 		<div class="col-md-8">
 			<div class="profile-content">
 				<h2 style="color : red;">Edit Waktu Operasional</h2>
-
+				<hr>
 				<form class="form-horizontal" action="{{ url('/editWaktuOperasional') }}" method="POST">
 					{!! csrf_field() !!}
 					@if(isset($passErr)) {{$restoran }} {{ $passErr }}

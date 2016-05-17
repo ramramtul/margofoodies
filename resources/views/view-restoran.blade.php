@@ -32,19 +32,19 @@
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 				    <div class="item active">
-				      <img src="../uploads/{{$restoran->nama}}.png" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../uploads/{{$restoran->nama}}.png" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../uploads/{{$restoran->nama}}.png" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../uploads/{{$restoran->nama}}.png" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 				  </div>
 

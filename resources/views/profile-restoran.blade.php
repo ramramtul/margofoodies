@@ -12,7 +12,7 @@
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-restopic">
 					<div class="hovereffect">
-						<img class="img-responsive fotoRestoran" src="uploads/{{$restoran->nama}}.png" alt="">
+						<img class="img-responsive fotoRestoran" src="{{url('uploads/r'.$restoran->id.'.png')}}" alt="">
 				        <br>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 							<a href="{{ URL::to('/profileRestoran') }}"><i class="glyphicon glyphicon-home"></i> My Profile </a>
 						</li>
 						<li>
-							<a href="{{ URL::to('/editMenu') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
+							<a href="{{ URL::to('/editMenuRestoran') }}"><i class="glyphicon glyphicon-tasks"></i> Edit Menu </a>
 						</li>
 						<li>
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
@@ -54,12 +54,9 @@
 						<li>
 							<a href="{{ URL::to('/editFasilitasRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Fasilitas Restoran </a>
 						</li>
-						<!-- <li>
-							<a href="#" target="_blank"><i class="glyphicon glyphicon-ok"></i>Tasks </a>
-						</li>
 						<li>
-							<a href="#"><i class="glyphicon glyphicon-flag"></i>Help </a>
-						</li> -->
+							<a href="{{ URL::to('/helpRestoran') }}"><i class="glyphicon glyphicon-flag"></i> Help </a>
+						</li>
 					</ul>
 				</div>
 				<!-- END MENU -->

@@ -34,18 +34,25 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('logout','UserController@logout');
 
 	Route::get('editRestoran', 'RestoranController@edit');
-	Route::post('uploadPhoto', 'RestoranController@fotoMenu');
-	Route::get('editMenu', 'RestoranController@editMenu');
+	Route::post('uploadPhotoResto', 'RestoranController@fotoResto');
+	Route::get('editMenuRestoran', 'RestoranController@editMenu');
+	Route::post('editMenu/{$id}', 'MenuController@confirmEditMenu');
 	Route::get('profileRestoran', 'RestoranController@view');
 	Route::post('editRestoran','RestoranController@confirmEdit');
-	Route::get('editWaktuOperasional','RestoranController@editWaktu');
-	Route::post('editWaktuOperasional','RestoranController@confirmEditWaktu');
-	Route::get('editFasilitasRestoran','RestoranController@editFasilitas');
-	Route::post('editFasilitasRestoran','RestoranController@addFasilitas');
+	Route::get('editWaktuOperasional','WaktuOperasionalController@editWaktu');
+	Route::post('editWaktuOperasional','WaktuOperasionalController@confirmEditWaktu');
+	Route::get('editFasilitasRestoran','FasilitasRestoranController@editFasilitas');
+	Route::post('editFasilitasRestoran','FasilitasRestoranController@addFasilitas');
 	Route::delete('editFasilitasRestoran/{id}/{nama}', function ($id, $nama) {
     	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
     	return redirect('/editFasilitasRestoran');
 	});
+	Route::get('viewMenu/{id}','MenuController@viewMenu');
+	Route::get('editMenu/{id}','MenuController@editMenu');
+	Route::post('viewMenu/{id}','MenuController@viewMenu');
+	Route::post('editMenu/{id}','MenuController@editMenu');
+	Route::post('deleteMenu','MenuController@deleteMenu');
+	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
 
 	Route::post('findFood','MenuController@findFood');
 

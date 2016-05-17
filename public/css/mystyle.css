@@ -257,12 +257,7 @@ ul {
     display: table;
     table-layout: fixed;
   }
-  input[type="radio"] {
-    -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
-    -moz-appearance: checkbox;    /* Firefox */
-    -ms-appearance: checkbox;     /* not currently supported */
-    transform: scale(1.5);
-  }
+  
   a {
     color: #EA5B4D;
   }
@@ -527,4 +522,10 @@ ul {
   .hovereffect:hover a.info {
     -webkit-transition-delay:.2s;
     transition-delay:.2s;
+  }
+
+  .menu-content {
+    padding: 30px;
+    background: #fff;
+    min-height: 460px;
   }
