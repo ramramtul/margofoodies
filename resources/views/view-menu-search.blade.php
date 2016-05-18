@@ -80,7 +80,8 @@
 	                                        {{ csrf_field() }}
 									<div class="row">	
 										<div class="col-md-10">
-	                                    	<i><input id="searchMenu" name="searchMenu" placeholder="cari menu" class="form-control input-md" onfocus="this.oldvalue = this.value;" type="text"></i>
+
+	                                    	<i><input id="searchMenu" name="searchMenu" placeholder="cari menu" class="form-control input-md" value="{{$key}}" type="text"></i>
 	                            		</div>
 	                            		<div class="col-md-2">
 	                            			<button type="submit" name="submitSearch" style="display:inline;" class="btn btn-danger">
@@ -137,7 +138,7 @@
                                             <form action="{{ url('deleteMenu/'.$menu->id.'') }}" method="POST" style="display:inline;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" name="menu" value="{{ $menu->id }}" class="btn btn-danger">
+                                                <button type="submit" name="menu" value="{{ $menu->id }}" onclick="return confirm('Apakah Anda yakin?')" class="btn btn-danger">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                             </form>

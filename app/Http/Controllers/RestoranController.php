@@ -174,8 +174,9 @@ class RestoranController extends Controller {
 		}
 		$user = $request->session()->get('user')->email;
 		$restoran = Restoran::where('admin', '=', $user)->get();
-		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->paginate(10);
-		return view('edit-menu-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('user', $user);
+		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->orderBy('nama', 'ASC')->paginate(10);
+		$page = $menus->currentPage();
+		return view('edit-menu-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('page', $page)->with('user', $user);
 
 	}
 

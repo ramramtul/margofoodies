@@ -105,11 +105,11 @@
 
                             <!-- Table Headings -->
                             <thead>
-                                <th>Nama</th>
-                                <th>Harga</th>
+                                <th class="nama">Nama</th>
+                                <th class="harga">Harga</th>
                                 <th>&nbsp;</th>
                             </thead>
-
+                       
                             <!-- Table Body -->
                             <tbody>
                                 @foreach ($menus as $menu)
@@ -134,7 +134,7 @@
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                             </form>
-                                            <form action="{{ url('deleteMenu/'.$menu->id.'') }}" method="POST" style="display:inline;">
+                                            <form action="{{ url('deleteMenu/'.$menu->id.'/'.$page.'') }}" method="POST" style="display:inline;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit" name="menu" onclick="return confirm('Apakah Anda yakin?')" value="{{ $menu->id }}" class="btn btn-danger">

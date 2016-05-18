@@ -72,7 +72,7 @@
 				<hr>
 				<h3> Tambah Menu </h3>
 				<br>
-				<form class="form-horizontal" action="{{ url('/addMenu') }}" method="POST">
+				{!! Form::open(array('url'=>'addMenu','class'=>'form-horizontal', 'method'=>'POST', 'files'=>true)) !!}
 					{!! csrf_field() !!}
 					
 					<fieldset>
@@ -263,12 +263,18 @@
 								<label class="col-md-4 control-label" for="paket">Jenis Paket</label>
 								<div class="col-md-8 controls">
 								      	<?php
-								      		foreach ($pak as $k) {
-											    if(old('paket') == $k){
-								      				echo "<input type='radio' id='paket' name='paket' value=''.$k.'' checked>$k<br>";
-									      		} else {
-									      			echo "<input type='radio' id='paket' name='paket' value=''.$k.''>$k<br>";
-									      		}
+								      		if(old('paket') == 'Bukan Paket'){
+										    	echo "<input type='radio' name='paket' value='Bukan Paket' checked>Bukan Paket<br>";
+										    	echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
+										    	echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' >Paket Tanpa Minuman<br>";
+								      		} else if (old('paket') == 'Paket Dengan Minuman') {
+								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman' checked>Paket Dengan Minuman<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman'>Paket Dengan Minuman<br>";
+								      		} else {
+								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' checked>Paket Tanpa Minuman<br>";
 								      		}
 								      	?>
 								  
@@ -280,13 +286,9 @@
 								<div class="col-md-8 controls">
 								      
 								      	<?php
-								      		foreach ($pak as $k) {
-											    if("Bukan Paket" == $k){
-								      				echo "<input type='radio' id='paket' value=''.$k.'' checked>$k<br>";
-									      		} else {
-									      			echo "<input type='radio' id='paket' value=''.$k.''>$k<br>";
-									      		}
-								      		}
+								      		echo "<input type='radio' name='paket' value='Bukan Paket' checked>Bukan Paket<br>";
+										    echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
+										    echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' >Paket Tanpa Minuman<br>";
 								      	?>
 								      
 								</div>
@@ -360,7 +362,7 @@
 					</div>
 
 					</fieldset>
-				</form>
+				{!! Form::close() !!}
 	        <button class="btn btn-danger" onclick="goBack()">Go Back</button>
 	        </div>
 	        <script>

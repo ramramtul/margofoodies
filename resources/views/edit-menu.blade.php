@@ -314,17 +314,21 @@
 								<div>
 								<label class="col-md-4 control-label" for="paket">Jenis Paket</label>
 								<div class="col-md-8 controls">
-								      	<select class="form-control" id="kategori" name="kategori">
 								      	<?php
-								      		foreach ($pak as $k) {
-											    if(old('paket') == $k){
-								      				echo "<input type='radio' name='paket' value=''.$k.'' checked>Bukan Paket<br>";;
-									      		} else {
-									      			echo "<input type='radio' name='paket' value=''.$k.''>Bukan Paket<br>";
-									      		}
+								      		if(old('paket') == 'Bukan Paket'){
+										    	echo "<input type='radio' name='paket' value='Bukan Paket' checked>Bukan Paket<br>";
+										    	echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
+										    	echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' >Paket Tanpa Minuman<br>";
+								      		} else if (old('paket') == 'Paket Dengan Minuman') {
+								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman' checked>Paket Dengan Minuman<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman'>Paket Dengan Minuman<br>";
+								      		} else {
+								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
+								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' checked>Paket Tanpa Minuman<br>";
 								      		}
 								      	?>
-								      </select>
 
 								     
 								</div>

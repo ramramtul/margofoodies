@@ -1,6 +1,7 @@
 <?php
 use App\Pesanan;
 use App\FasilitasRestoran;
+use App\Menu;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -54,13 +55,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('searchMenu','MenuController@searchMenu');
 	Route::post('editMenu/{id}', 'MenuController@confirmEditMenu');
 	Route::post('editMenuHelper/{id}','MenuController@editMenuHelper');
-	Route::post('deleteMenu','MenuController@deleteMenu');
 	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
 	Route::get('addMenu','MenuController@addMenu');
 	Route::post('addMenu','MenuController@confirmAddMenu');
-	Route::delete('deleteMenu/{id}', function ($id) {
+	Route::delete('deleteMenu/{id}/{page}', function ($id, $page) {
     	Menu::find($id)->delete();
-    	return redirect('/editMenuRestoran');
+    	return redirect('/editMenuRestoran?page='.$page.'');
 	});
 
 	Route::post('findFood','MenuController@findFood');
