@@ -92,8 +92,8 @@
 	                       	</div>
 						</div>
 				</div>
-				@if(count($menus))
 				{!! $menus->links() !!}
+				@if(count($menus))
 				
 				<div class="panel panel-default">
                     <div class="panel-heading">
@@ -152,7 +152,7 @@
 				<br>
                 <div class="panel panel-default">
                 	<div class="panel-body">
-						<h4 style="color: red;"><i> Menu tidak ditemukan, coba lagi </i></h4>
+						<h4 style="color: red;"><i> Menu tidak ditemukan </i></h4>
 					</div>
 				</div>
 				@endif

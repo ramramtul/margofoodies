@@ -360,7 +360,8 @@ class MenuController extends Controller {
 		Session::put('key', $key);
 		$restoran = Restoran::where('admin',Session::get('user')->email)->first();
 		$menus = Menu::where('id_restoran',$restoran->id)->where('nama', 'LIKE', '%'.$key.'%')->orderBy('nama', 'ASC')->paginate(10);
-		return view('view-menu-search')->with('restoran', $restoran)->with('menus', $menus)->with('key', $key)->with('user', $user);
+		$page = $menus->currentPage();
+		return view('view-menu-search')->with('restoran', $restoran)->with('menus', $menus)->with('page', $page)->with('key', $key)->with('user', $user);
     }
 
     public function addMenu(Request $request){
@@ -413,11 +414,11 @@ class MenuController extends Controller {
         		$menu = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ));
         	}
             $id = $menu->id;
-        	if(Input::has('image')){
+        	if(Input::hasFile('image')){
         		// getting all of the post data
 		  		$file = array('image' => Input::file('image'));
 		  		// setting up rules
-		  		$rules = array('image' => '',); //mimes:jpeg,bmp,png and for max size max:10000
+		  		$rules = array('image' => 'mimes:jpeg,jpg,png',); //mimes:jpeg,bmp,png and for max size max:10000
 		  		// doing the validation, passing post data, rules and the messages
 		  		$validator = Validator::make($file, $rules);
 		  		if ($validator->fails()) {
@@ -433,6 +434,7 @@ class MenuController extends Controller {
 		      			Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 		      			// sending back with message
 		      			Session::flash('success', 'Upload successfully'); 
+
 		      			Menu::where('id',$id)->update(['id_photo' => $fileName]);
 		      			return Redirect::to('viewMenu/'.$id.'');
 		    		}
@@ -443,8 +445,7 @@ class MenuController extends Controller {
 		     			return Redirect::to('addMenu')->withInput();
 		    		}
 	  			}
-        	}
-            return Redirect::to('viewMenu/'.$id.'');     
+        	}     
         } else {
             return Redirect::to('addMenu')->with('passErr','Password Salah!')->withInput();
         }
