@@ -68,41 +68,11 @@
 		</div>
 		<div class="col-md-8">
 			<div class="profile-content">
-				<h2 style="color : red;">{{$menu->nama}}</h2>
+				<h2 style="color : red;">{{$restoran->nama}}</h2>
 				<hr>
-				<div class="about-section">
-				   <div class="text-content">
-				     <div class="span7 offset1">
-				        @if(Session::has('success'))
-				        <div class="alert-box success">
-				        	<script>
-								alert({!! Session::get('success') !!});
-							</script>
-				        </div>
-				        @endif
-				        <h4>Change Picture</h4>
-				        {!! Form::open(array('url'=>'uploadPhotoMenu/'.$menu->id.'','method'=>'POST', 'files'=>true)) !!}
-				        <div class="control-group">
-				          	<div class="controls">
-				        		{!! Form::file('image') !!}
-					  			<p class="errors">{!!$errors->first('image')!!}</p>
-								@if(Session::has('error'))
-								<script>
-								alert({!! Session::get('error') !!});
-								</script>
-								@endif
-				        	</div>
-				        </div>
-				        <div id="success"> </div>
-					      {!! Form::submit('Submit', array('class'=>'btn btn-primary')) !!}
-					      {!! Form::close() !!}
-				      	</div>
-		  			</div>
-				</div>
-				<hr>
-				<h3> Edit Informasi Menu </h3>
+				<h3> Tambah Menu </h3>
 				<br>
-				<form class="form-horizontal" action="{{ url('/editMenu/'.$menu->id.'') }}" method="POST">
+				<form class="form-horizontal" action="{{ url('/addMenu') }}" method="POST">
 					{!! csrf_field() !!}
 					
 					<fieldset>
@@ -114,11 +84,11 @@
 								<label class="col-md-4 control-label" for="nama">Nama</label>
 								<div class="col-md-8 controls">
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="nama" name="nama" class="form-control input-md" type="text" value="{{ $menu->nama }}">
+									<input id="nama" name="nama" class="form-control input-md" type="text" value="">
 									@else
 									<input id="nama" name="nama" class="form-control input-md" type="text" value="{{ old('nama') }}">
 									@endif
-									<span class="help-block">Nama terlalu panjang</span>
+									<span class="help-block">Masukkan nama yang sesuai</span>
 								</div>
 							</div>
 							@else
@@ -126,7 +96,7 @@
 								<label class="col-md-4 control-label" for="nama">Nama</label>  
 								<div class="col-md-8">
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="nama" name="nama" class="form-control input-md" type="text" value="{{ $menu->nama }}">
+									<input id="nama" name="nama" class="form-control input-md" type="text" value="">
 									@else
 									<input id="nama" name="nama" class="form-control input-md" type="text" value="{{ old('nama') }}">
 									@endif
@@ -140,11 +110,11 @@
 								<label class="col-md-4 control-label" for="harga">Harga</label>
 								<div class="col-md-8 controls">
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="harga" name="harga" placeholder="" class="form-control input-md" type="text" value="{{ $menu->harga }}">
+									<input id="harga" name="harga" placeholder="" class="form-control input-md" type="text" value="">
 									@else
 									<input id="harga" name="harga" placeholder="" class="form-control input-md" type="text" value="{{ old('harga') }}">
 									@endif
-									<span class="help-block">Masukkan nilai yang sesuai</span>
+									<span class="help-block">Masukkan harga yang sesuai</span>
 								</div>
 							</div>
 							@else
@@ -152,7 +122,7 @@
 								<label class="col-md-4 control-label" for="harga">Harga</label>
 								<div class="col-md-8">
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="harga" name="harga" class="form-control input-md" type="text" value="{{ $menu->harga }}">
+									<input id="harga" name="harga" class="form-control input-md" type="text" value="">
 									@else
 									<input id="harga" name="harga" class="form-control input-md" type="text" value="{{ old('harga') }}">
 									@endif
@@ -166,11 +136,11 @@
 								<label class="col-md-4 control-label" for="kapasitas">Kapasitas</label>
 								<div class="col-md-8">     
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="{{ $menu->kapasitas }}">
+									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="">
 									@else
 									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="{{ old('kapasitas')}}">
 									@endif                
-									<span class="help-block">Masukkan nilai yang sesuai</span>
+									<span class="help-block">Masukkan kapasitas yang sesuai</span>
 								</div>
 								
 							</div>
@@ -179,7 +149,7 @@
 								<label class="col-md-4 control-label" for="kapasitas">Kapasitas</label>
 								<div class="col-md-8">                     
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="{{ $menu->kapasitas }}">
+									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="">
 									@else
 									<input id="kapasitas" name="kapasitas" placeholder="" class="form-control input-md" type="text" value="{{ old('kapasitas')}}">
 									@endif   
@@ -194,11 +164,11 @@
 								<label class="col-md-4 control-label" for="kapasitas">Jenis Masakan</label>
 								<div class="col-md-8">     
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="{{ $menu->kategori }}">
+									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="">
 									@else
 									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="{{ old('jenis')}}">
 									@endif                
-									<span class="help-block">Masukkan nilai yang sesuai</span>
+									<span class="help-block">Masukkan jenis masakan yang sesuai</span>
 								</div>
 								
 							</div>
@@ -207,7 +177,7 @@
 								<label class="col-md-4 control-label" for="kapasitas">Jenis Masakan</label>
 								<div class="col-md-8">                     
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="{{ $menu->kategori }}">
+									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="">
 									@else
 									<input id="jenis" name="jenis" placeholder="contoh : Indonesian" class="form-control input-md" type="text" value="{{ old('kategori')}}">
 									@endif   
@@ -223,7 +193,7 @@
 								<label class="col-md-4 control-label" for="textarea">Deskripsi</label>
 								<div class="col-md-8"> 
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<textarea class="form-control" id="desc" name="desc">{{ $menu->deskripsi }}</textarea>
+									<textarea class="form-control" id="desc" name="desc"></textarea>
 									@else
 									<textarea class="form-control" id="desc" name="desc">{{ old('desc') }}</textarea>
 									@endif                  
@@ -235,7 +205,7 @@
 								<label class="col-md-4 control-label" for="textarea">Deskripsi</label>
 								<div class="col-md-8">                     
 									@if($errors->isEmpty() && !Session::has('passErr'))
-									<textarea class="form-control" id="desc" name="desc">{{ $menu->deskripsi }}</textarea>
+									<textarea class="form-control" id="desc" name="desc"></textarea>
 									@else
 									<textarea class="form-control" id="desc" name="desc">{{ old('desc') }}</textarea>
 									@endif     
@@ -251,14 +221,14 @@
 								$kat = array("Makanan Utama", "Makanan Penutup", "Makanan Pelengkap", "Cemilan", "Minuman", "Other");
 								$pak = array("Bukan Paket", "Paket Dengan Minuman", "Paket Tanpa Minuman");
 							?>
-							@if($errors->isEmpty() && !Session::has('passErr'))
+							@if(!$errors->isEmpty() || Session::has('passErr'))
 							<div class="form-group">
 								<label class="col-md-4 control-label" for="kategori">Kategori</label>
 								<div class="col-md-8 controls">
 									    <select class="form-control" id="kategori" name="kategori">
 								      	<?php
 								      		foreach ($kat as $k) {
-											    if($menu->jenis == $k){
+											    if(old('kategori') == $k){
 								      				echo "<option selected='true'>$k</option>";
 									      		} else {
 									      			echo "<option>$k</option>";
@@ -275,7 +245,7 @@
 								      <select class="form-control" id="kategori" name="kategori">
 								      	<?php
 								      		foreach ($kat as $k) {
-											    if(old('kategori') == $k){
+											    if("Makanan Utama" == $k){
 								      				echo "<option selected='true'>$k</option>";
 								      			} else {
 								      				echo "<option>$k</option>";
@@ -288,54 +258,76 @@
 							@endif
 
 							<!-- Paket -->
-							@if($errors->isEmpty() && !Session::has('passErr'))
+							@if(!$errors->isEmpty() || Session::has('passErr'))
 							<div>
 								<label class="col-md-4 control-label" for="paket">Jenis Paket</label>
 								<div class="col-md-8 controls">
 								      	<?php
-										    if(!($menu->Is_Paket_Tanpa_Minum || $menu->Is_Paket_Dgn_Minum)){
-										    	echo "<input type='radio' name='paket' value='Bukan Paket' checked>Bukan Paket<br>";
-										    	echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
-										    	echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' >Paket Tanpa Minuman<br>";
-								      		} else if ($menu->Is_Paket_Dgn_Minum) {
-								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
-								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman' checked>Paket Dengan Minuman<br>";
-								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman'>";
-								      		} else {
-								      			echo "<input type='radio' name='paket' value='Bukan Paket'>Bukan Paket<br>";
-								      			echo "<input type='radio' name='paket' value='Paket Dengan Minuman'>Paket Dengan Minuman<br>";
-								      			echo "<input type='radio' name='paket' value='Paket Tanpa Minuman' checked>Paket Tanpa Minuman<br>";
-								      		}
-								      	?>
-								     
-								</div>
-							</div>
-							@else
-								<div>
-								<label class="col-md-4 control-label" for="paket">Jenis Paket</label>
-								<div class="col-md-8 controls">
-								      	<select class="form-control" id="kategori" name="kategori">
-								      	<?php
 								      		foreach ($pak as $k) {
 											    if(old('paket') == $k){
-								      				echo "<input type='radio' name='paket' value=''.$k.'' checked>Bukan Paket<br>";;
+								      				echo "<input type='radio' id='paket' name='paket' value=''.$k.'' checked>$k<br>";
 									      		} else {
-									      			echo "<input type='radio' name='paket' value=''.$k.''>Bukan Paket<br>";
+									      			echo "<input type='radio' id='paket' name='paket' value=''.$k.''>$k<br>";
 									      		}
 								      		}
 								      	?>
-								      </select>
-
-								     
+								  
 								</div>
 							</div>
-
+							@else
+							<div>
+								<label class="col-md-4 control-label" for="paket">Jenis Paket</label>
+								<div class="col-md-8 controls">
+								      
+								      	<?php
+								      		foreach ($pak as $k) {
+											    if("Bukan Paket" == $k){
+								      				echo "<input type='radio' id='paket' value=''.$k.'' checked>$k<br>";
+									      		} else {
+									      			echo "<input type='radio' id='paket' value=''.$k.''>$k<br>";
+									      		}
+								      		}
+								      	?>
+								      
+								</div>
+							</div>
 							@endif
-
-							<br>
-							<br>
-							<br>
 							
+							<br>
+							<br>
+							<br>
+							<br>
+							<div class="about-section">
+							   <div class="text-content">
+							     <div class="span7 offset1">
+							        @if(Session::has('success'))
+							        <div class="alert-box success">
+							        	<script>
+											alert({!! Session::get('success') !!});
+										</script>
+							        </div>
+							        @endif
+					
+							        <div class="control-group">
+							        	<label class="col-md-4 control-label" for="image">Foto</label>
+							          	<div class="col-md-8 controls">
+							        		{!! Form::file('image') !!}
+								  			<p class="errors">{!!$errors->first('image')!!}</p>
+											@if(Session::has('error'))
+											<script>
+											alert({!! Session::get('error') !!});
+											</script>
+											@endif
+							        	</div>
+							        </div>
+							        <div id="success"> </div>
+							      	</div>
+					  			</div>
+							</div>
+							<br>
+							<br>
+						
+					
 							<hr>
 						<!-- Password input-->
 							@if(Session::has('passErr'))

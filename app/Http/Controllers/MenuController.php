@@ -107,7 +107,10 @@ class MenuController extends Controller {
 		$restoran = Restoran::where('admin',Session::get('user')->email)->first();
 		$menu = Menu::find($id);
         if($menu->id_restoran != $restoran->id) {
-        	return Redirect::to('profileRestoran');
+        	echo $menu->nama;
+        	echo $menu->id_restoran;
+        	echo $restoran->id;
+        	//return Redirect::to('profileRestoran');
         }
 		return view('view-menu')->with('restoran', $restoran)->with('menu', $menu)->with('user', $user);
 	}
@@ -289,6 +292,10 @@ class MenuController extends Controller {
 		  }
 	}
 
+	public function editMenuHelper(Request $request, $id) {
+		return Redirect::to('editMenu/'.$id.'');
+	}
+
 	public function confirmEditMenu(Request $request, $id) {
         $this->validate($request, [
             'nama' => 'required | max:100',
@@ -321,10 +328,11 @@ class MenuController extends Controller {
         	} else if ($paket == "Paket Tanpa Minum"){
         		$sa = false;
         	}
+
         	if(!$pa){
-        		$status = Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ]);
+        		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ]);
         	} else {
-        		$status = Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ]);
+        		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ]);
         	}
             if ($status) {
                 return Redirect::to('viewMenu/'.$id.'');
@@ -335,6 +343,108 @@ class MenuController extends Controller {
             return Redirect::to('editMenu/'.$id.'')->with('passErr','Password Salah!')->withInput();
         }
     }
+
+    public function searchMenu(Request $request){
+    	if(!Session::has('user')){
+			return Redirect::to('/home');
+		}
+		$client = $request->session()->get('user')->isClient;
+		if(!$client){
+			return Redirect::to('/home');
+		}
+		$key = Input::get('searchMenu');
+		$user = $request->session()->get('user')->email;
+		$restoran = Restoran::where('admin',Session::get('user')->email)->first();
+		$menus = Menu::where('id_restoran',$restoran->id)->where('nama', 'LIKE', '%'.$key.'%')->orderBy('nama', 'ASC')->paginate(10);
+		return view('view-menu-search')->with('restoran', $restoran)->with('menus', $menus)->with('user', $user);
+    }
+
+    public function addMenu(Request $request){
+    	if(!Session::has('user')){
+			return Redirect::to('/home');
+		}
+		$client = $request->session()->get('user')->isClient;
+		if(!$client){
+			return Redirect::to('/home');
+		}
+		$key = Input::get('searchMenu');
+		$user = $request->session()->get('user')->email;
+		$restoran = Restoran::where('admin',Session::get('user')->email)->first();
+		return view('add-menu')->with('restoran', $restoran)->with('user', $user);
+    }
+
+    public function confirmAddMenu(Request $request) {
+        $this->validate($request, [
+            'nama' => 'required | max:100',
+            'harga' => 'required | numeric', 
+            'kapasitas' => 'required | numeric', 
+            'jenis' => 'required | max:30',
+            'desc' => '',
+            'kategori' => '',
+            'paket' => '',
+            'currPass' => 'required'
+        ]);
+        $user = Session::get('user');
+        $restoran = Restoran::where('admin',Session::get('user')->email)->first();
+
+        $currPass = Input::get('currPass');
+        $nama = Input::get('nama');
+        $harga = Input::get('harga');
+        $kapasitas = Input::get('kapasitas');
+        $jenis = Input::get('jenis');
+        $desc = Input::get('desc');
+		$kategori = Input::get('kategori');
+		echo Input::has('p');
+        $paket = Input::get('p');
+
+        if ($currPass == $user->password) {
+        	echo $paket;
+        	if($paket == "Bukan Paket") {
+        		echo "haha";
+        		$pa = false;
+        	} else if ($paket == "Paket Tanpa Minum"){
+        		$sa = false;
+        	}
+     //    	if(!$pa){
+     //    		$user = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ));
+     //    	} else {
+     //    		$user = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ));
+     //    	}
+     //        $id = $user->id;
+     //    	// getting all of the post data
+	  		// $file = array('image' => Input::file('image'));
+	  		// // setting up rules
+	  		// $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+	  		// // doing the validation, passing post data, rules and the messages
+	  		// $validator = Validator::make($file, $rules);
+	  		// if ($validator->fails()) {
+	    // 		// send back to the page with the input data and errors
+	    // 		return Redirect::to('editMenu/'.$id.'')->withInput()->withErrors($validator);
+	 		 // }
+	  		// else {
+	    // 		// checking file is valid.
+	    // 		if (Input::file('image')->isValid()) {
+	    //  			$destinationPath = 'uploads'; // upload path
+	    //   			$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+	    //   			$fileName = "m".$id.'.'."png"; // renameing image
+	    //   			Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+	    //   			// sending back with message
+	    //   			Session::flash('success', 'Upload successfully'); 
+	    //   			Menu::where('id',$id)->update(['id_photo' => $fileName]);
+	    //   			return Redirect::to('viewMenu/'.$id.'');
+	    // 		}
+	    // 		else {
+	    //   			// sending back with error message.
+	    //  			Session::flash('error', 'uploaded file is not valid');
+	    //  			//return Redirect::to('editMenu/'.$id.'');
+	    // 		}
+	  		// }
+            //return Redirect::to('viewMenu/'.$id.'');     
+        } else {
+            //return Redirect::to('editMenu')->with('passErr','Password Salah!')->withInput();
+        }
+    }
+
 
 
 	/**

@@ -36,7 +36,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('editRestoran', 'RestoranController@edit');
 	Route::post('uploadPhotoResto', 'RestoranController@fotoResto');
 	Route::get('editMenuRestoran', 'RestoranController@editMenu');
-	Route::post('editMenu/{$id}', 'MenuController@confirmEditMenu');
+	
 	Route::get('profileRestoran', 'RestoranController@view');
 	Route::post('editRestoran','RestoranController@confirmEdit');
 	Route::get('editWaktuOperasional','WaktuOperasionalController@editWaktu');
@@ -50,9 +50,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('viewMenu/{id}','MenuController@viewMenu');
 	Route::get('editMenu/{id}','MenuController@editMenu');
 	Route::post('viewMenu/{id}','MenuController@viewMenu');
-	Route::post('editMenu/{id}','MenuController@editMenu');
+	Route::post('searchMenu','MenuController@searchMenu');
+	Route::get('searchMenu','MenuController@searchMenu');
+	Route::post('editMenu/{id}', 'MenuController@confirmEditMenu');
+	Route::post('editMenuHelper/{id}','MenuController@editMenuHelper');
 	Route::post('deleteMenu','MenuController@deleteMenu');
 	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
+	Route::get('addMenu','MenuController@addMenu');
+	Route::post('addMenu','MenuController@confirmAddMenu');
 
 	Route::post('findFood','MenuController@findFood');
 
