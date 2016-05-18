@@ -137,7 +137,7 @@
                                             <form action="{{ url('deleteMenu/'.$menu->id.'') }}" method="POST" style="display:inline;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" name="menu" value="{{ $menu->id }}" class="btn btn-danger">
+                                                <button type="submit" name="menu" onclick="return confirm('Apakah Anda yakin?')" value="{{ $menu->id }}" class="btn btn-danger">
                                                     <i class="fa fa-trash-o"></i>
                                                 </button>
                                             </form>

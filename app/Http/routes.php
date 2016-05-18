@@ -58,6 +58,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
 	Route::get('addMenu','MenuController@addMenu');
 	Route::post('addMenu','MenuController@confirmAddMenu');
+	Route::delete('deleteMenu/{id}', function ($id) {
+    	Menu::find($id)->delete();
+    	return redirect('/editMenuRestoran');
+	});
 
 	Route::post('findFood','MenuController@findFood');
 
