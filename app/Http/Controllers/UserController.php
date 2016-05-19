@@ -30,14 +30,11 @@ class UserController extends Controller
             'password' => 'required|min:6|required',
             're-pass' => 'required|same:password',
         ]);
-
-
         $user = new User;
         $user->nama_lengkap = Input::get('nama');
         $user->email = Input::get('email');
         $user->password = Input::get('password');
         $user->save();
-        // Session::put('user',$user);
         return Redirect::to('/home');
     }
 
@@ -60,9 +57,9 @@ class UserController extends Controller
             $userdata = array(
                 'nama'      => $user->nama_lengkap,
                 'email'     => $user->email,
-                'password'  => $user->password
+                'password'  => $user->password,
+                'total_poin' => $user->total_point
             );
-            Session::put('user',$user);
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
@@ -71,11 +68,11 @@ class UserController extends Controller
             
             if( empty($userLog[1])   ){
                 $lastLogin = Carbon::parse($userLog[0]->login_time);
-
                 $userpoin = DB::table('users')->select('total_point')->where('email', $email)->first();
                 $poinuser = $userpoin->total_point;
                 $poin = $poinuser + 10;
-                
+
+                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
                 DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
             } else {
                 $lastLogin = Carbon::parse($userLog[1]->login_time);
@@ -86,10 +83,12 @@ class UserController extends Controller
                     $poinuser = $userpoin->total_point;
                     $poin = $poinuser + 10;
                     
+                    DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
             }
 
+            Session::put('user',$user);
             return Redirect::to('/home');
             // $loginerr = 'Wrong email or password';
             // return Redirect::to('/home')->with('loginerr',$loginerr);
@@ -118,7 +117,10 @@ class UserController extends Controller
      * @author Putra Muttaqin
      */
     public function profile() {
-        return View::make("profile-page");
+        //$poin = DB::table('users')->select('total_point')->where('email',Session::get('user')->email)->first();
+        $user = \App\User::where('email',Session::get('user')->email)->first();
+        // $poin = DB::table('users')->select('total_point')->where(['email',Session::get('user')->email])->first();
+        return view("profile-page", compact('user'));
     }
 
     /**
@@ -155,5 +157,14 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * user akan mendapatkan poin apabila melalukan 'Check in' ke suatu restoran
+     * @author rama
+    **/
+    public function visit() {
+        $email = session()->get('user')->email;
+        $checkins = \App\User::where(['email',$email],[]);
+    }
 }
      
+                
