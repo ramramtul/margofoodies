@@ -33,19 +33,19 @@
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 				    <div class="item active">
-				      <img src="../images/restoran.jpg" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../images/restoran.jpg" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../images/restoran.jpg" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 
 				    <div class="item">
-				      <img src="../images/restoran.jpg" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
 				    </div>
 				  </div>
 
@@ -67,24 +67,15 @@
   					<div class="panel-body res1">
   						<h2 style="text-align:center; margin : 0 auto;"> Informasi Restoran </h2>
 		  				<i><h5 id="deskripsi"> {{$restoran->deskripsi}} </h5></i>
-		  				@if($restoran->lokasi == "GF")
-							<h5 id="lokasi"><b>Lokasi : </b>Lantai Dasar</h5>
-						@endif
-
-						@if($restoran->lokasi == "FL1")
-							<h5 id="lokasi"><b>Lokasi : </b>Lantai 1</h5>
-						@endif
-
-						@if($restoran->lokasi == "FL2")
-							<h5 id="lokasi"><b>Lokasi : </b>Lantai 2</h5>
-						@endif
-
-						@if($restoran->lokasi == "LG")
-							<h5 id="lokasi"><b>Lokasi : </b>Lantai Paling Dasar</h5>
-						@endif
-
-
-						<h5 id="no-telp">  </h5>
+		  				<h5 id="lokasi"><b>Lokasi : </b>{{$restoran->lokasi}}</h5>
+						<?php
+							if($restoran->no_telepon == null){
+								echo "<h5 id='no-telp'><b> No Telepon : </b> Tidak tersedia </h5>";
+							} else {
+								echo "<h5 id='no-telp'><b> No Telepon : </b> $restoran->no_telepon </h5>";
+							}
+						?>
+						
 						<h5 id="tax"><b>Tax : </b>{{$restoran->tax}}%</h5>
 						
 						<h5><b>Jenis Masakan : </b></h5>
