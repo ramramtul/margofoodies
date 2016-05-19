@@ -34,7 +34,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('dologin','UserController@dologin');
 	Route::get('logout','UserController@logout');
 
-<<<<<<< HEAD
+
 	Route::get('profile','UserController@profile');
 	Route::get('editProfile', function() {
 		return View::make('edit-profile');
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
 	// @author rama
 	// sistem akan melakukan check in.
 	Route::post('view-restoran', 'UserController@visit');
-=======
+
 	Route::get('editRestoran', 'RestoranController@edit');
 	Route::post('uploadPhotoResto', 'RestoranController@fotoResto');
 	Route::get('editMenuRestoran', 'RestoranController@editMenu');
@@ -72,7 +72,7 @@ Route::group(['middleware' => ['web']], function () {
     	Menu::find($id)->delete();
     	return redirect('/editMenuRestoran?page='.$page.'');
 	});
->>>>>>> origin/master
+
 
 	Route::post('findFood','MenuController@findFood');
 
