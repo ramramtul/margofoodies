@@ -37,7 +37,8 @@ Route::group(['middleware' => ['web']], function () {
 		return View::make('edit-profile');
 	});
 	Route::post('editProfile','UserController@confirmEdit');
-
+	// @author rama
+	// sistem akan melakukan check in.
 	Route::post('view-restoran', 'UserController@visit');
 
 	Route::post('findFood','MenuController@findFood');

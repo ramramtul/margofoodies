@@ -14,7 +14,8 @@
  			<h1 id="name"><b><a href="../restoran/{{$restoran->id}}">{{strtoupper($restoran->nama)}}</a></b></h1>
  			</div>
  			<div class="col-xs-12 col-sm-6 col-md-1 col-md-offset-5">
- 			<button class="btn btn-responsive btn-singgah" onclick="#" type="submit">Singgah</button>
+			<a href="{{ url('/view-restoran') }}" class="btn btn-responsive btn-singgah" onclick="#" role="button">Singgah</a>
+
  			</div>
  		</div>
  		<br>

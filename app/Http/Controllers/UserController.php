@@ -162,7 +162,8 @@ class UserController extends Controller
      * @author rama
     **/
     public function visit() {
-        
+        $email = session()->get('user')->email;
+        $checkins = \App\User::where(['email',$email],[]);
     }
 }
      
