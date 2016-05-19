@@ -28,12 +28,17 @@
 		  			@endif
 	   				<div class = "col-sm-6 col-md-4">
 	      				<div class = "thumbnail">
-	        				<img src = "images/restoran.jpg" alt = "Generic placeholder thumbnail">
+	      					@if($res->id_photo <> "")
+		            			<img class="img-responsive" src="{{url('uploads/r'.$res->id.'.png')}}" alt="{{$res->nama}}">
+			            	@else
+			            		<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$res->nama}}">
+			            	@endif
+	        				
 	      				</div>
 	      
 	     				<div class = "caption">
 	         				<h3 style="text-align: center"><a href="restoran/{{$res->id}}">{{$res->nama}}</a></h3>
-	         				<p>{{$res->deskripsi}}</p>
+	         				<p style="text-align: center;">{{$res->deskripsi}}</p>
 	        			</div>
 	   					</div>
 				   	
