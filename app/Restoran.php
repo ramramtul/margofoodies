@@ -7,7 +7,8 @@ class Restoran extends Model {
 	//
     protected $table = "restorans";
     protected $primaryKey = 'id';
-    public $incrementing = false; 
+    public $incrementing = false;
+    
 	public function menu()
     {
         return $this->hasMany('Menu');
@@ -27,5 +28,11 @@ class Restoran extends Model {
     {
         return $this->hasMany('WaktuOperasional');
     }
+
+     public function user()
+    {
+        return $this->hasOne('User');
+    }
+
 
 }
