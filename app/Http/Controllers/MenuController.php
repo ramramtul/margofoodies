@@ -418,7 +418,7 @@ class MenuController extends Controller {
         		// getting all of the post data
 		  		$file = array('image' => Input::file('image'));
 		  		// setting up rules
-		  		$rules = array('image' => 'mimes:jpeg,jpg,png',); //mimes:jpeg,bmp,png and for max size max:10000
+		  		$rules = array('image' => ''); //mimes:jpeg,bmp,png and for max size max:10000
 		  		// doing the validation, passing post data, rules and the messages
 		  		$validator = Validator::make($file, $rules);
 		  		if ($validator->fails()) {
@@ -445,7 +445,8 @@ class MenuController extends Controller {
 		     			return Redirect::to('addMenu')->withInput();
 		    		}
 	  			}
-        	}     
+        	} 
+        	return Redirect::to('viewMenu/'.$id.'');    
         } else {
             return Redirect::to('addMenu')->with('passErr','Password Salah!')->withInput();
         }
