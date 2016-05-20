@@ -1,6 +1,3 @@
-<!-- @author Septiviana Savitri
-@class : reviewsController
-Kelas ini berisi kode untuk mengontrol atribut apa saja yang ada di review yang akan ditampilkan di panel admin -->
 <?php 
 
 namespace App\Http\Controllers;
