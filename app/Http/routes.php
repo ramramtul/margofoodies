@@ -2,6 +2,7 @@
 use App\Pesanan;
 use App\FasilitasRestoran;
 use App\Menu;
+use App\JenisMasakan;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -59,8 +60,21 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('addMenu','MenuController@addMenu');
 	Route::post('addMenu','MenuController@confirmAddMenu');
 	Route::delete('deleteMenu/{id}/{page}', function ($id, $page) {
+		$jenis_before = Menu::where('id',$id)->first()->kategori;
     	Menu::find($id)->delete();
-    	return redirect('/editMenuRestoran?page='.$page.'');
+    	if(!$jenis_masakan){
+			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
+			if(!$menu_jenis){
+				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
+			}
+        }
+        $menu = Menu::all();
+        if(count($menu)%10 != 0){
+        	return redirect('/editMenuRestoran?page='.$page.'');
+        } else {
+        	return redirect('/editMenuRestoran?page='.($page-1).'');
+        }
+    	
 	});
 
 	Route::post('findFood','MenuController@findFood');

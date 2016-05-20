@@ -100,7 +100,7 @@ class WaktuOperasionalController extends Controller
         $restoran = Restoran::where('admin',Session::get('user')->email)->first();
         $waktu = WaktuOperasional::where('id_restoran', '=', $restoran->id)->orderByRaw("FIELD(hari , 'Owner', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu') ASC")->get();
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
         	$status = true;
         	if($tSenin < $bSenin ) {
         		return Redirect::to('editWaktuOperasional')->with('SeninErr','Masukkan waktu yang sesuai')->withInput();

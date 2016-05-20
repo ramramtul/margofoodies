@@ -220,7 +220,7 @@ class RestoranController extends Controller {
         $lokasi = Input::get('lokasi', $restoran->lokasi);
         $desc = Input::get('desc', $restoran->deskripsi);
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
             if (Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'lokasi' => $lokasi, 'no_telepon' => $telepon,'tax' => $tax , 'deskripsi' => $desc])) {
                 return Redirect::to('profileRestoran');
             } else {

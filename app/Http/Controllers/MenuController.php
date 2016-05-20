@@ -322,19 +322,27 @@ class MenuController extends Controller {
 		$kategori = Input::get('kategori');
         $paket = Input::get('paket');
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
         	if($paket == "Bukan Paket") {
         		$pa = false;
         	} else if ($paket == "Paket Tanpa Minum"){
         		$sa = false;
         	}
-
+        	$jenis_before = Menu::where('id',$menu->id)->first()->kategori;
         	if(!$pa){
         		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ]);
         	} else {
         		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ]);
         	}
             if ($status) {
+            	$jenis_masakan = JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->first();
+        		if(!$jenis_masakan){
+        			$jenis_masakan = JenisMasakan::create(array('id_restoran'=> $restoran->id, 'jenis_masakan'=> $jenis));
+        			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
+        			if(!$menu_jenis){
+        				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
+        			}
+        		}
                 return Redirect::to('viewMenu/'.$id.'');
             } else {
                 return Redirect::to('editMenu/'.$id.'')->with('dbErr','Error saat menyimpan ke database')->withInput();
@@ -402,7 +410,7 @@ class MenuController extends Controller {
         $paket = $request->input('paket');
 
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
         	if($paket == "Bukan Paket") {
         		$pa = false;
         	} else if ($paket == "Paket Tanpa Minum"){
@@ -412,6 +420,10 @@ class MenuController extends Controller {
         		$menu = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ));
         	} else {
         		$menu = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ));
+        	}
+        	$jenis_masakan = JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->first();
+        	if(!$jenis_masakan){
+        		$jenis_masakan = JenisMasakan::create(array('id_restoran'=> $restoran->id, 'jenis_masakan'=> $jenis));
         	}
             $id = $menu->id;
         	if(Input::hasFile('image')){
