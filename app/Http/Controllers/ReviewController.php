@@ -10,6 +10,7 @@ use App\Review;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -52,6 +53,7 @@ class ReviewController extends Controller {
 			// code by rama
 			// user akan mendapatkan poin 5 untuk sebuah review di setiap menu
 			$isireview = DB::table('reviews')->select('email')->where('id_menu',$id)->first();
+			$revTime = Carbon::now();
 			
 			if(empty ($isireview) && $status = 1) {
 				$statusrev = DB::table('reviews')->select('status')->where([['email',$user],['id_menu',$id]]);
@@ -60,6 +62,7 @@ class ReviewController extends Controller {
 		            $poinuser = $userpoin->total_point;
 		            $poin = $poinuser + 5;
 
+		            DB::table('point_history')->where('email', $user)->insert(['email' => $user, 'id_point' => 'PFC', 'waktu' => $revTime]);
 		            DB::table('users')->where('email', $user)->update(['total_point' => $poin]);		
 				}
 			}
