@@ -137,7 +137,7 @@ class RestoranController extends Controller {
 		// getting all of the post data
 		  $file = array('image' => Input::file('image'));
 		  // setting up rules
-		  $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+		  $rules = array('image' => 'required | mimes:jpeg,jpg,png,gif,bmp,svg',); //mimes:jpeg,bmp,png and for max size max:10000
 		  // doing the validation, passing post data, rules and the messages
 		  $validator = Validator::make($file, $rules);
 		  if ($validator->fails()) {
