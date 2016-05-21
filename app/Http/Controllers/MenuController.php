@@ -445,7 +445,9 @@ class MenuController extends Controller {
 		     			return Redirect::to('addMenu')->withInput();
 		    		}
 	  			}
+
         	}     
+        	return Redirect::to('viewMenu/'.$id.'');
         } else {
             return Redirect::to('addMenu')->with('passErr','Password Salah!')->withInput();
         }
