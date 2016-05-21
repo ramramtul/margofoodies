@@ -161,10 +161,18 @@ class UserController extends Controller
      * user akan mendapatkan poin apabila melalukan 'Check in' ke suatu restoran
      * @author rama
     **/
-    public function visit() {
+    public function checkin($id) {
+        $checkinTime = Carbon::now();
         $email = session()->get('user')->email;
-        $checkins = \App\User::where(['email',$email],[]);
+        $restoran = \App\Restoran::where('id',$id)->first();
+
+        $checkinku = new CheckIn;
+        $checkinku->email = $email;
+        $checkinku->restoran = $restoran;
+        $checkinku->waktu = $checkinTime;
+        $checkinku->save();
     }
 }
      
                 
+
