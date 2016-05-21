@@ -149,6 +149,23 @@ class MenuController extends Controller {
 		return Redirect::to('/editMenuRestoran');
 	}
 
+	public function delete(Request $request, $page, $id) {
+		$jenis_before = Menu::where('id',$id)->first()->kategori;
+    	Menu::find($id)->delete();
+    	if(!$jenis_masakan){
+			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
+			if(!$menu_jenis){
+				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
+			}
+        }
+        $menu = Menu::all();
+        if(count($menu)%10 != 0){
+        	return redirect('/editMenuRestoran?page='.$page.'');
+        } else {
+        	return redirect('/editMenuRestoran?page='.($page-1).'');
+        }
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *

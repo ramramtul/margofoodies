@@ -53,4 +53,9 @@ class FasilitasRestoranController extends Controller
     	$fasilitas->save();
 	    return Redirect::to('editFasilitasRestoran');
     }
+
+    public function delete(Request $request){
+    	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
+    	return redirect('/editFasilitasRestoran');
+    }
 }

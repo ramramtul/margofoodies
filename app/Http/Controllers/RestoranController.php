@@ -145,22 +145,35 @@ class RestoranController extends Controller {
 		    return Redirect::to('editRestoran')->withInput()->withErrors($validator);
 		  }
 		  else {
-		    // checking file is valid.
-		    if (Input::file('image')->isValid()) {
-		      $destinationPath = 'uploads'; // upload path
-		      $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-		      $fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
-		      Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-		      // sending back with message
-		      Session::flash('success', 'Upload successfully'); 
-		      Restoran::where('id',$restoran[0]->id)->update(['id_photo' => $fileName]);
-		      return Redirect::to('editRestoran');
+		  	// checking file is valid.
+		  	if (Input::file('image')->isValid()) {
+	      		$destinationPath = 'uploads'; // upload path
+	      		$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+	      		$fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
+	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+	      		list($width, $height) = getimagesize($fileName);
+	      		if ($width > $height) {
+			    	// Landscape
+			    	// sending back with message
+		     		Session::flash('success', 'Upload successfully'); 
+		      		Restoran::where('id',$restoran[0]->id)->update(['id_photo' => $fileName]);
+		      		return Redirect::to('editRestoran');
+			  	} else {
+			    	// Portrait or Square
+			    	File::delete(public_path().'/uploads/'.$fileName);
+			    	Session::flash('error', 'a valid image has landscape orientation');
+	      			return Redirect::to('editRestoran');
+				}
+		      
 		    }
 		    else {
 		      // sending back with error message.
 		      Session::flash('error', 'uploaded file is not valid');
 		      return Redirect::to('editRestoran');
 		    }
+			
+		    
+		    
 		  }
 	}
 

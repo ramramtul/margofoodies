@@ -45,10 +45,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('editWaktuOperasional','WaktuOperasionalController@confirmEditWaktu');
 	Route::get('editFasilitasRestoran','FasilitasRestoranController@editFasilitas');
 	Route::post('editFasilitasRestoran','FasilitasRestoranController@addFasilitas');
-	Route::delete('editFasilitasRestoran/{id}/{nama}', function ($id, $nama) {
-    	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
-    	return redirect('/editFasilitasRestoran');
-	});
+	Route::delete('editFasilitasRestoran/{id}/{nama}', 'FasilitasRestoranController@delete');
 	Route::get('viewMenu/{id}','MenuController@viewMenu');
 	Route::get('editMenu/{id}','MenuController@editMenu');
 	Route::post('viewMenu/{id}','MenuController@viewMenu');
@@ -59,23 +56,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
 	Route::get('addMenu','MenuController@addMenu');
 	Route::post('addMenu','MenuController@confirmAddMenu');
-	Route::delete('deleteMenu/{id}/{page}', function ($id, $page) {
-		$jenis_before = Menu::where('id',$id)->first()->kategori;
-    	Menu::find($id)->delete();
-    	if(!$jenis_masakan){
-			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
-			if(!$menu_jenis){
-				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
-			}
-        }
-        $menu = Menu::all();
-        if(count($menu)%10 != 0){
-        	return redirect('/editMenuRestoran?page='.$page.'');
-        } else {
-        	return redirect('/editMenuRestoran?page='.($page-1).'');
-        }
-    	
-	});
+	Route::delete('deleteMenu/{id}/{page}', 'MenuContoller@delete');
 
 	Route::post('findFood','MenuController@findFood');
 
