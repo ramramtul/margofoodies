@@ -28,24 +28,19 @@ class promosController extends CrudController{
 			$this->grid->add('tgl_berlaku_akhir', 'Tanggal Berlaku Akhir');
 			$this->grid->add('id_restoran', 'Id Restoran');
 			$this->grid->add('id_photo', 'Id Photo');
-			$this->grid->orderBy('id','asc'); //default orderby
-
-
-        /** Simple code of  filter and grid part , List of all fields here : http://laravelpanel.com/docs/master/crud-fields
-
-
-			$this->filter = \DataFilter::source(new \App\Category);
-			$this->filter->add('name', 'Name', 'text');
-			$this->filter->submit('search');
-			$this->filter->reset('reset');
-			$this->filter->build();
-
-			$this->grid = \DataGrid::source($this->filter);
-			$this->grid->add('name', 'Name');
-			$this->grid->add('code', 'Code');
 			$this->addStylesToGrid();
 
-        */
+			$this->grid->paginate(10);
+
+			//$this->grid->add('name', 'Name', true); // allow ordering by this column
+			$this->grid->orderBy('id','asc'); //default orderby
+			$this->grid->add('judul', 'Judul', true);
+			$this->grid->add('id', 'Id', true);
+			
+		
+
+
+        
                  
         return $this->returnView();
     }
@@ -56,12 +51,20 @@ class promosController extends CrudController{
         	$this->edit = \DataEdit::source(new \App\Promos());
 
 			$this->edit->label('Edit Promo');
-			$this->edit->add('id', '', 'auto')->insertValue('3653');
-
-			//$this->edit->add('id', 'id', 'text');
-			$this->edit->add('nama', 'Nama', 'text');
-			$this->edit->add('harga', 'Harga', 'text');
-
+			$results = \App\Promos::all()->first() ;
+			if(empty($results)){
+				$this->edit->add('id', '', 'auto')->insertValue(1);
+			}else{
+				$results = \App\Promos::all()->last()->id;
+				$this->edit->add('id', '', 'auto')->insertValue($results + 1);
+			}
+			$this->edit->add('judul', 'Judul', 'text');
+			$this->edit->add('deskripsi', 'Deskripsi', 'text');
+			$this->edit->add('tgl_berlaku_awal', 'pub.date', 'date')->format('y-m-d', 'it');
+			$this->edit->add('tgl_berlaku_akhir', 'pub.date', 'date')->format('y-m-d', 'it');
+			$this->edit->add('id_restoran', 'Id_Restoran', 'select')->options(\App\Restorans::lists("nama", "id")->all());
+			$this->edit->add('photo', 'Photo', 'image')->move('uploads/images/');
+			
        
        
         return $this->returnEditView();
