@@ -5,7 +5,6 @@
 @stop
 
 @section('content')
-<?php $user = Session::get('user'); ?>
 <!--
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
@@ -30,6 +29,9 @@ Licensed under MIT
 					</div>
 					<div class="profile-usertitle-desc">
 						{{ $user->deskripsi }}
+					</div></br>
+					<div class="profile-usertitle-poin">
+						Poin : {{ $user->total_point }}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->

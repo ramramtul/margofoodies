@@ -1,3 +1,6 @@
+<!-- @author Septiviana Savitri
+@class : restoransController
+Kelas ini berisi kode untuk mengontrol atribut apa saja yang ada di restoran yang akan ditampilkan di panel admin -->
 <?php 
 
 namespace App\Http\Controllers;

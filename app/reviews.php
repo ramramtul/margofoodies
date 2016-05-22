@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class menus extends Model {
+class reviews extends Model {
 
-    protected $table = 'menus';
+    protected $table = 'reviews';
     public $timestamps = false;
     public $incrementing = false;
 

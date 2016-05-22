@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2016 at 11:06 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 7.0.4
+-- Generation Time: May 20, 2016 at 06:10 PM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -4056,7 +4056,11 @@ INSERT INTO `menus` (`id`, `nama`, `harga`, `id_restoran`, `kapasitas`, `jenis`,
 (3645, 'Hot Cappucino', 15000, '057', '1', 'Minuman', 'Western', '', '', '0', 0, NULL, NULL, '2016-05-17 18:56:12', '0000-00-00 00:00:00'),
 (3646, 'Hot Chocolate', 15000, '057', '1', 'Minuman', 'Western', '', '', '0', 0, NULL, NULL, '2016-05-17 18:56:12', '0000-00-00 00:00:00'),
 (3647, 'Hot Black Coffee', 15000, '057', '1', 'Minuman', 'Western', '', '', '0', 0, NULL, NULL, '2016-05-17 18:56:12', '0000-00-00 00:00:00'),
-(3648, 'Hot Tea', 15000, '057', '1', 'Minuman', 'Western', '', '', '0', 0, NULL, NULL, '2016-05-17 18:56:12', '0000-00-00 00:00:00');
+(3648, 'Hot Tea', 15000, '057', '1', 'Minuman', 'Western', '', '', '0', 0, NULL, NULL, '2016-05-17 18:56:12', '0000-00-00 00:00:00'),
+(3649, 'ppl', 23000, '017', '1', 'Makanan Utama', 'Indonesian', '', '', '0', 0, NULL, NULL, '2016-05-18 19:12:21', '2016-05-18 19:12:21'),
+(3650, 'ppl1', 1111, '017', '1', 'Makanan Utama', 's', '', '', '0', 0, NULL, NULL, '2016-05-18 19:14:29', '2016-05-18 19:14:29'),
+(3651, 'pplo', 233, '017', '1', 'Makanan Utama', 'jaj', '', '', '0', 0, NULL, NULL, '2016-05-18 19:15:11', '2016-05-18 19:15:11'),
+(3652, 'pll3', 425, '017', '1', 'Makanan Utama', 'jks', '', '', '0', 0, NULL, NULL, '2016-05-18 19:15:59', '2016-05-18 19:15:59');
 
 -- --------------------------------------------------------
 
@@ -4149,9 +4153,11 @@ CREATE TABLE `point` (
 --
 
 CREATE TABLE `point_history` (
-  `id_user` char(8) NOT NULL,
+  `email` char(8) NOT NULL,
   `id_point` char(3) NOT NULL,
-  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nominal_point` int(11) NOT NULL,
+  `nama_transaksi` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -4275,7 +4281,9 @@ INSERT INTO `reviews` (`id`, `email`, `id_menu`, `isi_review`, `rate`, `status`)
 (1, 'clara@gmail.com', '00000001', 'enak bangettt', '4', 0),
 (2, 'clara@gmail.com', '00000001', 'pengen lagii', '5', 1),
 (3, 'clara@gmail.com', '00000001', 'kurang enak', '2', 0),
-(4, 'ram@g.co', '00000001', 'jsaasjdkdhkjsdhsahafhjffhhhsahdsaiod jajanken', '1', 0);
+(4, 'ram@g.co', '00000001', 'jsaasjdkdhkjsdhsahafhjffhhhsahdsaiod jajanken', '1', 0),
+(5, 'hokahoka@bento.com', '1', 'lalala', '2', 0),
+(6, 'clara@gmail.com', '1', 'asik', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -4324,7 +4332,7 @@ INSERT INTO `users` (`nama_lengkap`, `email`, `password`, `id_photo`, `deskripsi
 ('Clara Indriyani', 'clara.ara7@gmail.com', '$2y$10$lwDhsXv31iz9w49X8bnF8Ozz9L4FBOzM9Ef2y5c/wMMIUllfloa/a', '', '', 0, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
 ('Clara', 'clara@gmail.com', 'sederhana', '', '', 20, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
 ('gaga gaga', 'gaga@gmail.com', '123456', '', '', 10, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
-('Hoka Hoka Bento', 'hokahoka@bento.com', 'hokahoka', '', 'hehehe', 10, 1, '2016-05-17 15:52:59', '2016-05-17 08:52:59'),
+('Hoka Hoka Bento', 'hokahoka@bento.com', 'hokahoka', '', 'hehehe', 15, 1, '2016-05-19 02:18:46', '2016-05-17 08:52:59'),
 ('pplbaru', 'ppl@gmail.com', '123456', '', 'ppl 2016', 10, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
 ('ram', 'ram@g.co', '123456', '', '', 10, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
 ('tes', 'tes@gmail.com', '123456', '', '', 10, 0, '2016-05-17 15:52:04', '0000-00-00 00:00:00'),
@@ -4373,7 +4381,11 @@ INSERT INTO `waktu_login_users` (`id`, `email`, `login_time`) VALUES
 (23, 'hokahoka@bento.com', '2016-05-16 07:27:22'),
 (24, 'hokahoka@bento.com', '2016-05-17 03:47:46'),
 (25, 'hokahoka@bento.com', '2016-05-17 15:00:50'),
-(26, 'hokahoka@bento.com', '2016-05-18 05:52:22');
+(26, 'hokahoka@bento.com', '2016-05-18 05:52:22'),
+(27, 'hokahoka@bento.com', '2016-05-19 02:06:40'),
+(28, 'clara@gmail.com', '2016-05-19 02:07:11'),
+(29, 'hokahoka@bento.com', '2016-05-19 02:10:14'),
+(30, 'clara@gmail.com', '2016-05-19 02:24:40');
 
 -- --------------------------------------------------------
 
@@ -4876,7 +4888,7 @@ ALTER TABLE `point`
 -- Indexes for table `point_history`
 --
 ALTER TABLE `point_history`
-  ADD PRIMARY KEY (`id_user`,`id_point`,`waktu`);
+  ADD PRIMARY KEY (`email`,`id_point`,`waktu`);
 
 --
 -- Indexes for table `promo`
@@ -4939,7 +4951,7 @@ ALTER TABLE `links`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3649;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3653;
 --
 -- AUTO_INCREMENT for table `permissions`
 --
@@ -4954,7 +4966,7 @@ ALTER TABLE `pesanan`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -4964,7 +4976,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `waktu_login_users`
 --
 ALTER TABLE `waktu_login_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- Constraints for dumped tables
 --

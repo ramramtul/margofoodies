@@ -30,7 +30,7 @@
               <div class="star-ratings-sprite">
                 <span class="star-ratings-sprite-rating" style="width:{{$hasil->rat}}%"></span></div>
               <h5><b> {{$hasil->jumlah_tested}} tasted </b></h5>
-              <a href="#"><b>Lihat Review</b></a>
+              <a href="review/{{$hasil->id}}"><b>Lihat Review</b></a>
             </div>
             <br>
           </div>

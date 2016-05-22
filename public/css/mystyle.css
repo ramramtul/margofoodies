@@ -1,3 +1,16 @@
+.tombolfooter-container{
+  padding-left: 50px;
+  padding-top: 10px;
+}
+
+.footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:60px;
+   width:100%;
+   background:#999;
+}
 .navbar { 
 	background-color: #FFFFFF;
 	border-top-style: none;
@@ -51,6 +64,12 @@
 	border: 6px solid #EA5B4D;
 	border-radius : 10px;
 	background-color: #E8E399;
+
+}
+.res3{
+  border: 6px solid #EA5B4D;
+  border-radius : 10px;
+  background-color: #FFFFFF;
 
 }
 .headline{
@@ -174,6 +193,10 @@ body{
  font-style: Helvetica;
 }
 
+.iLine input{
+float:left;
+}` 
+
 
 ul {
   list-style: none;
@@ -234,16 +257,11 @@ ul {
     display: table;
     table-layout: fixed;
   }
-  input[type="radio"] {
-    -webkit-appearance: checkbox; /* Chrome, Safari, Opera */
-    -moz-appearance: checkbox;    /* Firefox */
-    -ms-appearance: checkbox;     /* not currently supported */
-    transform: scale(1.5);
-  }
+  
   a {
     color: #EA5B4D;
   }
-
+  
   a:hover {
     color: #EA5B4D;
   }
@@ -284,6 +302,11 @@ ul {
     font-size: 23px;
   }
 
+  .fotoRestoran {
+    width : 400px;
+    height : 250px;
+  }
+
   /** 
    * Tambahan dari Putra
    *
@@ -299,6 +322,7 @@ ul {
     margin: 20px 0;
   }
 
+
   /* Profile sidebar */
   .profile-sidebar {
     padding: 20px 0 10px 0;
@@ -309,10 +333,16 @@ ul {
     float: none;
     margin: 0 auto;
     width: 50%;
-    height: 50%;
+    height: 100%;
     -webkit-border-radius: 50% !important;
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
+  }
+
+  .profile-restopic img {
+    float: none;
+    margin: 0 auto;
+    
   }
 
   .profile-usertitle {
@@ -431,6 +461,21 @@ ul {
     border-radius: 50% !important;
   }
 
+.hovereffect .overlay1 {
+    width:50%;
+    height:50%;
+    position:absolute;
+    overflow:hidden;
+    top:0;
+    left:25%;
+    opacity:0;
+    background-color:rgba(0,0,0,0.5);
+    -webkit-transition:all .4s ease-in-out;
+    transition:all .4s ease-in-out
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+  }
   .hovereffect img {
     display:block;
     position:relative;
@@ -461,6 +506,10 @@ ul {
     opacity:1;
     filter:alpha(opacity=100);
   }
+  .hovereffect:hover .overlay1 {
+    opacity:1;
+    filter:alpha(opacity=100);
+  }
 
   .hovereffect:hover h2,.hovereffect:hover a.info {
     opacity:1;
@@ -473,4 +522,10 @@ ul {
   .hovereffect:hover a.info {
     -webkit-transition-delay:.2s;
     transition-delay:.2s;
+  }
+
+  .menu-content {
+    padding: 30px;
+    background: #fff;
+    min-height: 460px;
   }

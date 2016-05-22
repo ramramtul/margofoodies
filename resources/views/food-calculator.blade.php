@@ -11,7 +11,7 @@
     $jmlOrang = Session::get('jmlOrang');
     $resto = Session::get('resto');
     $menus = Session::get('menus');
-    $user = Session::get('email');
+    $user = Session::get('user')->email;
     $pesanan = Pesanan::where('id_user', '=', $user)->where('id_orang', '=', $orang)->get();
     $jml = $jmlOrang + 1;
 

@@ -35,7 +35,7 @@ class PesananController extends Controller
 	public function create(Request $request)
 	{
 		//
-		$user = $request->session()->get('email');
+		$user = $request->session()->get('user')->email;
 		$id = $request->session()->get('orang');
 		$menu = Input::get('menu');
 		$pesanan = new Pesanan;
@@ -60,7 +60,7 @@ class PesananController extends Controller
 
 	public function reset(Request $request)
 	{
-		$user = session()->get('email');
+		$user = session()->get('user')->email;
 		$deletedRows = Pesanan::where('id_user', $user)->delete();
 		$request->session()->forget('resto');
 		$request->session()->forget('jmlOrang');
@@ -79,7 +79,7 @@ class PesananController extends Controller
 	public function pesan(Request $request, $orang)
 	{
 
-		$user = $request->session()->get('email');
+		$user = $request->session()->get('user')->email;
 		$or = session()->get('orang');
 		if($user == null){
 			return Redirect::to('/home');
@@ -105,7 +105,7 @@ class PesananController extends Controller
 	 */
 	public function destroy()
 	{
-		$user = session()->get('email');
+		$user = session()->get('user')->email;
 		$orang = session()->get('orang');
 		$pesanan = Pesanan::find(Input::get('pesanan'));
 		if($user === $pesanan->id_user) {
