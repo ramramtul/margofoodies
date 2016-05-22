@@ -92,5 +92,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('review/{id}','ReviewController@show');
 	Route::post('createReview/{id}','ReviewController@create');
+
+	Route::get('promo','PromoController@showAll');
+	Route::get('promo/{id}','PromoController@show');
 });
 
