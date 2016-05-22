@@ -1,5 +1,7 @@
 <?php
 use App\Pesanan;
+use App\FasilitasRestoran;
+use App\Menu;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -32,6 +34,46 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('dologin','UserController@dologin');
 	Route::get('logout','UserController@logout');
 
+
+	Route::get('profile','UserController@profile');
+	Route::get('editProfile', function() {
+		return View::make('edit-profile');
+	});
+	Route::post('editProfile','UserController@confirmEdit');
+	// @author rama
+	// sistem akan melakukan check in.
+	Route::post('view-restoran', 'UserController@visit');
+
+	Route::get('editRestoran', 'RestoranController@edit');
+	Route::post('uploadPhotoResto', 'RestoranController@fotoResto');
+	Route::get('editMenuRestoran', 'RestoranController@editMenu');
+	
+	Route::get('profileRestoran', 'RestoranController@view');
+	Route::post('editRestoran','RestoranController@confirmEdit');
+	Route::get('editWaktuOperasional','WaktuOperasionalController@editWaktu');
+	Route::post('editWaktuOperasional','WaktuOperasionalController@confirmEditWaktu');
+	Route::get('editFasilitasRestoran','FasilitasRestoranController@editFasilitas');
+	Route::post('editFasilitasRestoran','FasilitasRestoranController@addFasilitas');
+	Route::delete('editFasilitasRestoran/{id}/{nama}', function ($id, $nama) {
+    	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
+    	return redirect('/editFasilitasRestoran');
+	});
+	Route::get('viewMenu/{id}','MenuController@viewMenu');
+	Route::get('editMenu/{id}','MenuController@editMenu');
+	Route::post('viewMenu/{id}','MenuController@viewMenu');
+	Route::post('searchMenu','MenuController@searchMenu');
+	Route::get('searchMenu','MenuController@searchMenu');
+	Route::post('editMenu/{id}', 'MenuController@confirmEditMenu');
+	Route::post('editMenuHelper/{id}','MenuController@editMenuHelper');
+	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
+	Route::get('addMenu','MenuController@addMenu');
+	Route::post('addMenu','MenuController@confirmAddMenu');
+	Route::delete('deleteMenu/{id}/{page}', function ($id, $page) {
+    	Menu::find($id)->delete();
+    	return redirect('/editMenuRestoran?page='.$page.'');
+	});
+
+
 	Route::post('findFood','MenuController@findFood');
 
 	Route::post('calculateFood','HomeController@calculateFood');
@@ -44,11 +86,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
 	
-	Route::get('profile','UserController@profile');
-	Route::get('editProfile', function() {
-		return View::make('edit-profile');
-	});
-	Route::post('editProfile','UserController@confirmEdit');
 
 	Route::get('menus/{id}','MenuController@showList');
 	Route::post('search','MenuController@search');

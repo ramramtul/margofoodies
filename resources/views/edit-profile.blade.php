@@ -36,6 +36,9 @@ Licensed under MIT
 					<div class="profile-usertitle-desc">
 						{{ $user->deskripsi }}
 					</div>
+					<div class="profile-usertitle-poin">
+						<!-- Poin : {{ $poin }} -->
+					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
 				<!-- SIDEBAR BUTTONS -->

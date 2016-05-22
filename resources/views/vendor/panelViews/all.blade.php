@@ -23,6 +23,7 @@
 					<div><input type="file" name="import_file" /></div>
 					<br />
 					<div>
+						echo capedeh
 						<input type="radio" name="status" id="status_1" value="1" checked="checked" />&nbsp;
 						<label for="status_1">{!! \Lang::get('panel::fields.deletePreviousData') !!}</label><br />
 						<input type="radio" name="status" id="status_2" value="2" />&nbsp;
