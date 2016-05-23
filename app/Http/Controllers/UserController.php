@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use App\Photo;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
@@ -29,12 +30,18 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|required',
             're-pass' => 'required|same:password',
-        ]);
+            ]);
         $user = new User;
         $user->nama_lengkap = Input::get('nama');
         $user->email = Input::get('email');
-        $user->password = Input::get('password');
+        $user->password = md5(Input::get('password'));
+        $user->id_photo = 'u'.Input::get('email');
         $user->save();
+
+        $foto = new Photo;
+        $foto->id_photo = 'u'.Input::get('email');
+        $foto->save();
+
         return Redirect::to('/home');
     }
 
@@ -46,7 +53,7 @@ class UserController extends Controller
     public function dologin()
     {   
         $email = Input::get('email');
-        $pass = (Input::get('password'));
+        $pass = md5(Input::get('password'));
         $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
         if($user===null){
 
@@ -59,7 +66,7 @@ class UserController extends Controller
                 'email'     => $user->email,
                 'password'  => $user->password,
                 'total_poin' => $user->total_point
-            );
+                );
             // menambahkan poin apabila berhasil login, namun poin yg dihitung adalah 1 login tiap hari by Rama Rahmatullah
             $loginTime = Carbon::now();
             DB::table('waktu_login_users')->insert(['email' => $email],['login_time' => $loginTime]);
@@ -135,7 +142,7 @@ class UserController extends Controller
             'confirmNewPass' => 'same:newPass',
             'desc' => '',
             'currPass' => 'required'
-        ]);
+            ]);
 
         $user = User::where('email',Session::get('user')->email)->first();
         $currPass = Input::get('currPass');
@@ -143,17 +150,38 @@ class UserController extends Controller
         $newPass = Input::get('newPass', null);
         $desc = Input::get('desc', $user->deskripsi);
 
-        $pass = empty($newPass) ? $currPass : $newPass;
+        $pass = md5(empty($newPass) ? $currPass : $newPass);
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
             if (User::where('email',$user->email)->update(['nama_lengkap' => $nama, 'password' => $pass, 'deskripsi' => $desc])) {
                 Session::put('user',User::where('email',Session::get('user')->email)->first());
-                return Redirect::to('profile');
+                if (isset($_FILES["pic-btn"]["name"])) {
+
+                    $name = $_FILES["pic-btn"]["name"];
+                    $tmp_name = $_FILES['pic-btn']['tmp_name'];
+                    $error = $_FILES['pic-btn']['error'];
+
+                    if (!empty($name)) {
+                        $location = 'images/pp/';
+
+                        if (move_uploaded_file($tmp_name, $location.$name)){
+                            Photo::where('id_photo',$user->id_photo)->update(array('alamat' => $location.$name));
+                        } else {
+
+                        }
+
+                    } else {
+                        echo 'please choose a file';
+                    }
+                } else {
+                    echo "<script type='text/javascript'>alert('file gagal');</script>";
+                }
+                return Redirect::to('profile')->with('success', 'berhasil');
             } else {
-                return Redirect::to('editProfile')->with('dbErr','Error saat menyimpan ke database')->withInput();
+                return Redirect::to('editProfile')->with('dbErr','Error saat menyimpan ke database')->with('gagal','tidak berubah')->withInput();
             }       
         } else {
-            return Redirect::to('editProfile')->with('passErr','Password Salah!')->withInput();
+            return Redirect::to('editProfile')->with('passErr','Password Salah!')->with('gagal','tidak berubah')->withInput();
         }
     }
 
@@ -166,5 +194,5 @@ class UserController extends Controller
         $checkins = \App\User::where(['email',$email],[]);
     }
 }
-     
-                
+
+
