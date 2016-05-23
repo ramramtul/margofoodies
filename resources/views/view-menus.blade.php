@@ -64,7 +64,7 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                   @if($menu->id_photo <> "")
-                    <img src="{{url('uploads/m'.$menu->id.'.jpg')}}" class="img-responsive img-menu" alt={{$menu->nama}}>
+                    <img src="{{url('uploads/'.$menu->id_photo.'')}}" class="img-responsive img-menu" alt={{$menu->nama}}>
                   @else
                     <img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$menu->nama}}">
                   @endif
