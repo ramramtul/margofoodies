@@ -136,7 +136,7 @@ class RestoranController extends Controller {
 		  	if (Input::file('image')->isValid()) {
 	      		$destinationPath = 'uploads'; // upload path
 	      		$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-	      		$fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
+	      		$fileName = "r".$restoran[0]->id.'.'."jpg"; // renameing image
 	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 	      		list($width, $height) = getimagesize(public_path('uploads/' . $fileName . ''));
 	      		if ($width > $height) {

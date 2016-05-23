@@ -294,7 +294,7 @@ class MenuController extends Controller {
 		    if (Input::file('image')->isValid()) {
 		      $destinationPath = 'uploads'; // upload path
 		      $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-		      $fileName = "m".$id.'.'."png"; // renameing image
+		      $fileName = "m".$id.'.'."jpg"; // renameing image
 		      Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 		      // sending back with message
 		      Session::flash('success', 'Upload successfully'); 
