@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -14,9 +12,7 @@ use App\JenisMasakan;
 use App\WaktuOperasional;
 use Session;
 use Validator;
-
 class RestoranController extends Controller {
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -38,7 +34,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -48,7 +43,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -77,10 +71,7 @@ class RestoranController extends Controller {
 		} else {
 			return view('error-page');
 		}
-
 	}
-
-
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -99,9 +90,7 @@ class RestoranController extends Controller {
 		$restoran = Restoran::where('admin', '=', $user)->get();
 		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->get();
 		return view('edit-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('user', $user);
-
 	}
-
 	public function view(Request $request)
 	{
 		if(!Session::has('user')){
@@ -128,16 +117,14 @@ class RestoranController extends Controller {
 		else if ($hari == "Saturday") $hari = "Sabtu";
 		$hari_ini = WaktuOperasional::where('id_restoran', '=', $id)->where('hari', '=', $hari)->get();
 		return view('profile-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('user', $user)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0]);;
-
 	}
-
 	public function fotoResto(Request $request){
 		$user = $request->session()->get('user')->email;
 		$restoran = Restoran::where('admin', '=', $user)->get();
 		// getting all of the post data
 		  $file = array('image' => Input::file('image'));
 		  // setting up rules
-		  $rules = array('image' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+		  $rules = array('image' => 'required | mimes:jpeg,jpg,png,gif,bmp,svg',); //mimes:jpeg,bmp,png and for max size max:10000
 		  // doing the validation, passing post data, rules and the messages
 		  $validator = Validator::make($file, $rules);
 		  if ($validator->fails()) {
@@ -145,25 +132,37 @@ class RestoranController extends Controller {
 		    return Redirect::to('editRestoran')->withInput()->withErrors($validator);
 		  }
 		  else {
-		    // checking file is valid.
-		    if (Input::file('image')->isValid()) {
-		      $destinationPath = 'uploads'; // upload path
-		      $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-		      $fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
-		      Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-		      // sending back with message
-		      Session::flash('success', 'Upload successfully'); 
-		      Restoran::where('id',$restoran[0]->id)->update(['id_photo' => $fileName]);
-		      return Redirect::to('editRestoran');
+		  	// checking file is valid.
+		  	if (Input::file('image')->isValid()) {
+	      		$destinationPath = 'uploads'; // upload path
+	      		$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+	      		$fileName = "r".$restoran[0]->id.'.'."jpg"; // renameing image
+	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+	      		list($width, $height) = getimagesize(public_path('uploads/' . $fileName . ''));
+	      		if ($width > $height) {
+			    	// Landscape
+			    	// sending back with message
+		     		Session::flash('success', 'Upload successfully'); 
+		      		Restoran::where('id',$restoran[0]->id)->update(['id_photo' => $fileName]);
+		      		return Redirect::to('editRestoran');
+			  	} else {
+			    	// Portrait or Square
+			    	File::delete(public_path().'/uploads/'.$fileName);
+			    	Session::flash('error', 'a valid image has landscape orientation');
+	      			return Redirect::to('editRestoran');
+				}
+		      
 		    }
 		    else {
 		      // sending back with error message.
 		      Session::flash('error', 'uploaded file is not valid');
 		      return Redirect::to('editRestoran');
 		    }
+			
+		    
+		    
 		  }
 	}
-
 	public function editMenu(Request $request){
 		if(!Session::has('user')){
 			return Redirect::to('/home');
@@ -177,9 +176,7 @@ class RestoranController extends Controller {
 		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->orderBy('nama', 'ASC')->paginate(10);
 		$page = $menus->currentPage();
 		return view('edit-menu-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('page', $page)->with('user', $user);
-
 	}
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -190,7 +187,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -201,7 +197,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	public function confirmEdit(Request $request) {
         $this->validate($request, [
             'nama' => 'min:3|max:255',
@@ -219,8 +214,7 @@ class RestoranController extends Controller {
         $tax = Input::get('tax', $restoran->tax);
         $lokasi = Input::get('lokasi', $restoran->lokasi);
         $desc = Input::get('desc', $restoran->deskripsi);
-
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
             if (Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'lokasi' => $lokasi, 'no_telepon' => $telepon,'tax' => $tax , 'deskripsi' => $desc])) {
                 return Redirect::to('profileRestoran');
             } else {

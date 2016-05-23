@@ -44,6 +44,7 @@
 					      	<span class="sr-only">Next</span>
 					    </a>
 	  				</div>
+	  				<a href="promo">Lihat selengkapnya</a>
   				</div>
   			</div>
   		</div>

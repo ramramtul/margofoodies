@@ -33,19 +33,36 @@
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 				    <div class="item active">
-				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				    	@if($restoran->id_photo <> "")
+		            		<img src="{{url('uploads/r'.$restoran->id.'.jpg')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+			            @else
+			            	<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$restoran->nama}}">
+			            @endif
+				      
 				    </div>
 
 				    <div class="item">
-				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				       @if($restoran->id_photo <> "")
+		            		<img src="{{url('uploads/r'.$restoran->id.'.jpg')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+			            @else
+			            	<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$restoran->nama}}">
+			            @endif
 				    </div>
 
 				    <div class="item">
-				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				        @if($restoran->id_photo <> "")
+		            		<img src="{{url('uploads/r'.$restoran->id.'.jpg')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+			            @else
+			            	<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$restoran->nama}}">
+			            @endif
 				    </div>
 
 				    <div class="item">
-				      <img src="{{url('uploads/r'.$restoran->id.'.png')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+				     @if($restoran->id_photo <> "")
+		            		<img src="{{url('uploads/r'.$restoran->id.'.jpg')}}" class="img-responsive img-restoran col-xs-12" alt={{$restoran->nama}}>
+			            @else
+			            	<img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$restoran->nama}}">
+			            @endif
 				    </div>
 				  </div>
 
