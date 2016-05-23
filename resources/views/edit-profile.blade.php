@@ -5,7 +5,14 @@
 @stop
 
 @section('content')
-<?php $user = Session::get('user'); ?>
+<?php 
+	$user = Session::get('user'); 
+	$photo = DB::table('photos')->where('id_photo',$user->id_photo)->first();
+	$link = $photo->alamat;
+	if (!isset($link)) {
+		$link = 'images/pp/default_pp.png';
+	}
+?>
 <!--
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
@@ -18,7 +25,7 @@ Licensed under MIT
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<div class="hovereffect">
-						<img class="img-responsive" src="images/default_pp.png" class="img-responsive" alt="">
+						<img id="pp" class="img-responsive" src="{{$link}}" class="img-responsive" alt="">
 						<div class="overlay">
 							<a id="browse" class="info" onclick="browse()">Upload</a>
 						</div>
@@ -37,7 +44,7 @@ Licensed under MIT
 						{{ $user->deskripsi }}
 					</div>
 					<div class="profile-usertitle-poin">
-						<!-- Poin : {{ $poin }} -->
+						Poin : {{ $user->total_point }}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -70,7 +77,7 @@ Licensed under MIT
 		<div class="col-md-9">
 			<div class="profile-content">
 				<h2>Edit Profile</h2>
-				<form class="form-horizontal" action="{{ url('/editProfile') }}" method="POST">
+				<form class="form-horizontal" action="{{ url('/editProfile') }}" method="POST" enctype="multipart/form-data">
 					{!! csrf_field() !!}
 					@if(isset($passErr)) {{ $passErr }}
 					@endif
@@ -204,7 +211,15 @@ Licensed under MIT
 		a.onclick = function() {
 			var btn = document.getElementById("pic-btn");
 			btn.click();
+			if (btn.files && btn.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#pp').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(btn.files[0]);
+            }
 		}
 	});
 </script>
+
 @stop
