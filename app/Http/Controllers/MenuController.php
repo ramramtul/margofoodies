@@ -499,14 +499,10 @@ class MenuController extends Controller {
 		$i = 0;
 		$j = 0;
 		$result = [];
-<<<<<<< HEAD
-		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('jenis')->get();
-		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('jenis')->get();
-		
-=======
-		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('harga')->get();
-		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('harga')->get();
->>>>>>> master
+
+		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.kategori as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('harga')->get();
+		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.kategori as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('harga')->get();
+
 		foreach ($main as $mainMenu) {
 			foreach ($drinks as $drink) {
 				$temp = array(
@@ -525,8 +521,8 @@ class MenuController extends Controller {
 				}
 			}
 		}
-		echo "hai ".$budget." ".$porsi."<br>";
-		var_dump($result);
+		// echo "hai ".$budget." ".$porsi."<br>";
+		// var_dump($result);
 		return $result;
 	}
 
