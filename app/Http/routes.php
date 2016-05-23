@@ -83,7 +83,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('restoran','RestoranController@showList');
 	Route::get('restoran/{id}','RestoranController@show');
 	// untuk melakukan check in
-	Route::post('restoran/{id}','UserController@checkin(id)');
+	Route::post('restoran/{id}','UserController@checkin');
 	
 
 	Route::get('menus/{id}','MenuController@showList');
