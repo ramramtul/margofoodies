@@ -14,8 +14,12 @@
  			<h1 id="name"><b><a href="../restoran/{{$restoran->id}}">{{strtoupper($restoran->nama)}}</a></b></h1>
  			</div>
  			<div class="col-xs-12 col-sm-6 col-md-1 col-md-offset-5">
-			<a href="{{ url('/view-restoran') }}" class="btn btn-responsive btn-singgah" onclick="#" role="button">Singgah</a>
-
+				<form id="form-horizontal-checkin" role="form" action="../restoran/{{$restoran->id}}" method="POST">
+					{!! csrf_field() !!}
+					<input type="text" name="nama" id="namaku" value="{{ $userku }}">
+					<input type="text" name="restoran" id="restoranku" value="{{$restoran->nama}}">
+					<button class="btn btn-responsive btn-singgah" id="singgahah" onclick="change()" role="button" type="submit">Singgah</button>
+				</form>
  			</div>
  		</div>
  		<br>

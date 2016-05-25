@@ -1,6 +1,10 @@
 <?php 
 namespace App\Http\Controllers;
 
+// <!-- @author Septiviana Savitri
+// @class : reviewsController
+// Kelas ini berisi kode untuk mengontrol atribut apa saja yang ada di review yang akan ditampilkan di panel admin -->
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use \Serverfireteam\Panel\CrudController;
