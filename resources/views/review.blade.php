@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
                  @if($menu->id_photo <> "")
-                    <img src="{{url('uploads/m'.$menu->id.'.png')}}" class="img-responsive img-menu col-xs-12" alt={{$menu->nama}}>
+                    <img src="{{url('uploads/'.$menu->id_photo.'')}}" class="img-responsive img-menu col-xs-12" alt={{$menu->nama}}>
                   @else
                     <img class="img-responsive" src="{{url('images/default-pic.png')}}" alt="{{$menu->nama}}">
                   @endif
@@ -52,14 +52,14 @@
             <textarea class="form-control" name="isi" id="isi" placeholder="Masukkan review Anda"></textarea>
           </div>  
         </div>
-        <button onclick="myFunction()" type="submit" class="btn btn-default" >Kirim</button>
+        <button onclick="myFunction()" type="submit" class="btn btn-default" >Kirim</button>        
           <script>
           function myFunction() {
               alert("Terimakasih telah mereview! Review kamu akan diverifikasi oleh pihak margofoodies terlebih dahulu sebelum di publish :)")
             }
           </script>
-
       </form>
+      
       <br>
       @if(count($review))
         <h4><b>Review untuk menu ini</b></h4>
