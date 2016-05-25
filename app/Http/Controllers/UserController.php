@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use App\CheckIn;
 use App\Photo;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\View;
@@ -54,7 +55,7 @@ class UserController extends Controller
     {   
         $email = Input::get('email');
         $pass = md5(Input::get('password'));
-        $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
+        $user= DB::table('users')->where([['email',$email],['password',$pass]])->first();
         if($user===null){
 
             $loginerr = 'Wrong email or password';
@@ -79,7 +80,7 @@ class UserController extends Controller
                 $poinuser = $userpoin->total_point;
                 $poin = $poinuser + 10;
 
-                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
+                DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime]);
                 DB::table('users')->where('email', $email)->update(['total_point' => $poin]);
             } else {
                 $lastLogin = Carbon::parse($userLog[1]->login_time);
@@ -90,7 +91,7 @@ class UserController extends Controller
                     $poinuser = $userpoin->total_point;
                     $poin = $poinuser + 10;
                     
-                    DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime, 'nominal_poin' => '10', 'nama_transaksi' => 'login']);
+                    DB::table('point_history')->insert(['email' => $email, 'id_point' => 'PFL', 'waktu' => $loginTime]);
                     DB::table('users')->where('email', $email)->update(['total_point' => $poin]);    
                 }
             }
@@ -189,10 +190,27 @@ class UserController extends Controller
      * user akan mendapatkan poin apabila melalukan 'Check in' ke suatu restoran
      * @author rama
     **/
-    public function visit() {
-        $email = session()->get('user')->email;
-        $checkins = \App\User::where(['email',$email],[]);
+    public function checkin($id) {
+        if(session()->has('user')){
+            $checkinTime = Carbon::now();
+            $email = session()->get('user')->email;
+            $restoran = \App\Restoran::where('id',$id)->first()->id;
+            $hiscek_user = \App\CheckIn::where('email',$email);
+            $hiscek_resto = \App\CheckIn::where('id_restoran',$restoran);
+
+            if($hiscek_user == $email && $hiscek_resto == $restoran){
+                return redirect()->route('restoranku', $id);
+                dd($hiscek_user);    
+            } else {
+                $checkinku = new CheckIn;
+                $checkinku->email = $email;
+                $checkinku->id_restoran = $restoran;
+                $checkinku->waktu = $checkinTime;
+                $checkinku->save();
+                return app('App\Http\Controllers\RestoranController')->show($id);
+            }
+        } else{
+            return redirect()->route('restoranku', $id);
+        }
     }
 }
-
-
