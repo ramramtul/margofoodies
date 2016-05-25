@@ -74,7 +74,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('calculateFood/{orang}', 'PesananController@destroy');
 	
 	Route::get('restoran','RestoranController@showList');
-	Route::get('restoran/{id}','RestoranController@show');
+	Route::get('restoran/{id}','RestoranController@show')->name('restoranku');
 	// untuk melakukan check in
 	Route::post('restoran/{id}','UserController@checkin');
 	

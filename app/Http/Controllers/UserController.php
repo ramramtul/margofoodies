@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use App\CheckIn;
 use App\Photo;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\View;
@@ -190,21 +191,26 @@ class UserController extends Controller
      * @author rama
     **/
     public function checkin($id) {
-        
         if(session()->has('user')){
-
             $checkinTime = Carbon::now();
             $email = session()->get('user')->email;
-            $restoran = \App\Restoran::where('id',$id)->first();
-           
-            DB::table('check_in')->insert(['email' => $email, 'restoran' => $restoran, 'waktu' => $checkinTime]);
+            $restoran = \App\Restoran::where('id',$id)->first()->id;
+            $hiscek_user = \App\CheckIn::where('email',$email);
+            $hiscek_resto = \App\CheckIn::where('id_restoran',$restoran);
 
-            // $checkinku = new CheckIn;
-            // $checkinku->email = $email;
-            // $checkinku->restoran = $restoran;
-            // $checkinku->waktu = $checkinTime;
-            // $checkinku->save();
-
+            if($hiscek_user == $email && $hiscek_resto == $restoran){
+                return redirect()->route('restoranku', $id);
+                dd($hiscek_user);    
+            } else {
+                $checkinku = new CheckIn;
+                $checkinku->email = $email;
+                $checkinku->id_restoran = $restoran;
+                $checkinku->waktu = $checkinTime;
+                $checkinku->save();
+                return app('App\Http\Controllers\RestoranController')->show($id);
+            }
+        } else{
+            return redirect()->route('restoranku', $id);
         }
     }
 }

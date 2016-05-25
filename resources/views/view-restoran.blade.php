@@ -15,10 +15,11 @@
  			</div>
  			<div class="col-xs-12 col-sm-6 col-md-1 col-md-offset-5">
 				<form id="form-horizontal-checkin" role="form" action="../restoran/{{$restoran->id}}" method="POST">
-					<input type="text" name="nama" id="nama" value="">
-					<input type="text" name="restoran" id="restoran" value="{{$restoran->nama}}">
+					{!! csrf_field() !!}
+					<input type="text" name="nama" id="namaku" value="{{ $userku }}">
+					<input type="text" name="restoran" id="restoranku" value="{{$restoran->nama}}">
+					<button class="btn btn-responsive btn-singgah" id="singgahah" onclick="change()" role="button" type="submit">Singgah</button>
 				</form>
-				<button class="btn btn-responsive btn-singgah" id="singgahah" onclick="change()" role="button" type="submit">Singgah</button>
  			</div>
  		</div>
  		<br>

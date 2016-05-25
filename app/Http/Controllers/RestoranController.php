@@ -66,9 +66,16 @@ class RestoranController extends Controller {
 		else if ($hari == "Friday") $hari = "Jumat";
 		else if ($hari == "Saturday") $hari = "Sabtu";
 		$hari_ini = WaktuOperasional::where('id_restoran', '=', $id)->where('hari', '=', $hari)->get();
+		
 		$userku = session()->get('user');
+		if($userku != null){
+			$userku =session()->get('user')->email;
+		} else {
+			$userku = "kosong";
+		}
+
 		if ($restoran != null){
-		return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0])->with('userku', $userku);
+			return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0])->with('userku', $userku);
 		} else {
 			return view('error-page');
 		}
