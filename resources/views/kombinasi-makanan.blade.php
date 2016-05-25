@@ -65,7 +65,6 @@
       </div>
     </div>
 
-
     <script type="text/javascript">
       // Wait for the page to load first
       function update($page, $len) {

@@ -54,7 +54,7 @@ class UserController extends Controller
     {   
         $email = Input::get('email');
         $pass = md5(Input::get('password'));
-        $user= DB::table('users')->where([['email','=',$email],['password','=',$pass]])->first();
+        $user= DB::table('users')->where([['email',$email],['password',$pass]])->first();
         if($user===null){
 
             $loginerr = 'Wrong email or password';
