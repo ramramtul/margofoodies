@@ -48,14 +48,14 @@
             <textarea class="form-control" name="isi" id="isi" placeholder="Masukkan review Anda"></textarea>
           </div>  
         </div>
-        <button onclick="myFunction()" type="submit" class="btn btn-default" >Kirim</button>
+        <button onclick="myFunction()" type="submit" class="btn btn-default" >Kirim</button>        
           <script>
           function myFunction() {
               alert("Terimakasih telah mereview! Review kamu akan diverifikasi oleh pihak margofoodies terlebih dahulu sebelum di publish :)")
             }
           </script>
-
       </form>
+      
       <br>
       @if(count($review))
         <h4><b>Review untuk menu ini</b></h4>

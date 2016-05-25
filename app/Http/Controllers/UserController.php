@@ -162,15 +162,22 @@ class UserController extends Controller
      * @author rama
     **/
     public function checkin($id) {
-        $checkinTime = Carbon::now();
-        $email = session()->get('user')->email;
-        $restoran = \App\Restoran::where('id',$id)->first();
+        
+        if(session()->has('user')){
 
-        $checkinku = new CheckIn;
-        $checkinku->email = $email;
-        $checkinku->restoran = $restoran;
-        $checkinku->waktu = $checkinTime;
-        $checkinku->save();
+            $checkinTime = Carbon::now();
+            $email = session()->get('user')->email;
+            $restoran = \App\Restoran::where('id',$id)->first();
+           
+            DB::table('check_in')->insert(['email' => $email, 'restoran' => $restoran, 'waktu' => $checkinTime]);
+
+            // $checkinku = new CheckIn;
+            // $checkinku->email = $email;
+            // $checkinku->restoran = $restoran;
+            // $checkinku->waktu = $checkinTime;
+            // $checkinku->save();
+
+        }
     }
 }
      

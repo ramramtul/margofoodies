@@ -14,7 +14,12 @@
  			<h1 id="name"><b><a href="../restoran/{{$restoran->id}}">{{strtoupper($restoran->nama)}}</a></b></h1>
  			</div>
  			<div class="col-xs-12 col-sm-6 col-md-1 col-md-offset-5">
-			<a href="{{url ('restoran/ {{$restoran->id}}')}}" class="btn btn-responsive btn-singgah" onclick="" role="button">Singgah</a>
+			
+			<form id="form-horizontal-checkin" role="form" action="../restoran/{{$restoran->id}}" method="POST">
+				<input type="text" name="nama" id="nama" value="">
+				<input type="text" name="restoran" id="restoran" value="{{$restoran->nama}}">
+			</form>
+			<button class="btn btn-responsive btn-singgah" id="singgahah" onclick="change()" role="button" type="submit">Singgah</button>
 
  			</div>
  		</div>
