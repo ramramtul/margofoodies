@@ -13,7 +13,7 @@
 				<div class="profile-restopic">
 					<div class="hovereffect">
 						@if($restoran->id_photo <> "")
-		            		<img class="img-responsive fotoRestoran" src="{{url('uploads/r'.$restoran->id.'.png')}}" alt="">
+		            		<img class="img-responsive fotoRestoran" src="{{url('uploads/'.$restoran->id_photo.'')}}" alt="">
 		            	@else
 		            		<img class="img-responsive fotoRestoran" src="{{url('images/default-pic.png')}}" alt="">
 		            	@endif
@@ -95,7 +95,7 @@
 		            <div class="col-md-6">
 
 		            	@if($menu->id_photo <> "")
-		            		<img class="img-responsive fotoRestoran" style="border: 5px ridge black" src="{{url('uploads/m'.$menu->id.'.png')}}" alt="">
+		            		<img class="img-responsive fotoRestoran" style="border: 5px ridge black" src="{{url('uploads/'.$menu->id_photo.'')}}" alt="">
 		            	@else
 		            		<img class="img-responsive fotoRestoran" style="border: 5px ridge black" src="{{url('images/default-pic.png')}}" alt="">
 		            	@endif

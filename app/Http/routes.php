@@ -51,10 +51,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('editWaktuOperasional','WaktuOperasionalController@confirmEditWaktu');
 	Route::get('editFasilitasRestoran','FasilitasRestoranController@editFasilitas');
 	Route::post('editFasilitasRestoran','FasilitasRestoranController@addFasilitas');
-	Route::delete('editFasilitasRestoran/{id}/{nama}', function ($id, $nama) {
-    	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
-    	return redirect('/editFasilitasRestoran');
-	});
+	Route::delete('editFasilitasRestoran/{id}/{nama}', 'FasilitasRestoranController@delete');
 	Route::get('viewMenu/{id}','MenuController@viewMenu');
 	Route::get('editMenu/{id}','MenuController@editMenu');
 	Route::post('viewMenu/{id}','MenuController@viewMenu');
@@ -65,11 +62,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('uploadPhotoMenu/{id}', 'MenuController@fotoMenu');
 	Route::get('addMenu','MenuController@addMenu');
 	Route::post('addMenu','MenuController@confirmAddMenu');
-	Route::delete('deleteMenu/{id}/{page}', function ($id, $page) {
-    	Menu::find($id)->delete();
-    	return redirect('/editMenuRestoran?page='.$page.'');
-	});
-
+	Route::delete('deleteMenu/{id}/{page}', 'MenuContoller@delete');
 
 	Route::post('findFood','MenuController@findFood');
 
@@ -91,5 +84,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('review/{id}','ReviewController@show');
 	Route::post('createReview/{id}','ReviewController@create');
+
+	Route::get('promo','PromoController@showAll');
+	Route::get('promo/{id}','PromoController@show');
 });
 

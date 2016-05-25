@@ -7,43 +7,20 @@
 @section('content')
 
 @if(count($menus))
-<div class="container" >
+<div class="container" style="height:1100px; overflow:hidden;" >
   <br>
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-3">
       <div class="panel panel-default">
         <div class="panel-body res2">
           <h3><b> FILTER <b></h3>
-
+          <?php $jenis = DB::table('menus')->select('kategori')->groupBy('kategori')->get(); $i=0; ?>
           <form role="form">
+            @foreach($jenis as $tipe)
             <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 1</label></h4>
+              <h4><label><input id="{{$tipe->kategori}}" class="filter" name="{{$tipe->kategori}}" type="checkbox" checked>{{$tipe->kategori}}</label></h4>
             </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 2</label></h4>
-            </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 3</label></h4>
-            </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 4</label></h4>
-            </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 5</label></h4>
-            </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 6</label></h4>
-            </div>
-
-            <div class="radio">
-              <h4><label><input type="radio" name="optradio">Filter 7</label></h4>
-            </div>
-
+            @endforeach
           </form>
         </div>
       </div>
@@ -60,9 +37,9 @@
           <li><a id="next" href="#">Next</a></li>
         </ul>
       </nav>
-      <?php $id=1; $length=sizeof($menus); ?>
+      <?php $id=1; $length=sizeof($menus); $jmlJenis = sizeof($jenis); ?>
       @foreach($menus as $menu)
-      <div class="panel panel-default" id="{{ $id++ }}" style="display: none;">
+      <div class="panel panel-default {{$menu['jenis']}}" id="{{ $id++ }}" harga="" style="display: none;">
         <div class="panel-body res1">
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -126,6 +103,7 @@
         var prev = document.getElementById("prev");
         var next = document.getElementById("next");
         var halaman = document.getElementById("page");
+
         $page = 0;
         $("#prev").hide();
         if ($len > 10) {
@@ -156,6 +134,19 @@
           update($page,$len);
           return false;
         }
+
+        $(".filter").on("click", function(){
+          $nama = ($(this).attr('name'));
+          if($(this).is(":checked")) {
+            $(this).prop('checked',true);
+            $("."+$nama).show();
+            // alert("a");
+          } else {
+            $(this).prop('checked',false);
+            $("."+$nama).hide();
+            // alert("b");
+          }
+        });
       });
     </script>
     @endif

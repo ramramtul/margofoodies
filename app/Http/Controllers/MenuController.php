@@ -149,6 +149,23 @@ class MenuController extends Controller {
 		return Redirect::to('/editMenuRestoran');
 	}
 
+	public function delete(Request $request, $page, $id) {
+		$jenis_before = Menu::where('id',$id)->first()->kategori;
+    	Menu::find($id)->delete();
+    	if(!$jenis_masakan){
+			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
+			if(!$menu_jenis){
+				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
+			}
+        }
+        $menu = Menu::all();
+        if(count($menu)%10 != 0){
+        	return redirect('/editMenuRestoran?page='.$page.'');
+        } else {
+        	return redirect('/editMenuRestoran?page='.($page-1).'');
+        }
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -277,7 +294,7 @@ class MenuController extends Controller {
 		    if (Input::file('image')->isValid()) {
 		      $destinationPath = 'uploads'; // upload path
 		      $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-		      $fileName = "m".$id.'.'."png"; // renameing image
+		      $fileName = "m".$id.'.'."jpg"; // renameing image
 		      Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 		      // sending back with message
 		      Session::flash('success', 'Upload successfully'); 
@@ -322,19 +339,27 @@ class MenuController extends Controller {
 		$kategori = Input::get('kategori');
         $paket = Input::get('paket');
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
         	if($paket == "Bukan Paket") {
         		$pa = false;
         	} else if ($paket == "Paket Tanpa Minum"){
         		$sa = false;
         	}
-
+        	$jenis_before = Menu::where('id',$menu->id)->first()->kategori;
         	if(!$pa){
         		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => null,'is_paket_dgn_minum' => null ]);
         	} else {
         		$status = Menu::where('id',$menu->id)->update(['nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas,'jenis' => $kategori , 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ]);
         	}
             if ($status) {
+            	$jenis_masakan = JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->first();
+        		if(!$jenis_masakan){
+        			$jenis_masakan = JenisMasakan::create(array('id_restoran'=> $restoran->id, 'jenis_masakan'=> $jenis));
+        			$menu_jenis = Menu::where('kategori', '=', $jenis_before)->first();
+        			if(!$menu_jenis){
+        				JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->delete();
+        			}
+        		}
                 return Redirect::to('viewMenu/'.$id.'');
             } else {
                 return Redirect::to('editMenu/'.$id.'')->with('dbErr','Error saat menyimpan ke database')->withInput();
@@ -402,7 +427,7 @@ class MenuController extends Controller {
         $paket = $request->input('paket');
 
 
-        if ($currPass == $user->password) {
+        if (md5($currPass) == $user->password) {
         	if($paket == "Bukan Paket") {
         		$pa = false;
         	} else if ($paket == "Paket Tanpa Minum"){
@@ -413,12 +438,16 @@ class MenuController extends Controller {
         	} else {
         		$menu = Menu::create(array('nama' => $nama, 'harga' => $harga, 'kapasitas' => $kapasitas, 'id_restoran'=> $restoran->id, 'jenis' => $kategori , 'id_photo'=>'', 'deskripsi' => $desc, 'kategori' => $jenis , 'is_paket_tanpa_minum' => !$sa,'is_paket_dgn_minum' => $sa ));
         	}
+        	$jenis_masakan = JenisMasakan::where('id_restoran', "=", $restoran->id)->where('jenis_masakan', '=', $jenis)->first();
+        	if(!$jenis_masakan){
+        		$jenis_masakan = JenisMasakan::create(array('id_restoran'=> $restoran->id, 'jenis_masakan'=> $jenis));
+        	}
             $id = $menu->id;
         	if(Input::hasFile('image')){
         		// getting all of the post data
 		  		$file = array('image' => Input::file('image'));
 		  		// setting up rules
-		  		$rules = array('image' => 'mimes:jpeg,jpg,png',); //mimes:jpeg,bmp,png and for max size max:10000
+		  		$rules = array('image' => 'mimes:jpeg,jpg,png,gif,bmp,svg'); //mimes:jpeg,bmp,png and for max size max:10000
 		  		// doing the validation, passing post data, rules and the messages
 		  		$validator = Validator::make($file, $rules);
 		  		if ($validator->fails()) {
@@ -430,7 +459,7 @@ class MenuController extends Controller {
 		    		if (Input::file('image')->isValid()) {
 		     			$destinationPath = 'uploads'; // upload path
 		      			$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-		      			$fileName = "m".$id.'.'."png"; // renameing image
+		      			$fileName = "m".$id.'.'."jpg"; // renameing image
 		      			Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 		      			// sending back with message
 		      			Session::flash('success', 'Upload successfully'); 
@@ -445,9 +474,8 @@ class MenuController extends Controller {
 		     			return Redirect::to('addMenu')->withInput();
 		    		}
 	  			}
-
-        	}     
-        	return Redirect::to('viewMenu/'.$id.'');
+        	} 
+        	return Redirect::to('viewMenu/'.$id.'');    
         } else {
             return Redirect::to('addMenu')->with('passErr','Password Salah!')->withInput();
         }
@@ -499,8 +527,10 @@ class MenuController extends Controller {
 		$i = 0;
 		$j = 0;
 		$result = [];
-		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('harga')->get();
-		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.jenis as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('harga')->get();
+
+		$main= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.kategori as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Makanan Utama']])->orderBy('id_restoran')->orderBy('harga')->get();
+		$drinks= DB::table('menus')->join('restorans', 'menus.id_restoran', '=', 'restorans.id')->select(DB::raw('restorans.id as resto_id, restorans.nama as nama_resto, restorans.lokasi as lokasi, restorans.tax as tax, menus.nama as nama_menu, menus.harga as harga, menus.kapasitas as porsi, menus.kategori as jenis, menus.deskripsi as deskripsi, menus.id_photo as photo_menu, menus.rate as rate_menu, menus.jumlah_tested as jumlah_tested, menus.is_paket_tanpa_minum as tanpa_minuman'))->where([['harga','<=',$budget],['kapasitas','<=',$porsi],['jenis','=','Minuman']])->orderBy('id_restoran')->orderBy('harga')->get();
+
 		foreach ($main as $mainMenu) {
 			foreach ($drinks as $drink) {
 				$temp = array(
@@ -519,6 +549,8 @@ class MenuController extends Controller {
 				}
 			}
 		}
+		// echo "hai ".$budget." ".$porsi."<br>";
+		// var_dump($result);
 		return $result;
 	}
 
