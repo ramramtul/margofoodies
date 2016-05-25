@@ -40,9 +40,6 @@ Route::group(['middleware' => ['web']], function () {
 		return View::make('edit-profile');
 	});
 	Route::post('editProfile','UserController@confirmEdit');
-	// @author rama
-	// sistem akan melakukan check in.
-	Route::post('view-restoran', 'UserController@visit');
 
 	Route::get('editRestoran', 'RestoranController@edit');
 	Route::post('uploadPhotoResto', 'RestoranController@fotoResto');
@@ -77,7 +74,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::delete('calculateFood/{orang}', 'PesananController@destroy');
 	
 	Route::get('restoran','RestoranController@showList');
-	Route::get('restoran/{id}','RestoranController@show');
+	Route::get('restoran/{id}','RestoranController@show')->name('restoranku');
+	// untuk melakukan check in
+	Route::post('restoran/{id}','UserController@checkin');
 	
 
 	Route::get('menus/{id}','MenuController@showList');
