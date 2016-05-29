@@ -26,7 +26,6 @@
 			    </div>
   				<br>
   			</div>
-  			<!-- Menampilkan informasi promo -->
   			<div class="col-xs-12 col-sm-6 col-md-6">
   				<div class="panel panel-default">
   					<div class="panel-body res1">
