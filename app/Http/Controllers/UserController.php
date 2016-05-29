@@ -20,8 +20,15 @@ use DB;
 use Session;
 
 class UserController extends Controller
-{
+{   
 
+    /**
+     * Autentikasi user yang mencoba untuk login
+     *
+     * @author Rama
+     *
+     * 
+     */
     // menyimpan (store) data yg sudah tervalidasi kedatabase
     public function create(Request $request){
         //Users::create($request->all());
@@ -49,6 +56,8 @@ class UserController extends Controller
      * Autentikasi user yang mencoba untuk login
      *
      * @author Putra Muttaqin
+     *
+     * 
      */
     public function dologin()
     {   
@@ -119,7 +128,7 @@ class UserController extends Controller
     }
 
     /**
-     * Mengembalikan profile user
+     * Mengembalikan halaman profile user
      *
      * @author Putra Muttaqin
      */
