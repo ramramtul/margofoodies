@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Restoran;
 use App\Menu;
+use App\Promo;
 use App\Pesanan;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -18,7 +19,10 @@ class HomeController extends Controller
 {
     public function home()
 	{
-		return view('home');
+		$promo = Promo::orderBy('tgl_berlaku_awal', 'asc')->get();
+		$firstpromo = $promo[0];
+		unset($promo[0]);
+		return view('home', compact('firstpromo','promo'));
 	}
 
 	public function calculateFood(Request $request)
