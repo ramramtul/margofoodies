@@ -17,6 +17,10 @@ use Session;
 
 class HomeController extends Controller
 {
+	/**
+	 * @author Karunia
+	 * Mengirim daftar promo ke homepage
+	 */
     public function home()
 	{
 		$promo = Promo::orderBy('tgl_berlaku_awal', 'asc')->get();
