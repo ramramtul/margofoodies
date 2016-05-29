@@ -73,14 +73,12 @@ class RestoranController extends Controller {
 		} else {
 			$userku = "kosong";
 		}
-
 		if ($restoran != null){
 			return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0])->with('userku', $userku);
 		} else {
 			return view('error-page');
 		}
 	}
-
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -145,15 +143,9 @@ class RestoranController extends Controller {
 		  	if (Input::file('image')->isValid()) {
 	      		$destinationPath = 'uploads'; // upload path
 	      		$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-<<<<<<< HEAD
-	      		$fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
-	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
-	      		list($width, $height) = getimagesize($fileName);
-=======
 	      		$fileName = "r".$restoran[0]->id.'.'."jpg"; // renameing image
 	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 	      		list($width, $height) = getimagesize(public_path('uploads/' . $fileName . ''));
->>>>>>> ff9ef93521bbc48b39cbb26ae36c0e1302bea157
 	      		if ($width > $height) {
 			    	// Landscape
 			    	// sending back with message
@@ -229,10 +221,6 @@ class RestoranController extends Controller {
         $tax = Input::get('tax', $restoran->tax);
         $lokasi = Input::get('lokasi', $restoran->lokasi);
         $desc = Input::get('desc', $restoran->deskripsi);
-<<<<<<< HEAD
-
-=======
->>>>>>> ff9ef93521bbc48b39cbb26ae36c0e1302bea157
         if (md5($currPass) == $user->password) {
             if (Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'lokasi' => $lokasi, 'no_telepon' => $telepon,'tax' => $tax , 'deskripsi' => $desc])) {
                 return Redirect::to('profileRestoran');
