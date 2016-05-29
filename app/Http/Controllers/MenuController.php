@@ -25,32 +25,6 @@ use Validator;
 class MenuController extends Controller {
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  string  $id
@@ -74,7 +48,6 @@ class MenuController extends Controller {
 		//
 		$restoran = Restoran::find($id);
 		$menus = Menu::where('id_restoran', '=', $id)->paginate(5);
-		//dd($menus);
 		if ($restoran != null){
 			return view('view-menus')->with('menus', $menus)->with('restoran', $restoran);
 		} else {
@@ -82,6 +55,10 @@ class MenuController extends Controller {
 		}
 	}
 
+	/**
+	 * @author Karunia
+	 * Melakukan pencarian
+	 */
 	public function search()
 	{
 		$syarat = Input::get('query');
@@ -164,39 +141,6 @@ class MenuController extends Controller {
         } else {
         	return redirect('/editMenuRestoran?page='.($page-1).'');
         }
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 	/**
