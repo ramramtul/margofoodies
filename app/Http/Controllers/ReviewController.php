@@ -20,28 +20,20 @@ use Illuminate\Support\Facades\View;
 class ReviewController extends Controller {
 	
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  string  $id
-	 * @return Response
+	 * @author Karunia
+	 * Menampilkan review untuk menu bersangkutan
 	 */
 	public function show($id)
 	{
-		//id yang masuk adalah id menu
 		$review = Review::where([['id_menu', '=', $id],['status','=','1']])->get();;
 		$menu = Menu::find($id);
 		$restoran = Restoran::find($menu->id_restoran);
-		// for ($i = 0; $i < count($review); $i++) {
-		// 	$user = User::find($review->email);
-		// 	$review[$i]->user = $user->nama_lengkap;
-		// }
 		return view('review', compact('review', 'menu', 'restoran'));
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * @author Karunia & Septiviana Savitri
+	 * Membuat review namun menunggu persetujuan admin terlebih dahulu
 	 */
 	public function create($id)
 	{
@@ -71,49 +63,6 @@ class ReviewController extends Controller {
 			$review->id = DB::table('reviews')->insertGetId(['email' => $user, 'id_menu' => $id, 'isi_review' => Input::get('isi'), 'rate' => Input::get('rate'), 'status' => 0]);
 		}
 		return Redirect::to('review/'.$id);
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-	
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  string  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 
