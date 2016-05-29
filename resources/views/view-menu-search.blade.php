@@ -45,6 +45,9 @@
 							<a href="{{ URL::to('/editRestoran') }}"><i class="glyphicon glyphicon-grain"></i> Edit Restoran </a>
 						</li>
 						<li>
+							<a href="{{ URL::to('/seePromo') }}"><i class="glyphicon glyphicon-grain"></i> Lihat Promo </a>
+						</li>
+						<li>
 							<a href="{{ URL::to('/editWaktuOperasional') }}"><i class="glyphicon glyphicon-grain"></i> Edit Waktu Operasional </a>
 						</li>
 						<li>
