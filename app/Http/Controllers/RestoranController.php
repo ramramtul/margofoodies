@@ -73,14 +73,12 @@ class RestoranController extends Controller {
 		} else {
 			$userku = "kosong";
 		}
-
 		if ($restoran != null){
 			return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0])->with('userku', $userku);
 		} else {
 			return view('error-page');
 		}
 	}
-
 	/**
 	 * Show the form for editing the specified resource.
 	 *

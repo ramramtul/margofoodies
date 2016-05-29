@@ -2,6 +2,7 @@
 use App\Pesanan;
 use App\FasilitasRestoran;
 use App\Menu;
+use App\JenisMasakan;
 /*
 |--------------------------------------------------------------------------
 | Routes File
