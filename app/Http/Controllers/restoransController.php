@@ -14,8 +14,7 @@ class restoransController extends CrudController{
         parent::all($entity); 
 
         $this->filter = \DataFilter::source(new \App\Restorans());
-			//$this->filter->add('categoryId','Category','select')->options(\App\Category::lists("name", "id")->all()); // Filter with Select List
-			$this->filter->add('nama', 'Nama', 'text'); // Filter by String
+			$this->filter->add('nama', 'Nama', 'text'); // Filter dengan nama
 			$this->filter->submit('search');
 			$this->filter->reset('reset');
 			$this->filter->build();
@@ -34,8 +33,7 @@ class restoransController extends CrudController{
 
 			$this->grid->paginate(10);
 
-			//$this->grid->add('name', 'Name', true); // allow ordering by this column
-			$this->grid->orderBy('id','asc'); //default orderby
+			$this->grid->orderBy('id','asc'); //urutkan berdasar waktu
 
                  
         return $this->returnView();

@@ -14,7 +14,6 @@ class menusController extends CrudController{
         parent::all($entity); 
 
         	$this->filter = \DataFilter::source(new \App\Menus());
-			//$this->filter->add('categoryId','Category','select')->options(\App\Category::lists("name", "id")->all()); // Filter with Select List
 			$this->filter->add('nama', 'Nama', 'text'); // Filter by String
 			$this->filter->submit('search');
 			$this->filter->reset('reset');
@@ -59,7 +58,7 @@ class menusController extends CrudController{
 
 			$this->edit->label('Edit Menu');
 			$results = \App\Menus::all()->last()->id ;
-			echo $results + 1;
+			
 			
 			$this->edit->add('id', '', 'auto')->insertValue($results + 1);
 

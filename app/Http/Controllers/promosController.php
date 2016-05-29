@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 
 class promosController extends CrudController{
 
+    //Septiviana Savitri
+    //Method untuk memunculkan halaman promo untuk admin
     public function all($entity){
         parent::all($entity); 
         	$this->filter = \DataFilter::source(new \App\Promos());
-			//$this->filter->add('categoryId','Category','select')->options(\App\Category::lists("name", "id")->all()); // Filter with Select List
 			$this->filter->add('judul', 'Judul', 'text'); // Filter by String
 			$this->filter->submit('search');
 			$this->filter->reset('reset');
@@ -32,7 +33,6 @@ class promosController extends CrudController{
 
 			$this->grid->paginate(10);
 
-			//$this->grid->add('name', 'Name', true); // allow ordering by this column
 			$this->grid->orderBy('id','asc'); //default orderby
 			$this->grid->add('judul', 'Judul', true);
 			$this->grid->add('id', 'Id', true);
