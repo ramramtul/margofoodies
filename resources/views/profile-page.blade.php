@@ -5,19 +5,25 @@
 @stop
 
 @section('content')
-<?php $user = App\User::where('email',Session::get('user')->email)->first(); ?>
 <!--
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
 Licensed under MIT
 -->
+<?php 
+	$photo = DB::table('photos')->where('id_photo',$user->id_photo)->first();
+	$link = $photo->alamat;
+	if (!isset($link)) {
+		$link = 'images/pp/default_pp.png';
+	}
+?>
 <div class="container">
 	<div class="row profile">
 		<div class="col-md-3">
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="images/default_pp.png" class="img-responsive" alt="">
+					<img src="{{$link}}" class="img-responsive" alt="">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -71,4 +77,9 @@ Licensed under MIT
 </div>
 <br>
 <br>
+<?php 
+if(Session::has('success')) {
+	echo "<script type='text/javascript'>alert('Perubahan Berhasil');</script>";
+}
+?>
 @stop

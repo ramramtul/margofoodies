@@ -58,7 +58,10 @@ class menusController extends CrudController{
         	$this->edit = \DataEdit::source(new \App\Menus());
 
 			$this->edit->label('Edit Menu');
-			$this->edit->add('id', '', 'auto')->insertValue('1080000');
+			$results = \App\Menus::all()->last()->id ;
+			echo $results + 1;
+			
+			$this->edit->add('id', '', 'auto')->insertValue($results + 1);
 
 			//$this->edit->add('id', 'id', 'text');
 			$this->edit->add('nama', 'Nama', 'text');

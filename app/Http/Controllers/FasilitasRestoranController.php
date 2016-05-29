@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -16,7 +13,6 @@ use App\JenisMasakan;
 use App\WaktuOperasional;
 use Session;
 use Validator;
-
 class FasilitasRestoranController extends Controller
 {
     //
@@ -33,12 +29,10 @@ class FasilitasRestoranController extends Controller
 		$fasilitas_restorans = FasilitasRestoran::where('id_restoran', '=', $restoran[0]->id)->get();
 		return view('edit-fasilitas')->with('restoran', $restoran[0])->with('fasilitas_restorans', $fasilitas_restorans)->with('user', $user);
     }
-
     public function addFasilitas(Request $request){
     	$validator = Validator::make($request->all(), [
         'fasilitas' => 'required|max:100',
     	]);
-
 	    if ($validator->fails()) {
 	        return redirect('/editFasilitasRestoran')
 	            ->withInput()
@@ -53,8 +47,7 @@ class FasilitasRestoranController extends Controller
     	$fasilitas->save();
 	    return Redirect::to('editFasilitasRestoran');
     }
-
-    public function delete(Request $request){
+    public function delete(Request $request, $id, $nama){
     	FasilitasRestoran::where('id_restoran', '=', $id)->where('nama_fasilitas', '=', $nama)->delete();
     	return redirect('/editFasilitasRestoran');
     }

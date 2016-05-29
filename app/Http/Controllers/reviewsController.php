@@ -1,6 +1,9 @@
 <?php 
-
 namespace App\Http\Controllers;
+
+// <!-- @author Septiviana Savitri
+// @class : reviewsController
+// Kelas ini berisi kode untuk mengontrol atribut apa saja yang ada di review yang akan ditampilkan di panel admin -->
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,7 +25,11 @@ class reviewsController extends CrudController{
 			$this->grid = \DataGrid::source($this->filter);
 
 			$this->grid->add('id', 'id');
+// <<<<<<< HEAD
+// 			$this->grid->add('id_user', 'id_user');
+// =======
 			$this->grid->add('email', 'email');
+// >>>>>>> master
 			$this->grid->add('id_menu', 'id_menu');
 			$this->grid->add('isi_review', 'isi_review');
 			$this->grid->add('rate', 'rate');
@@ -33,8 +40,12 @@ class reviewsController extends CrudController{
 			$this->grid->paginate(10);
 
 			//$this->grid->add('name', 'Name', true); // allow ordering by this column
-			$this->grid->orderBy('id','desc');
+// <<<<<<< HEAD
+// 			$this->grid->orderBy('id','asc');
+// =======
+// 			$this->grid->orderBy('id','desc');
 
+// >>>>>>> master
 
         /** Simple code of  filter and grid part , List of all fields here : http://laravelpanel.com/docs/master/crud-fields
 

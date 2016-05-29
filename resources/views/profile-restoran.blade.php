@@ -12,7 +12,11 @@
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-restopic">
 					<div class="hovereffect">
-						<img class="img-responsive fotoRestoran" src="{{url('uploads/r'.$restoran->id.'.png')}}" alt="">
+						@if($restoran->id_photo <> "")
+		            		<img class="img-responsive fotoRestoran" src="{{url('uploads/'.$restoran->id_photo.'')}}" alt="">
+		            	@else
+		            		<img class="img-responsive fotoRestoran" src="{{url('images/default-pic.png')}}" alt="">
+		            	@endif
 				        <br>
 					</div>
 				</div>

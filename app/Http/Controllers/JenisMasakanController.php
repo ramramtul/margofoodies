@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -16,7 +13,6 @@ use App\JenisMasakan;
 use App\WaktuOperasional;
 use Session;
 use Validator;
-
 class JenisMasakanController extends Controller
 {
     //

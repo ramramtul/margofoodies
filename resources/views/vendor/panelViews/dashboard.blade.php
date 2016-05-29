@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                                 <div class="panel-footer">
-
+echo capatuh
                                      <a href='{{$box['showListUrl']}}' class="pull-left">{{ \Lang::get('panel::fields.showList') }} <i class="icon ic-chevron-right"></i></a>
                                     <div class="pull-right"> <a class="add " href="{{$box['addUrl']}}">{{ \Lang::get('panel::fields.Add') }}  </a></div>
 
@@ -43,9 +43,9 @@
 
             </div>
             <div class="row hide update">
-                <div class="alert alert-warning" role="alert">
+                <!-- <div class="alert alert-warning" role="alert">
                     <a href="http://laravelpanel.com/docs/master/update" class="alert-link"></a>
-                </div>
+                </div> -->
             </div>
 
 <script>

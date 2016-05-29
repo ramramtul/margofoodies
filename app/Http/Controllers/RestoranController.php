@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -14,9 +12,7 @@ use App\JenisMasakan;
 use App\WaktuOperasional;
 use Session;
 use Validator;
-
 class RestoranController extends Controller {
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -38,7 +34,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -48,7 +43,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -72,14 +66,20 @@ class RestoranController extends Controller {
 		else if ($hari == "Friday") $hari = "Jumat";
 		else if ($hari == "Saturday") $hari = "Sabtu";
 		$hari_ini = WaktuOperasional::where('id_restoran', '=', $id)->where('hari', '=', $hari)->get();
+		
+		$userku = session()->get('user');
+		if($userku != null){
+			$userku =session()->get('user')->email;
+		} else {
+			$userku = "kosong";
+		}
+
 		if ($restoran != null){
-		return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0]);
+			return view('view-restoran')->with('restoran',$restoran)-> with('menus',$menus)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0])->with('userku', $userku);
 		} else {
 			return view('error-page');
 		}
-
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -99,9 +99,7 @@ class RestoranController extends Controller {
 		$restoran = Restoran::where('admin', '=', $user)->get();
 		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->get();
 		return view('edit-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('user', $user);
-
 	}
-
 	public function view(Request $request)
 	{
 		if(!Session::has('user')){
@@ -128,9 +126,7 @@ class RestoranController extends Controller {
 		else if ($hari == "Saturday") $hari = "Sabtu";
 		$hari_ini = WaktuOperasional::where('id_restoran', '=', $id)->where('hari', '=', $hari)->get();
 		return view('profile-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('user', $user)-> with('fasilitas_restorans',$fasilitas_restorans) -> with ('jenis_masakans',$jenis_masakans)-> with('waktu_operasionals',$waktu_operasionals)->with('hari_ini', $hari_ini[0]);;
-
 	}
-
 	public function fotoResto(Request $request){
 		$user = $request->session()->get('user')->email;
 		$restoran = Restoran::where('admin', '=', $user)->get();
@@ -149,9 +145,15 @@ class RestoranController extends Controller {
 		  	if (Input::file('image')->isValid()) {
 	      		$destinationPath = 'uploads'; // upload path
 	      		$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+<<<<<<< HEAD
 	      		$fileName = "r".$restoran[0]->id.'.'."png"; // renameing image
 	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
 	      		list($width, $height) = getimagesize($fileName);
+=======
+	      		$fileName = "r".$restoran[0]->id.'.'."jpg"; // renameing image
+	      		Input::file('image')->move($destinationPath, $fileName); // uploading file to given path
+	      		list($width, $height) = getimagesize(public_path('uploads/' . $fileName . ''));
+>>>>>>> ff9ef93521bbc48b39cbb26ae36c0e1302bea157
 	      		if ($width > $height) {
 			    	// Landscape
 			    	// sending back with message
@@ -176,7 +178,6 @@ class RestoranController extends Controller {
 		    
 		  }
 	}
-
 	public function editMenu(Request $request){
 		if(!Session::has('user')){
 			return Redirect::to('/home');
@@ -190,9 +191,7 @@ class RestoranController extends Controller {
 		$menus = Menu::where('id_restoran', '=', $restoran[0]->id)->orderBy('nama', 'ASC')->paginate(10);
 		$page = $menus->currentPage();
 		return view('edit-menu-restoran')->with('restoran', $restoran[0])->with('menus', $menus)->with('page', $page)->with('user', $user);
-
 	}
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -203,7 +202,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -214,7 +212,6 @@ class RestoranController extends Controller {
 	{
 		//
 	}
-
 	public function confirmEdit(Request $request) {
         $this->validate($request, [
             'nama' => 'min:3|max:255',
@@ -232,7 +229,10 @@ class RestoranController extends Controller {
         $tax = Input::get('tax', $restoran->tax);
         $lokasi = Input::get('lokasi', $restoran->lokasi);
         $desc = Input::get('desc', $restoran->deskripsi);
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff9ef93521bbc48b39cbb26ae36c0e1302bea157
         if (md5($currPass) == $user->password) {
             if (Restoran::where('id',$restoran->id)->update(['nama' => $nama, 'lokasi' => $lokasi, 'no_telepon' => $telepon,'tax' => $tax , 'deskripsi' => $desc])) {
                 return Redirect::to('profileRestoran');
