@@ -20,7 +20,9 @@ class HomeController extends Controller
     public function home()
 	{
 		$promo = Promo::orderBy('tgl_berlaku_awal', 'asc')->get();
-		return view('home', compact('promo'));
+		$firstpromo = $promo[0];
+		unset($promo[0]);
+		return view('home', compact('firstpromo','promo'));
 	}
 
 	public function calculateFood(Request $request)

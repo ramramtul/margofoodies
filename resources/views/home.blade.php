@@ -8,7 +8,7 @@
 	<div class="container-fluid" >
   		<div class="row">
         	<div class="col-sm-4 col-sm-offset-4">
-				<div class="judul"> <h2> Promo bulan ini! </h2>
+				<div class="judul"><a href="promo"><h2> PROMO</h2></a>
 	  				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	    				<!-- Indicators -->
 					    <ol class="carousel-indicators">
@@ -19,16 +19,13 @@
 
 					    <!-- Wrapper for slides -->
 					    <div class="carousel-inner" role="listbox">
+					    	<div class="item active">
+					        		<img src="{{url('uploads/'.$firstpromo->id_photo.'')}}" alt="Chania" width="400" height="300">
+					      		</div>
 					    @foreach ($promo as $pro)
-					      	@if ($active)
-					      		<div class="item active">
-					        		<img src="{{url('uploads/'.$pro->id_photo.'')}}" alt="Chania" width="400" height="300">
-					      		</div>
-					      	@else
-					      		<div class="item">
-					        		<img src="{{url('uploads/'.$pro->id_photo.'')}}" alt="Chania" width="400" height="300">
-					      		</div>
-					      	@endif
+				      		<div class="item">
+				        		<img src="{{url('uploads/'.$pro->id_photo.'')}}" alt="Chania" width="400" height="300">
+				      		</div>
 					    @endforeach
 					    </div>
 
@@ -42,7 +39,6 @@
 					      	<span class="sr-only">Next</span>
 					    </a>
 	  				</div>
-	  				<a href="promo">Lihat selengkapnya</a>
   				</div>
   			</div>
   		</div>
